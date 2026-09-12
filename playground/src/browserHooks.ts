@@ -4,13 +4,28 @@ import {
   useOnlineStatusApi,
   useWindowSizeApi,
 } from './api/browserApi';
+import {
+  useEventListenerApi,
+  useHoverApi,
+  useKeyPressApi,
+  usePreferredColorSchemeApi,
+  useTimeoutApi,
+} from './api/browserEventsApi';
 import { useAsyncSelectApi, useOverlayApi, useStepFlowApi } from './api/flowApi';
 import { UseAsyncSelectDemo, useAsyncSelectExample } from './demos/UseAsyncSelectDemo';
+import { UseEventListenerDemo, useEventListenerExample } from './demos/UseEventListenerDemo';
+import { UseHoverDemo, useHoverExample } from './demos/UseHoverDemo';
+import { UseKeyPressDemo, useKeyPressExample } from './demos/UseKeyPressDemo';
 import { UseMediaQueryDemo, useMediaQueryExample } from './demos/UseMediaQueryDemo';
 import { UseOnClickOutsideDemo, useOnClickOutsideExample } from './demos/UseOnClickOutsideDemo';
 import { UseOnlineStatusDemo, useOnlineStatusExample } from './demos/UseOnlineStatusDemo';
 import { UseOverlayDemo, useOverlayExample } from './demos/UseOverlayDemo';
+import {
+  UsePreferredColorSchemeDemo,
+  usePreferredColorSchemeExample,
+} from './demos/UsePreferredColorSchemeDemo';
 import { UseStepFlowDemo, useStepFlowExample } from './demos/UseStepFlowDemo';
+import { UseTimeoutDemo, useTimeoutExample } from './demos/UseTimeoutDemo';
 import { UseWindowSizeDemo, useWindowSizeExample } from './demos/UseWindowSizeDemo';
 import type { HookEntry } from './hookDoc';
 
@@ -84,5 +99,55 @@ export const browserHooks: HookEntry[] = [
     api: useAsyncSelectApi,
     Demo: UseAsyncSelectDemo,
     example: useAsyncSelectExample,
+  },
+  {
+    id: 'useEventListener',
+    name: 'useEventListener',
+    summary: 'Subscribe to a DOM or window event with a stable handler.',
+    whenToUse: 'Use instead of addEventListener in an effect you would rewrite often.',
+    category: 'Browser',
+    api: useEventListenerApi,
+    Demo: UseEventListenerDemo,
+    example: useEventListenerExample,
+  },
+  {
+    id: 'useTimeout',
+    name: 'useTimeout',
+    summary: 'Run a callback once after a delay. null pauses.',
+    whenToUse: 'Use for one-shot delays, not repeating ticks (see useInterval).',
+    category: 'Browser',
+    api: useTimeoutApi,
+    Demo: UseTimeoutDemo,
+    example: useTimeoutExample,
+  },
+  {
+    id: 'useHover',
+    name: 'useHover',
+    summary: 'Whether the pointer is over a ref element.',
+    whenToUse: 'Use for hover styles or tooltips driven by JS.',
+    category: 'Browser',
+    api: useHoverApi,
+    Demo: UseHoverDemo,
+    example: useHoverExample,
+  },
+  {
+    id: 'useKeyPress',
+    name: 'useKeyPress',
+    summary: 'True while a keyboard key is held (ignores text fields).',
+    whenToUse: 'Use for shortcuts such as Escape.',
+    category: 'Browser',
+    api: useKeyPressApi,
+    Demo: UseKeyPressDemo,
+    example: useKeyPressExample,
+  },
+  {
+    id: 'usePreferredColorScheme',
+    name: 'usePreferredColorScheme',
+    summary: 'OS light or dark preference from matchMedia.',
+    whenToUse: 'Use when you need the system scheme, not app theme state.',
+    category: 'Browser',
+    api: usePreferredColorSchemeApi,
+    Demo: UsePreferredColorSchemeDemo,
+    example: usePreferredColorSchemeExample,
   },
 ];

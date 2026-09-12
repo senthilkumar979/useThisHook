@@ -34,10 +34,10 @@ export const HomePage = () => (
       </div>
     </header>
     <HomeBenefits />
-    <div id="install">
+    <div id="install" className="scroll-mt-8">
       <HomeInstall />
     </div>
-    <div id="hooks">
+    <div id="hooks" className="scroll-mt-8">
       <HomeHookIndex />
     </div>
   </div>

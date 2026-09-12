@@ -13,4 +13,14 @@ export const browserDescriptions: Record<string, string> = {
     'Onboarding, checkout, or a three-screen import wizard. Each step is a component. next() starts the flow and resolves with every step’s data when the last step finishes, or null if the user cancels.',
   useAsyncSelect:
     'A button should open the native file picker and you want a Promise, not a hidden <input type="file"> in JSX. Call the function from a click, await the File (or File[]), and get null if they cancel.',
+  useEventListener:
+    'You need a resize, keydown, or custom event on window, document, or a node, without re-binding every render. Pass the target, type, and handler. The hook keeps the latest handler and cleans up on unmount.',
+  useTimeout:
+    'Run something once after a delay: a splash screen, a deferred toast. Pass null to cancel. Unlike useInterval, this fires once.',
+  useHover:
+    'A card or button should look different while the pointer is over it. Attach the returned ref. isHovered starts false on the server.',
+  useKeyPress:
+    'A shortcut such as Escape should flip a boolean while the key is held. Typing in inputs does not count.',
+  usePreferredColorScheme:
+    'You want the OS light or dark preference, not your own theme store. This is matchMedia prefers-color-scheme. Default is light when there is no window.',
 };

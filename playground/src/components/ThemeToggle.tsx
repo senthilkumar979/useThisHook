@@ -1,3 +1,4 @@
+import { gooeyToast } from 'goey-toast';
 import { useState } from 'react';
 import { applyTheme, readTheme, type Theme } from '../theme';
 
@@ -10,6 +11,8 @@ export const ThemeToggle = () => {
     const next = theme === 'light' ? 'dark' : 'light';
     applyTheme(next);
     setTheme(next);
+    if (next === 'dark') gooeyToast.info('You chose chaos. The moths are already on their way.');
+    else gooeyToast.success('Look at you, flipping the sun back on like you own the sky.');
   };
 
   const isLight = theme === 'light';

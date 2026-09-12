@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { BrandMark } from './BrandMark';
 import { HookNav } from './HookNav';
+import { SidebarScroll } from './SidebarScroll';
 import { SiteFooter } from './SiteFooter';
 import { ThemeToggle } from './ThemeToggle';
 
@@ -12,7 +13,7 @@ interface LayoutProps {
 export const Layout = ({ activeId, children }: LayoutProps) => (
   <div className="min-h-screen lg:grid lg:grid-cols-[17.5rem_1fr]">
     <ThemeToggle />
-    <aside className="border-b border-line bg-aside p-5 backdrop-blur lg:sticky lg:top-0 lg:h-screen lg:border-b-0 lg:border-r">
+    <aside className="flex flex-col border-b border-line bg-aside p-5 backdrop-blur lg:sticky lg:top-0 lg:h-screen lg:border-b-0 lg:border-r">
       <a href="#/" className="mb-1 inline-block">
         <BrandMark size="sm" />
       </a>
@@ -37,7 +38,9 @@ export const Layout = ({ activeId, children }: LayoutProps) => (
           GitHub
         </a>
       </p>
-      <HookNav activeId={activeId} />
+      <SidebarScroll>
+        <HookNav activeId={activeId} />
+      </SidebarScroll>
     </aside>
     <main className="relative py-8 pl-5 pr-14 lg:py-10 lg:pl-12 lg:pr-16">
       {children}
