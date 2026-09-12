@@ -205,4 +205,4 @@ The full legal text is in [`LICENSE`](LICENSE).
 - Website: [senthilkumar.mentorbridge.in](https://senthilkumar.mentorbridge.in)
 - LinkedIn: [linkedin.com/in/senthilk979](https://www.linkedin.com/in/senthilk979)
 
-Issues and ideas: [GitHub issues](https://github.com/senthilkumar979/usethishook/issues).
+Issues and ideas: [GitHub issues](https://github.com/senthilkumar979/useThisHook/issues).

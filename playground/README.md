@@ -16,6 +16,6 @@ Then open the URL Vite prints (usually `http://localhost:5173`).
 
 Build a static site with `npm run playground:build` (output in `playground/dist`). That build uses `base: /` for Vercel and custom domains.
 
-GitHub Pages for this repo is a project site at `/useThisHook/` (repo-name casing). CI runs `npm run playground:build:pages` and deploys `playground/dist` via [`.github/workflows/pages.yml`](../.github/workflows/pages.yml). Enable **Settings → Pages → GitHub Actions** once.
+GitHub Pages is a project site at `/useThisHook/`. The Pages build uses a relative Vite `base` (`./`) so asset URLs follow the HTML location and do not 404 on path casing. CI runs `npm run playground:build:pages` and deploys `playground/dist` via [`.github/workflows/pages.yml`](../.github/workflows/pages.yml).
 
 The playground defaults to light mode. Theme choice is stored in `localStorage` under `usethishook-theme`.

@@ -15,8 +15,26 @@ export const Layout = ({ activeId, children }: LayoutProps) => (
       <a href="#/" className="mb-1 inline-block">
         <BrandMark size="sm" />
       </a>
-      <p className="mb-6 mt-3 text-sm leading-6 text-muted">
+      <p className="mb-3 mt-3 text-sm leading-6 text-muted">
         Typed React hooks with live previews and a full API reference.
+      </p>
+      <p className="mb-6 flex flex-wrap gap-x-3 gap-y-1 text-sm">
+        <a
+          className="text-violet-700 underline decoration-violet-400/50 underline-offset-2 hover:decoration-violet-500 dark:text-violet-300"
+          href="https://www.npmjs.com/package/usethishook"
+          rel="noreferrer"
+          target="_blank"
+        >
+          npm
+        </a>
+        <a
+          className="text-violet-700 underline decoration-violet-400/50 underline-offset-2 hover:decoration-violet-500 dark:text-violet-300"
+          href="https://github.com/senthilkumar979/useThisHook"
+          rel="noreferrer"
+          target="_blank"
+        >
+          GitHub
+        </a>
       </p>
       <HookNav activeId={activeId} />
     </aside>

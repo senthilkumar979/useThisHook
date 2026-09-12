@@ -6,14 +6,10 @@ import { defineConfig } from 'vite';
 
 const playgroundRoot = path.dirname(fileURLToPath(import.meta.url));
 
-function pagesBase() {
-  const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? 'useThisHook';
-  return `/${repo}/`;
-}
-
 export default defineConfig({
   root: playgroundRoot,
-  base: process.env.GITHUB_PAGES === 'true' ? pagesBase() : '/',
+  // Relative URLs so GitHub Pages casing (/useThisHook vs /usethishook) cannot 404 assets.
+  base: process.env.GITHUB_PAGES === 'true' ? './' : '/',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {

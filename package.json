@@ -1,6 +1,6 @@
 {
   "name": "usethishook",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A collection of reusable React hooks for everyday UI, state, and browser APIs.",
   "license": "MIT",
   "author": {
@@ -64,10 +64,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/senthilkumar979/usethishook.git"
+    "url": "git+https://github.com/senthilkumar979/useThisHook.git"
   },
   "bugs": {
-    "url": "https://github.com/senthilkumar979/usethishook/issues"
+    "url": "https://github.com/senthilkumar979/useThisHook/issues"
   },
-  "homepage": "https://github.com/senthilkumar979/usethishook#readme"
+  "homepage": "https://www.npmjs.com/package/usethishook"
 }
