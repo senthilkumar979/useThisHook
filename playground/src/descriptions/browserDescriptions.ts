@@ -1,0 +1,16 @@
+export const browserDescriptions: Record<string, string> = {
+  useOnlineStatus:
+    'You want to warn “you are offline” or disable Save when the laptop loses the network. This hook is the browser’s online flag, updated when the browser fires online and offline. It is not a ping of your API.',
+  useMediaQuery:
+    'Layout should change at the same breakpoint as CSS, for example a compact toolbar under 768px. Match the query in JS without resize listeners and leftover subscriptions.',
+  useWindowSize:
+    'You need the actual pixel width or height: a canvas, a chart, a split pane. A media query is not enough. This hook tracks innerWidth and innerHeight on resize.',
+  useOnClickOutside:
+    'A popover or dropdown should close when the user presses outside it. Attach a ref to the surface and pass a close handler. Inside clicks stay ignored.',
+  useOverlay:
+    'You need a modal that the caller can await, like window.confirm but with your own UI. open(props) returns a promise; close(result) resolves it. Use it for delete confirms, pickers, and any dialog that must return a value before the flow continues.',
+  useStepFlow:
+    'Onboarding, checkout, or a three-screen import wizard. Each step is a component. next() starts the flow and resolves with every step’s data when the last step finishes, or null if the user cancels.',
+  useAsyncSelect:
+    'A button should open the native file picker and you want a Promise, not a hidden <input type="file"> in JSX. Call the function from a click, await the File (or File[]), and get null if they cancel.',
+};
