@@ -165,14 +165,17 @@ Guidelines for adding a hook: [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## Publish
 
-**npm** is the install path for everyone: `npm install usethishook`. That listing does not appear on GitHub Packages by itself — GitHub hosts a second registry.
+**npm** is the install path for everyone: `npm install usethishook`. Publishing to the public registry is **manual only** — it does not run on push.
 
-**GitHub Packages** needs a scoped name (`@owner/package`). The committed `package.json` stays `usethishook` for npm. [`.github/workflows/github-packages.yml`](.github/workflows/github-packages.yml) renames it to `@senthilkumar979/usethishook` only for that publish, then uploads with `GITHUB_TOKEN`.
+1. Bump `version` in `package.json` (and commit / push `main`).
+2. Add a repo secret named `NPM_TOKEN` (npm access token with publish rights).
+3. **Actions → Publish npm → Run workflow**.
 
-After you merge the workflow:
+[`.github/workflows/npm-publish.yml`](.github/workflows/npm-publish.yml) runs `npm publish --access public`. `prepublishOnly` still typechecks, tests, and builds.
 
-1. Repo **Actions** → **Publish GitHub Package** → **Run workflow** (for the current `0.1.0`), or create a GitHub Release.
-2. The empty “Get started with GitHub Packages” panel is replaced by the package on the repo sidebar.
+**GitHub Packages** is a second registry and also does not publish on push. It needs a scoped name (`@owner/package`). The committed `package.json` stays `usethishook`. [`.github/workflows/github-packages.yml`](.github/workflows/github-packages.yml) renames it to `@senthilkumar979/usethishook` only for that job.
+
+**Actions → Publish GitHub Package → Run workflow**, or create a GitHub Release.
 
 Install from GitHub Packages (optional; still requires a GitHub token for the registry):
 
@@ -183,8 +186,6 @@ npm install @senthilkumar979/usethishook
 ```ini
 @senthilkumar979:registry=https://npm.pkg.github.com
 ```
-
-Later npm releases: `npm version patch|minor|major`, `npm publish --access public`, then run the Packages workflow (or cut a Release) so both registries stay in sync.
 
 ## License
 
