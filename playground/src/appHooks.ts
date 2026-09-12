@@ -9,7 +9,10 @@ import {
 } from './api/appListApi';
 import { UseAsyncActionDemo, useAsyncActionExample } from './demos/UseAsyncActionDemo';
 import { UseConfirmDemo, useConfirmExample } from './demos/UseConfirmDemo';
-import { UseDebouncedCallbackDemo, useDebouncedCallbackExample } from './demos/UseDebouncedCallbackDemo';
+import {
+  UseDebouncedCallbackDemo,
+  useDebouncedCallbackExample,
+} from './demos/UseDebouncedCallbackDemo';
 import { UseFieldsDemo, useFieldsExample } from './demos/UseFieldsDemo';
 import { UseListDemo, useListExample } from './demos/UseListDemo';
 import { UseOnChangeDemo, useOnChangeExample } from './demos/UseOnChangeDemo';

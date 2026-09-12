@@ -16,7 +16,12 @@ export const UseSearchStateDemo = () => {
       />
       <div className="flex gap-2">
         {(['all', 'open', 'done'] as const).map((tab) => (
-          <button key={tab} type="button" className={buttonClass} onClick={() => setParams({ tab })}>
+          <button
+            key={tab}
+            type="button"
+            className={buttonClass}
+            onClick={() => setParams({ tab })}
+          >
             {tab}
           </button>
         ))}

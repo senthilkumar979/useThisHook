@@ -24,12 +24,14 @@ export const useOverlayApi: HookApi = {
       {
         name: 'close',
         type: '(result?: TResult) => void',
-        description: 'Hides the overlay, restores overflow, and resolves the pending open() promise.',
+        description:
+          'Hides the overlay, restores overflow, and resolves the pending open() promise.',
       },
       {
         name: 'render',
         type: '() => ReactNode',
-        description: 'Returns the overlay element, or null before the first open(). Put this in JSX.',
+        description:
+          'Returns the overlay element, or null before the first open(). Put this in JSX.',
       },
     ],
   },
@@ -47,7 +49,8 @@ export const useStepFlowApi: HookApi = {
     {
       name: 'steps',
       type: 'Array<ComponentType<StepFlowStepProps<TStepData>>>',
-      description: 'Components rendered one at a time. Each receives stepIndex, isLastStep, onNext, and onCancel.',
+      description:
+        'Components rendered one at a time. Each receives stepIndex, isLastStep, onNext, and onCancel.',
     },
   ],
   returns: {
@@ -59,7 +62,11 @@ export const useStepFlowApi: HookApi = {
         type: '() => Promise<Array<TStepData | undefined> | null>',
         description: 'Starts from step 0. Resolves with collected step data, or null on cancel.',
       },
-      { name: 'cancel', type: '() => void', description: 'Aborts, resets the index, resolves next() with null.' },
+      {
+        name: 'cancel',
+        type: '() => void',
+        description: 'Aborts, resets the index, resolves next() with null.',
+      },
       {
         name: 'completeStep',
         type: '(stepData?: TStepData) => void',
@@ -68,9 +75,14 @@ export const useStepFlowApi: HookApi = {
       {
         name: 'renderCurrentStep',
         type: '(extraProps?: object) => ReactNode',
-        description: 'The active step, or null when the flow is inactive. extraProps are spread onto the step.',
+        description:
+          'The active step, or null when the flow is inactive. extraProps are spread onto the step.',
       },
-      { name: 'currentStepIndex', type: 'number', description: 'Zero-based index of the visible step.' },
+      {
+        name: 'currentStepIndex',
+        type: 'number',
+        description: 'Zero-based index of the visible step.',
+      },
       { name: 'isActive', type: 'boolean', description: 'True between next() and finish/cancel.' },
     ],
   },
@@ -97,7 +109,8 @@ export const useAsyncSelectApi: HookApi = {
         type: 'boolean',
         optional: true,
         defaultValue: 'false',
-        description: 'When true, the promise resolves to File[]. When false, it resolves to a single File.',
+        description:
+          'When true, the promise resolves to File[]. When false, it resolves to a single File.',
       },
     ],
   },

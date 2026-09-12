@@ -7,15 +7,13 @@ export interface StepFlowStepProps<TStepData = unknown> {
   onCancel: () => void;
 }
 
-export const useStepFlow = <TStepData = unknown>(
+export const useStepFlow = <TStepData = unknown,>(
   steps: Array<ComponentType<StepFlowStepProps<TStepData>>>,
 ) => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const resultsRef = useRef<Array<TStepData | undefined>>([]);
-  const resolverRef = useRef<((result: Array<TStepData | undefined> | null) => void) | null>(
-    null,
-  );
+  const resolverRef = useRef<((result: Array<TStepData | undefined> | null) => void) | null>(null);
 
   const next = useCallback(() => {
     setIsActive(true);

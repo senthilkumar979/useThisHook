@@ -7,7 +7,9 @@ const schema = {
     if (!values.email.includes('@')) {
       return {
         success: false as const,
-        error: { issues: [{ path: ['email'] as Array<string | number>, message: 'Enter a valid email' }] },
+        error: {
+          issues: [{ path: ['email'] as Array<string | number>, message: 'Enter a valid email' }],
+        },
       };
     }
     return { success: true as const, data: values };

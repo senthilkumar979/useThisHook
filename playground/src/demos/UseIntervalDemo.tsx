@@ -11,7 +11,11 @@ export const UseIntervalDemo = () => {
     <div className="space-y-3">
       <p className="text-2xl font-semibold">{count}</p>
       <div className="flex gap-2">
-        <button type="button" className={buttonClass} onClick={() => setIsRunning((value) => !value)}>
+        <button
+          type="button"
+          className={buttonClass}
+          onClick={() => setIsRunning((value) => !value)}
+        >
           {isRunning ? 'Pause' : 'Resume'}
         </button>
         <button type="button" className={ghostButtonClass} onClick={() => setCount(0)}>

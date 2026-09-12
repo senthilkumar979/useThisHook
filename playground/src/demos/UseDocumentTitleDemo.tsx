@@ -8,7 +8,11 @@ export const UseDocumentTitleDemo = () => {
 
   return (
     <div className="space-y-3">
-      <input className={inputClass} value={title} onChange={(event) => setTitle(event.target.value)} />
+      <input
+        className={inputClass}
+        value={title}
+        onChange={(event) => setTitle(event.target.value)}
+      />
       <p>Check the browser tab title. It restores when you leave this page.</p>
     </div>
   );

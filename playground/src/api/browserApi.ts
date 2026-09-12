@@ -7,7 +7,8 @@ export const useOnlineStatusApi: HookApi = {
   arguments: [],
   returns: {
     type: 'boolean',
-    description: 'true when the browser thinks it is online, false when it fires the offline event.',
+    description:
+      'true when the browser thinks it is online, false when it fires the offline event.',
   },
   caveats: ['This is the browser’s connectivity flag, not a guarantee that your API is reachable.'],
 };
@@ -20,7 +21,8 @@ export const useMediaQueryApi: HookApi = {
     {
       name: 'query',
       type: 'string',
-      description: 'A CSS media query, for example "(min-width: 768px)" or "(prefers-color-scheme: dark)".',
+      description:
+        'A CSS media query, for example "(min-width: 768px)" or "(prefers-color-scheme: dark)".',
     },
   ],
   returns: {

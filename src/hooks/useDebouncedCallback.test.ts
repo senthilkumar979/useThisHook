@@ -13,10 +13,9 @@ describe('useDebouncedCallback', () => {
 
   it('invokes the latest callback after the delay and can cancel', () => {
     const spy = vi.fn();
-    const { result, rerender } = renderHook(
-      ({ fn }) => useDebouncedCallback(fn, 200),
-      { initialProps: { fn: spy } },
-    );
+    const { result, rerender } = renderHook(({ fn }) => useDebouncedCallback(fn, 200), {
+      initialProps: { fn: spy },
+    });
 
     act(() => {
       result.current[0]();

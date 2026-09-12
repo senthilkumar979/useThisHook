@@ -7,7 +7,6 @@ import { useResetState } from './useResetState';
 
 describe('useStableCallback', () => {
   it('keeps a stable identity while calling the latest function', () => {
-    let latest = 0;
     const { result, rerender } = renderHook(
       ({ value }) => {
         const callback = useStableCallback(() => value);
@@ -21,8 +20,6 @@ describe('useStableCallback', () => {
     rerender({ value: 2 });
     expect(result.current.same).toBe(true);
     expect(result.current.callback()).toBe(2);
-    latest = result.current.callback();
-    expect(latest).toBe(2);
   });
 });
 

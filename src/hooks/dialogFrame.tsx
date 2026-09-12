@@ -25,7 +25,12 @@ interface DialogFrameProps {
 
 export const DialogFrame = ({ title, children }: DialogFrameProps) => (
   <div style={backdropStyle}>
-    <div role="dialog" aria-modal="true" aria-labelledby="usethishook-dialog-title" style={panelStyle}>
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="usethishook-dialog-title"
+      style={panelStyle}
+    >
       <h2 id="usethishook-dialog-title" style={{ margin: '0 0 0.75rem', fontSize: '1.05rem' }}>
         {title}
       </h2>

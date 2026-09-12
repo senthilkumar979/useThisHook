@@ -5,8 +5,8 @@ export const UseMediaQueryDemo = () => {
 
   return (
     <p>
-      Viewport is {isWide ? 'at least 768px wide' : 'narrower than 768px'}. Resize the window to
-      see this update.
+      Viewport is {isWide ? 'at least 768px wide' : 'narrower than 768px'}. Resize the window to see
+      this update.
     </p>
   );
 };

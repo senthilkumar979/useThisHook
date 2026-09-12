@@ -18,10 +18,20 @@ export const UsePaginationDemo = () => {
         Page {pager.page} of {pager.pageCount} · offset {pager.offset}
       </p>
       <div className="flex gap-2">
-        <button type="button" className={ghostButtonClass} disabled={!pager.canPrev} onClick={pager.prev}>
+        <button
+          type="button"
+          className={ghostButtonClass}
+          disabled={!pager.canPrev}
+          onClick={pager.prev}
+        >
           Prev
         </button>
-        <button type="button" className={buttonClass} disabled={!pager.canNext} onClick={pager.next}>
+        <button
+          type="button"
+          className={buttonClass}
+          disabled={!pager.canNext}
+          onClick={pager.next}
+        >
           Next
         </button>
       </div>

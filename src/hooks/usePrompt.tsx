@@ -36,7 +36,9 @@ const PromptDialog = ({
 
   return (
     <DialogFrame title={title}>
-      {message && <p style={{ margin: '0 0 0.75rem', color: '#d4d4d8', lineHeight: 1.5 }}>{message}</p>}
+      {message && (
+        <p style={{ margin: '0 0 0.75rem', color: '#d4d4d8', lineHeight: 1.5 }}>{message}</p>
+      )}
       <label style={{ display: 'grid', gap: '0.35rem', fontSize: '0.85rem' }}>
         {label}
         <input

@@ -21,24 +21,33 @@
   "files": [
     "dist",
     "LICENSE",
-    "README.md"
+    "README.md",
+    "CHANGELOG.md"
   ],
   "sideEffects": false,
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
     "test": "vitest run",
     "test:watch": "vitest",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p playground/tsconfig.json",
+    "lint": "eslint . && prettier --check .",
+    "lint:fix": "eslint . --fix && prettier --write .",
+    "format": "prettier --write .",
     "prepublishOnly": "npm run typecheck && npm run test && npm run build",
     "playground": "vite --config playground/vite.config.ts",
     "playground:build": "vite build --config playground/vite.config.ts",
     "playground:build:pages": "GITHUB_PAGES=true vite build --config playground/vite.config.ts"
   },
   "peerDependencies": {
-    "react": ">=18"
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@tailwindcss/vite": "^4.3.3",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.0",
@@ -46,12 +55,17 @@
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.1",
+    "eslint": "^10.10.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "jsdom": "^26.1.0",
+    "prettier": "^3.9.6",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "tailwindcss": "^4.3.3",
     "tsup": "^8.5.0",
     "typescript": "^5.8.3",
+    "typescript-eslint": "^8.70.0",
     "vite": "^8.3.0",
     "vitest": "^3.2.4"
   },
@@ -69,5 +83,5 @@
   "bugs": {
     "url": "https://github.com/senthilkumar979/useThisHook/issues"
   },
-  "homepage": "https://www.npmjs.com/package/usethishook"
+  "homepage": "https://usethishook.mentorbridge.in"
 }

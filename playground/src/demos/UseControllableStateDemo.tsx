@@ -16,7 +16,11 @@ const Switch = ({ checked, defaultChecked = false, onCheckedChange }: SwitchProp
   });
 
   return (
-    <button type="button" className={on ? buttonClass : ghostButtonClass} onClick={() => setOn((value) => !value)}>
+    <button
+      type="button"
+      className={on ? buttonClass : ghostButtonClass}
+      onClick={() => setOn((value) => !value)}
+    >
       {on ? 'On' : 'Off'}
     </button>
   );
@@ -32,7 +36,9 @@ export const UseControllableStateDemo = () => {
         <Switch defaultChecked />
       </div>
       <div>
-        <p className="mb-2 text-sm text-muted">Controlled by parent ({controlled ? 'true' : 'false'})</p>
+        <p className="mb-2 text-sm text-muted">
+          Controlled by parent ({controlled ? 'true' : 'false'})
+        </p>
         <Switch checked={controlled} onCheckedChange={setControlled} />
       </div>
     </div>

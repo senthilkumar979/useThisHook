@@ -15,10 +15,20 @@ export const UseAsyncActionDemo = () => {
 
   return (
     <div className="space-y-3">
-      <button type="button" className={buttonClass} disabled={isPending} onClick={() => void run('Ada')}>
+      <button
+        type="button"
+        className={buttonClass}
+        disabled={isPending}
+        onClick={() => void run('Ada')}
+      >
         {isPending ? 'Saving…' : 'Save Ada'}
       </button>
-      <button type="button" className={buttonClass} disabled={isPending} onClick={() => void run('').catch(() => undefined)}>
+      <button
+        type="button"
+        className={buttonClass}
+        disabled={isPending}
+        onClick={() => void run('').catch(() => undefined)}
+      >
         Save empty (error)
       </button>
       <p>{data ?? (error instanceof Error ? error.message : 'Idle')}</p>

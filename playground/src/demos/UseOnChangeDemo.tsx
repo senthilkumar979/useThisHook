@@ -12,7 +12,11 @@ export const UseOnChangeDemo = () => {
 
   return (
     <div className="space-y-3">
-      <input className={inputClass} value={text} onChange={(event) => setText(event.target.value)} />
+      <input
+        className={inputClass}
+        value={text}
+        onChange={(event) => setText(event.target.value)}
+      />
       <p>{log}</p>
     </div>
   );

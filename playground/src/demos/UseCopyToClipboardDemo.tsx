@@ -8,7 +8,11 @@ export const UseCopyToClipboardDemo = () => {
 
   return (
     <div className="space-y-3">
-      <input className={inputClass} value={text} onChange={(event) => setText(event.target.value)} />
+      <input
+        className={inputClass}
+        value={text}
+        onChange={(event) => setText(event.target.value)}
+      />
       <div className="flex gap-2">
         <button type="button" className={buttonClass} onClick={() => void copy(text)}>
           Copy

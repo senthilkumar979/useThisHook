@@ -7,7 +7,12 @@ import { stateHooks } from './stateHooks';
 
 export type { HookDoc } from './hookDoc';
 
-export const hooksCatalog: HookDoc[] = [...stateHooks, ...browserHooks, ...appHooks, ...leverageHooks].map((hook) => {
+export const hooksCatalog: HookDoc[] = [
+  ...stateHooks,
+  ...browserHooks,
+  ...appHooks,
+  ...leverageHooks,
+].map((hook) => {
   const description = hookDescriptions[hook.id];
   if (!description) throw new Error(`Missing description for ${hook.id}`);
   return { ...hook, description };
