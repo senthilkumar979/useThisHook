@@ -6,7 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 Bump `version` in `package.json` in the same change as the notes below, then run
-**Actions → Publish npm** (manual). Do not publish from a push or tag.
+**Actions → Publish npm** (manual). Create GitHub Release **vX.Y.Z** from the matching section.
+Do not publish from a push or tag.
+
+## [0.2.0] - 2026-09-12
+
+### Added
+
+- `useEventListener` — window / document / node / ref listener with a stable handler
+- `useTimeout` — one-shot delay (`null` pauses)
+- `useHover` — `{ ref, isHovered }`
+- `useKeyPress` — key held down; ignores editable fields
+- `usePreferredColorScheme` — OS `light` | `dark` via `matchMedia`
+- Playground **Home** control in the sidebar
+- Smooth-scroll to top when changing playground routes
+- Radix Scroll Area on the playground sidebar hook list
 
 ## [0.1.1] - 2026-09-12
 

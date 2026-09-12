@@ -25,7 +25,11 @@ export const HomeInstall = () => (
       . The product name is <span className="text-fg">useThisHook</span>. Requires React 18 or later
       as a peer dependency.
     </p>
-    <CodeBlock label="Terminal" code={installCommand} />
+    <CodeBlock
+      label="Terminal"
+      code={installCommand}
+      copiedToast="I knew it! Welcome to the club"
+    />
     <p className="text-sm leading-6 text-muted">Then import a named hook:</p>
     <CodeBlock label="React" code={usageExample} />
   </section>

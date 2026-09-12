@@ -119,7 +119,12 @@ Playground paths are hash routes on the local docs app (for example `#/useToggle
 | `useOnClickOutside` | Handler when the user presses outside a ref   | `#/useOnClickOutside` |
 | `useOverlay`        | Promise-based custom overlay                  | `#/useOverlay`        |
 | `useStepFlow`       | Multi-step wizard that resolves when finished | `#/useStepFlow`       |
-| `useAsyncSelect`    | Native file picker as a Promise               | `#/useAsyncSelect`    |
+| `useAsyncSelect`            | Native file picker as a Promise                  | `#/useAsyncSelect`            |
+| `useEventListener`          | DOM / window listener with a stable handler      | `#/useEventListener`          |
+| `useTimeout`                | One-shot timer (`null` pauses)                   | `#/useTimeout`                |
+| `useHover`                  | Pointer over a ref                               | `#/useHover`                  |
+| `useKeyPress`               | Key held down (ignores inputs)                   | `#/useKeyPress`               |
+| `usePreferredColorScheme`   | OS `prefers-color-scheme`                        | `#/usePreferredColorScheme`   |
 
 ### App
 
@@ -146,7 +151,7 @@ Playground paths are hash routes on the local docs app (for example `#/useToggle
 
 Hooks that read `window`, `document`, `navigator`, or observers are safe to _call_ on the server when they fall back (typical values: `false`, `{ width: 0, height: 0 }`, or an empty query). They subscribe after mount.
 
-- `useMediaQuery`, `useWindowSize`, `useOnlineStatus`, `useLocalStorage`, `useSearchState`, `useDocumentTitle`, `useOnClickOutside`, `useElementSize`, `useInView`, and `useUnsavedChanges` must not assume a browser until after hydration.
+- `useMediaQuery`, `useWindowSize`, `useOnlineStatus`, `useLocalStorage`, `useSearchState`, `useDocumentTitle`, `useOnClickOutside`, `useElementSize`, `useInView`, `useUnsavedChanges`, `useEventListener`, `useTimeout`, `useHover`, `useKeyPress`, and `usePreferredColorScheme` must not assume a browser until after hydration.
 - Confirm, prompt, overlay, and step-flow still need `render()` in the client tree.
 
 ## Scripts
