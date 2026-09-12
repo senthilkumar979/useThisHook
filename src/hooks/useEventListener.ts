@@ -1,11 +1,7 @@
 import { useEffect, useRef, type RefObject } from 'react';
 
 export type EventListenerTarget =
-  | Window
-  | Document
-  | EventTarget
-  | RefObject<EventTarget | null>
-  | null;
+  Window | Document | EventTarget | RefObject<EventTarget | null> | null;
 
 function resolveTarget(target: EventListenerTarget): EventTarget | null {
   if (target == null) return null;

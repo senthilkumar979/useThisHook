@@ -26,10 +26,10 @@ export const HookNav = ({ activeId }: HookNavProps) => {
       {groups.map((group) => {
         const hooks = hooksCatalog.filter((hook) => hook.category === group);
         return (
-        <div key={group}>
-          <NavGroupHeader category={group} count={hooks.length} />
-          <div className="flex flex-col gap-0.5">
-            {hooks.map((hook) => {
+          <div key={group}>
+            <NavGroupHeader category={group} count={hooks.length} />
+            <div className="flex flex-col gap-0.5">
+              {hooks.map((hook) => {
                 const isActive = hook.id === activeId;
                 return (
                   <a
@@ -45,8 +45,8 @@ export const HookNav = ({ activeId }: HookNavProps) => {
                   </a>
                 );
               })}
+            </div>
           </div>
-        </div>
         );
       })}
     </nav>

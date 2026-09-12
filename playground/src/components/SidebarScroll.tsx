@@ -7,7 +7,9 @@ interface SidebarScrollProps {
 
 export const SidebarScroll = ({ children }: SidebarScrollProps) => (
   <ScrollArea.Root className="min-h-40 flex-1 overflow-hidden lg:min-h-0">
-    <ScrollArea.Viewport className="h-full max-h-[70vh] pr-2 lg:max-h-none">{children}</ScrollArea.Viewport>
+    <ScrollArea.Viewport className="h-full max-h-[70vh] pr-2 lg:max-h-none">
+      {children}
+    </ScrollArea.Viewport>
     <ScrollArea.Scrollbar
       className="flex w-2.5 touch-none select-none bg-transparent p-0.5"
       orientation="vertical"

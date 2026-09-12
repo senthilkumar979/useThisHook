@@ -50,7 +50,11 @@ export const useHoverApi: HookApi = {
     description: 'Attach ref to a DOM node. isHovered is false until pointerenter.',
     fields: [
       { name: 'ref', type: 'RefObject<T | null>', description: 'Put this on the hover target.' },
-      { name: 'isHovered', type: 'boolean', description: 'true while the pointer is over the node.' },
+      {
+        name: 'isHovered',
+        type: 'boolean',
+        description: 'true while the pointer is over the node.',
+      },
     ],
   },
 };
@@ -60,7 +64,11 @@ export const useKeyPressApi: HookApi = {
   explanation:
     'True while that event.key is held down on window. Keydowns from inputs, textareas, selects, and contenteditable are ignored.',
   arguments: [
-    { name: 'key', type: 'string', description: 'KeyboardEvent.key value, for example "Escape" or "k".' },
+    {
+      name: 'key',
+      type: 'string',
+      description: 'KeyboardEvent.key value, for example "Escape" or "k".',
+    },
   ],
   returns: { type: 'boolean', description: 'true between matching keydown and keyup.' },
 };
@@ -72,6 +80,6 @@ export const usePreferredColorSchemeApi: HookApi = {
   arguments: [],
   returns: {
     type: "'light' | 'dark'",
-    description: "light when the dark media query does not match, including on the server.",
+    description: 'light when the dark media query does not match, including on the server.',
   },
 };
