@@ -20,7 +20,7 @@ npm install usethishook
 ## Documentation playground
 
 - Hosted: [usethishook.mentorbridge.in](https://usethishook.mentorbridge.in) (Vercel)
-- Mirror: [senthilkumar979.github.io/usethishook](https://senthilkumar979.github.io/usethishook/) (GitHub Pages)
+- Mirror: [senthilkumar979.github.io/useThisHook](https://senthilkumar979.github.io/useThisHook/) (GitHub Pages)
 
 ```bash
 npm install
@@ -35,7 +35,7 @@ Open the URL Vite prints (usually `http://localhost:5173`). Light mode is the de
 See [`playground/README.md`](playground/README.md).
 
 - `npm run playground:build` — static site with `base: /` (Vercel / custom domain)
-- `npm run playground:build:pages` — same site with `base: /usethishook/` for project GitHub Pages
+- `npm run playground:build:pages` — same site with `base: /useThisHook/` for project GitHub Pages
 
 Output is `playground/dist`. Hash routes (`#/…`) work on Pages without extra rewrite rules. In the GitHub repo, set **Settings → Pages → Source** to **GitHub Actions**.
 
