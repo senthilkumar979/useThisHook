@@ -19,17 +19,25 @@ npm install usethishook
 
 ## Documentation playground
 
+- Hosted: [usethishook.mentorbridge.in](https://usethishook.mentorbridge.in) (Vercel)
+- Mirror: [senthilkumar979.github.io/usethishook](https://senthilkumar979.github.io/usethishook/) (GitHub Pages)
+
 ```bash
 npm install
 npm run playground
 ```
 
-Open the URL Vite prints (usually `http://localhost:5173`).
+Open the URL Vite prints (usually `http://localhost:5173`). Light mode is the default; use the sun/moon icon at the top right to switch theme.
 
 - Home (`#/`): what the library is, install, and the hook index
 - Hook pages (`#/useToggle`, `#/useConfirm`, …): description, live preview, API, example
 
-See [`playground/README.md`](playground/README.md). Build a static site with `npm run playground:build` (output in `playground/dist`).
+See [`playground/README.md`](playground/README.md).
+
+- `npm run playground:build` — static site with `base: /` (Vercel / custom domain)
+- `npm run playground:build:pages` — same site with `base: /usethishook/` for project GitHub Pages
+
+Output is `playground/dist`. Hash routes (`#/…`) work on Pages without extra rewrite rules. In the GitHub repo, set **Settings → Pages → Source** to **GitHub Actions**.
 
 ## Usage
 

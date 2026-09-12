@@ -14,7 +14,7 @@ export const UseStableCallbackDemo = () => {
     <div className="space-y-3">
       <input className={inputClass} value={label} onChange={(event) => setLabel(event.target.value)} />
       <p>
-        Interval still uses the latest name <span className="text-white">{label}</span> without resetting.
+        Interval still uses the latest name <span className="font-medium text-fg">{label}</span> without resetting.
         Ticks: {ticks}
       </p>
     </div>

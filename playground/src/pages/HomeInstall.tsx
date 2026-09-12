@@ -11,14 +11,14 @@ export const Panel = () => {
 
 export const HomeInstall = () => (
   <section className="space-y-5">
-    <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-zinc-500">Install</h2>
-    <p className="max-w-2xl text-sm leading-6 text-zinc-400">
-      The npm package name is lowercase <code className="text-zinc-200">usethishook</code>. The product
-      name is <span className="text-zinc-200">useThisHook</span>. Requires React 18 or later as a peer
+    <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-muted">Install</h2>
+    <p className="max-w-2xl text-sm leading-6 text-muted">
+      The npm package name is lowercase <code className="text-fg">usethishook</code>. The product
+      name is <span className="text-fg">useThisHook</span>. Requires React 18 or later as a peer
       dependency.
     </p>
     <CodeBlock label="Terminal" code={installCommand} />
-    <p className="text-sm leading-6 text-zinc-400">Then import a named hook:</p>
+    <p className="text-sm leading-6 text-muted">Then import a named hook:</p>
     <CodeBlock label="React" code={usageExample} />
   </section>
 );

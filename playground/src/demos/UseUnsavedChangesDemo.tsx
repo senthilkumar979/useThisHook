@@ -14,7 +14,7 @@ export const UseUnsavedChangesDemo = () => {
   return (
     <div className="space-y-3">
       <textarea className={inputClass} rows={3} value={draft} onChange={(event) => setDraft(event.target.value)} />
-      <p className="text-sm text-zinc-400">{isDirty ? 'Dirty — closing the tab will warn.' : 'Clean'}</p>
+      <p className="text-sm text-muted">{isDirty ? 'Dirty — closing the tab will warn.' : 'Clean'}</p>
       <div className="flex gap-2">
         <button type="button" className={buttonClass} onClick={() => setSaved(draft)}>
           Save

@@ -13,7 +13,7 @@ export const BrandMark = ({ size = 'md' }: BrandMarkProps) => {
       >
         uTH
       </span>
-      <span className={`font-semibold tracking-tight text-white ${labelSize}`}>useThisHook</span>
+      <span className={`font-semibold tracking-tight text-fg ${labelSize}`}>useThisHook</span>
     </span>
   );
 };

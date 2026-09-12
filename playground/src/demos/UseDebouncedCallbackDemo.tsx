@@ -20,7 +20,7 @@ export const UseDebouncedCallbackDemo = () => {
           runSearch(event.target.value);
         }}
       />
-      <ul className="space-y-1 text-sm text-zinc-400">
+      <ul className="space-y-1 text-sm text-muted">
         {searches.map((item) => (
           <li key={item}>{item}</li>
         ))}

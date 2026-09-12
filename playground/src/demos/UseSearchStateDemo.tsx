@@ -21,7 +21,7 @@ export const UseSearchStateDemo = () => {
           </button>
         ))}
       </div>
-      <p className="text-sm text-zinc-400">
+      <p className="text-sm text-muted">
         URL search: q={params.q || '(empty)'} · tab={params.tab}
       </p>
     </div>

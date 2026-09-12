@@ -28,11 +28,11 @@ export const UseControllableStateDemo = () => {
   return (
     <div className="space-y-4">
       <div>
-        <p className="mb-2 text-sm text-zinc-400">Uncontrolled (own state)</p>
+        <p className="mb-2 text-sm text-muted">Uncontrolled (own state)</p>
         <Switch defaultChecked />
       </div>
       <div>
-        <p className="mb-2 text-sm text-zinc-400">Controlled by parent ({controlled ? 'true' : 'false'})</p>
+        <p className="mb-2 text-sm text-muted">Controlled by parent ({controlled ? 'true' : 'false'})</p>
         <Switch checked={controlled} onCheckedChange={setControlled} />
       </div>
     </div>

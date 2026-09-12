@@ -8,6 +8,7 @@ const playgroundRoot = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   root: playgroundRoot,
+  base: process.env.GITHUB_PAGES === 'true' ? '/usethishook/' : '/',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {

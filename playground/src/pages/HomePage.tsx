@@ -7,13 +7,13 @@ export const HomePage = () => (
   <div className="mx-auto max-w-4xl space-y-16">
     <header className="space-y-5">
       <BrandMark />
-      <p className="text-[0.7rem] font-medium uppercase tracking-[0.18em] text-violet-300/80">
+      <p className="text-[0.7rem] font-medium uppercase tracking-[0.18em] text-violet-700 dark:text-violet-300/80">
         Open source React hooks
       </p>
-      <h1 className="text-4xl font-semibold tracking-tight text-white md:text-5xl">
+      <h1 className="text-4xl font-semibold tracking-tight text-fg md:text-5xl">
         useThisHook is a typed library of custom React hooks you can drop into any app.
       </h1>
-      <p className="max-w-2xl text-lg leading-8 text-zinc-400">
+      <p className="max-w-2xl text-lg leading-8 text-muted">
         Stop rewriting toggle, debounce, overlay, wizard, and file-picker logic. Import a named
         hook, wire it to your UI, and ship. This playground is the documentation: try the hook,
         read what it takes and returns, then copy the example.
@@ -27,7 +27,7 @@ export const HomePage = () => (
         </a>
         <a
           href="#hooks"
-          className="rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm text-zinc-100 hover:bg-white/10"
+          className="rounded-full border border-line bg-surface px-5 py-2.5 text-sm text-fg hover:bg-code"
         >
           Browse hooks
         </a>

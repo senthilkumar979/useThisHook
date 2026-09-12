@@ -19,15 +19,15 @@ const benefits = [
 
 export const HomeBenefits = () => (
   <section>
-    <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-zinc-500">Why useThisHook</h2>
+    <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-muted">Why useThisHook</h2>
     <ul className="mt-5 grid gap-3 sm:grid-cols-2">
       {benefits.map((benefit) => (
         <li
           key={benefit.title}
-          className="rounded-2xl border border-white/10 bg-zinc-950/50 p-5"
+          className="rounded-2xl border border-line bg-surface p-5"
         >
-          <h3 className="text-base font-medium text-white">{benefit.title}</h3>
-          <p className="mt-2 text-sm leading-6 text-zinc-400">{benefit.body}</p>
+          <h3 className="text-base font-medium text-fg">{benefit.title}</h3>
+          <p className="mt-2 text-sm leading-6 text-muted">{benefit.body}</p>
         </li>
       ))}
     </ul>

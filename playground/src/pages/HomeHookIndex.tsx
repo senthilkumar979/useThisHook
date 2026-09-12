@@ -12,10 +12,10 @@ export const HomeHookIndex = () => {
 
   return (
     <section>
-      <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-zinc-500">
+      <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-muted">
         Browse hooks
       </h2>
-      <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-400">
+      <p className="mt-2 max-w-2xl text-sm leading-6 text-muted">
         Open a hook for a live preview, API reference, and copy-paste example.
       </p>
       <input
@@ -29,11 +29,11 @@ export const HomeHookIndex = () => {
           <li key={hook.id}>
             <a
               href={`#/${hook.id}`}
-              className="block h-full rounded-2xl border border-white/10 bg-zinc-950/50 p-5 transition hover:border-violet-400/40 hover:bg-zinc-900/80"
+              className="block h-full rounded-2xl border border-line bg-surface p-5 transition hover:border-violet-400/40 hover:bg-code"
             >
-              <p className="text-[0.65rem] uppercase tracking-[0.16em] text-zinc-500">{hook.category}</p>
-              <h3 className="mt-2 font-mono text-base text-white">{hook.name}</h3>
-              <p className="mt-2 text-sm leading-6 text-zinc-400">{hook.summary}</p>
+              <p className="text-[0.65rem] uppercase tracking-[0.16em] text-muted">{hook.category}</p>
+              <h3 className="mt-2 font-mono text-base text-fg">{hook.name}</h3>
+              <p className="mt-2 text-sm leading-6 text-muted">{hook.summary}</p>
             </a>
           </li>
         ))}

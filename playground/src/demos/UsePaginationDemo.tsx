@@ -14,7 +14,7 @@ export const UsePaginationDemo = () => {
           <li key={item}>{item}</li>
         ))}
       </ul>
-      <p className="text-sm text-zinc-400">
+      <p className="text-sm text-muted">
         Page {pager.page} of {pager.pageCount} · offset {pager.offset}
       </p>
       <div className="flex gap-2">

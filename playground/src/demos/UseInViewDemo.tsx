@@ -5,14 +5,14 @@ export const UseInViewDemo = () => {
 
   return (
     <div className="space-y-3">
-      <p className={isInView ? 'text-emerald-300' : 'text-zinc-400'}>
+      <p className={isInView ? 'text-emerald-700 dark:text-emerald-300' : 'text-muted'}>
         Sentinel is {isInView ? 'in view' : 'out of view'}. Scroll the box.
       </p>
-      <div className="h-40 overflow-auto rounded-xl border border-white/10">
+      <div className="h-40 overflow-auto rounded-xl border border-line">
         <div className="h-48" />
         <div
           ref={ref}
-          className={`mx-4 rounded-lg p-4 text-center ${isInView ? 'bg-emerald-500/20' : 'bg-zinc-800'}`}
+          className={`mx-4 rounded-lg p-4 text-center ${isInView ? 'bg-emerald-500/20' : 'bg-code'}`}
         >
           Watch me
         </div>

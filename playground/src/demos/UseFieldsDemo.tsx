@@ -40,7 +40,7 @@ export const UseFieldsDemo = () => {
         onChange={(event) => form.setField('email', event.target.value)}
       />
       {form.errors.email && <p className="text-sm text-rose-300">{form.errors.email}</p>}
-      <p className="text-sm text-zinc-400">{form.isDirty ? 'Unsaved changes' : 'Clean'}</p>
+      <p className="text-sm text-muted">{form.isDirty ? 'Unsaved changes' : 'Clean'}</p>
       <div className="flex gap-2">
         <button type="submit" className={buttonClass}>
           Submit
