@@ -163,14 +163,28 @@ npm run playground
 
 Guidelines for adding a hook: [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-## Publish to npm
+## Publish
 
-1. Push the public GitHub repository.
-2. `npm login`
-3. Confirm the name is free: `npm view usethishook`
-4. `npm publish --access public`
+**npm** is the install path for everyone: `npm install usethishook`. That listing does not appear on GitHub Packages by itself — GitHub hosts a second registry.
 
-Later releases: `npm version patch|minor|major`, then publish again.
+**GitHub Packages** needs a scoped name (`@owner/package`). The committed `package.json` stays `usethishook` for npm. [`.github/workflows/github-packages.yml`](.github/workflows/github-packages.yml) renames it to `@senthilkumar979/usethishook` only for that publish, then uploads with `GITHUB_TOKEN`.
+
+After you merge the workflow:
+
+1. Repo **Actions** → **Publish GitHub Package** → **Run workflow** (for the current `0.1.0`), or create a GitHub Release.
+2. The empty “Get started with GitHub Packages” panel is replaced by the package on the repo sidebar.
+
+Install from GitHub Packages (optional; still requires a GitHub token for the registry):
+
+```bash
+npm install @senthilkumar979/usethishook
+```
+
+```ini
+@senthilkumar979:registry=https://npm.pkg.github.com
+```
+
+Later npm releases: `npm version patch|minor|major`, `npm publish --access public`, then run the Packages workflow (or cut a Release) so both registries stay in sync.
 
 ## License
 
