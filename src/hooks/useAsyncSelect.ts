@@ -33,7 +33,7 @@ export const useAsyncSelect = () => {
           return;
         }
 
-        settle(multiple ? Array.from(files) : files[0] ?? null);
+        settle(multiple ? Array.from(files) : (files[0] ?? null));
       };
 
       const handleCancel = () => {

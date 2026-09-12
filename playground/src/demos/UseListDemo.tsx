@@ -14,10 +14,18 @@ export const UseListDemo = () => {
           <li key={item.id} className="flex items-center justify-between gap-2">
             <span>{item.name}</span>
             <span className="flex gap-2">
-              <button type="button" className={ghostButtonClass} onClick={() => list.move(index, Math.max(0, index - 1))}>
+              <button
+                type="button"
+                className={ghostButtonClass}
+                onClick={() => list.move(index, Math.max(0, index - 1))}
+              >
                 Up
               </button>
-              <button type="button" className={ghostButtonClass} onClick={() => list.remove(item.id)}>
+              <button
+                type="button"
+                className={ghostButtonClass}
+                onClick={() => list.remove(item.id)}
+              >
                 Remove
               </button>
             </span>
@@ -27,7 +35,9 @@ export const UseListDemo = () => {
       <button
         type="button"
         className={buttonClass}
-        onClick={() => list.insert({ id: String(Date.now()), name: `Person ${list.items.length + 1}` })}
+        onClick={() =>
+          list.insert({ id: String(Date.now()), name: `Person ${list.items.length + 1}` })
+        }
       >
         Add
       </button>

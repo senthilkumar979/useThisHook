@@ -1,5 +1,16 @@
-import { useCopyToClipboardApi, useDocumentTitleApi, useIntervalApi, useLocalStorageApi } from './api/persistApi';
-import { useCounterApi, useDebounceApi, useDisclosureApi, usePreviousApi, useToggleApi } from './api/coreStateApi';
+import {
+  useCopyToClipboardApi,
+  useDocumentTitleApi,
+  useIntervalApi,
+  useLocalStorageApi,
+} from './api/persistApi';
+import {
+  useCounterApi,
+  useDebounceApi,
+  useDisclosureApi,
+  usePreviousApi,
+  useToggleApi,
+} from './api/coreStateApi';
 import { UseCopyToClipboardDemo, useCopyToClipboardExample } from './demos/UseCopyToClipboardDemo';
 import { UseCounterDemo, useCounterExample } from './demos/UseCounterDemo';
 import { UseDebounceDemo, useDebounceExample } from './demos/UseDebounceDemo';

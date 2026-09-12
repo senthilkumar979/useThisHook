@@ -26,9 +26,12 @@ export const useSelection = ({ mode = 'multiple', initial = [] }: UseSelectionOp
     setSelected([id]);
   }, []);
 
-  const selectAll = useCallback((ids: string[]) => {
-    setSelected(mode === 'single' ? ids.slice(0, 1) : [...new Set(ids)]);
-  }, [mode]);
+  const selectAll = useCallback(
+    (ids: string[]) => {
+      setSelected(mode === 'single' ? ids.slice(0, 1) : [...new Set(ids)]);
+    },
+    [mode],
+  );
 
   const clear = useCallback(() => {
     setSelected([]);

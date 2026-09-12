@@ -18,11 +18,27 @@ export const useListApi: HookApi = {
     description: 'The list and the mutations.',
     fields: [
       { name: 'items', type: 'T[]', description: 'Current array.' },
-      { name: 'insert', type: '(item: T, index?: number) => void', description: 'Appends, or inserts at index.' },
-      { name: 'update', type: '(id, patch | fn) => void', description: 'Merges a partial or maps one item.' },
+      {
+        name: 'insert',
+        type: '(item: T, index?: number) => void',
+        description: 'Appends, or inserts at index.',
+      },
+      {
+        name: 'update',
+        type: '(id, patch | fn) => void',
+        description: 'Merges a partial or maps one item.',
+      },
       { name: 'remove', type: '(id: string) => void', description: 'Drops the item with that id.' },
-      { name: 'move', type: '(fromIndex, toIndex) => void', description: 'Reorders one item. No-op if indexes are out of range.' },
-      { name: 'replace', type: '(next: T[]) => void', description: 'Swap the whole list (for example after fetch).' },
+      {
+        name: 'move',
+        type: '(fromIndex, toIndex) => void',
+        description: 'Reorders one item. No-op if indexes are out of range.',
+      },
+      {
+        name: 'replace',
+        type: '(next: T[]) => void',
+        description: 'Swap the whole list (for example after fetch).',
+      },
     ],
   },
 };
@@ -52,10 +68,26 @@ export const useSelectionApi: HookApi = {
     description: 'selected is a string[] in click order.',
     fields: [
       { name: 'selected', type: 'string[]', description: 'Currently selected ids.' },
-      { name: 'isSelected', type: '(id: string) => boolean', description: 'Whether id is in the selection.' },
-      { name: 'toggle', type: '(id: string) => void', description: 'Add/remove in multiple; replace or clear in single.' },
-      { name: 'selectOnly', type: '(id: string) => void', description: 'Selection becomes exactly this id.' },
-      { name: 'selectAll', type: '(ids: string[]) => void', description: 'Select these ids (first only in single mode).' },
+      {
+        name: 'isSelected',
+        type: '(id: string) => boolean',
+        description: 'Whether id is in the selection.',
+      },
+      {
+        name: 'toggle',
+        type: '(id: string) => void',
+        description: 'Add/remove in multiple; replace or clear in single.',
+      },
+      {
+        name: 'selectOnly',
+        type: '(id: string) => void',
+        description: 'Selection becomes exactly this id.',
+      },
+      {
+        name: 'selectAll',
+        type: '(ids: string[]) => void',
+        description: 'Select these ids (first only in single mode).',
+      },
       { name: 'clear', type: '() => void', description: 'Empty selection.' },
     ],
   },
@@ -77,7 +109,11 @@ export const useSearchStateApi: HookApi = {
     description: 'Like useState. setValues accepts a partial or a functional update.',
     fields: [
       { name: 'values', type: 'T', description: 'Current params merged on top of defaults.' },
-      { name: 'setValues', type: '(partial | fn) => void', description: 'Writes the query string and notifies subscribers.' },
+      {
+        name: 'setValues',
+        type: '(partial | fn) => void',
+        description: 'Writes the query string and notifies subscribers.',
+      },
     ],
   },
   caveats: ['Hash routes still work; only location.search is read and written.'],
@@ -97,7 +133,11 @@ export const useConfirmApi: HookApi = {
         type: '(options: ConfirmOptions) => Promise<boolean>',
         description: 'options: title, message?, confirmLabel?, cancelLabel?, danger?.',
       },
-      { name: 'render', type: '() => ReactNode', description: 'Place this in JSX. Null until the first confirm().' },
+      {
+        name: 'render',
+        type: '() => ReactNode',
+        description: 'Place this in JSX. Null until the first confirm().',
+      },
     ],
   },
 };
@@ -114,7 +154,8 @@ export const usePromptApi: HookApi = {
       {
         name: 'prompt',
         type: '(options: PromptOptions) => Promise<string | null>',
-        description: 'options: title, message?, label?, initialValue?, confirmLabel?, cancelLabel?.',
+        description:
+          'options: title, message?, label?, initialValue?, confirmLabel?, cancelLabel?.',
       },
       { name: 'render', type: '() => ReactNode', description: 'Place this in JSX.' },
     ],

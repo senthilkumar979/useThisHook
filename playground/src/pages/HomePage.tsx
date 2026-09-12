@@ -15,8 +15,8 @@ export const HomePage = () => (
       </h1>
       <p className="max-w-2xl text-lg leading-8 text-muted">
         Stop rewriting toggle, debounce, overlay, wizard, and file-picker logic. Import a named
-        hook, wire it to your UI, and ship. This playground is the documentation: try the hook,
-        read what it takes and returns, then copy the example.
+        hook, wire it to your UI, and ship. This playground is the documentation: try the hook, read
+        what it takes and returns, then copy the example.
       </p>
       <div className="flex flex-wrap gap-3">
         <a

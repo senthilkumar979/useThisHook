@@ -1,5 +1,9 @@
 # useThisHook
 
+[![npm](https://img.shields.io/npm/v/usethishook.svg)](https://www.npmjs.com/package/usethishook)
+[![license](https://img.shields.io/npm/l/usethishook.svg)](LICENSE)
+[![CI](https://github.com/senthilkumar979/useThisHook/actions/workflows/ci.yml/badge.svg)](https://github.com/senthilkumar979/useThisHook/actions/workflows/ci.yml)
+
 **useThisHook** is an open-source TypeScript library of named React hooks for everyday UI, forms, lists, overlays, and browser APIs. Import only what you need — the package is tree-shakeable.
 
 The npm package name is lowercase: [`usethishook`](https://www.npmjs.com/package/usethishook).
@@ -8,7 +12,7 @@ The npm package name is lowercase: [`usethishook`](https://www.npmjs.com/package
 npm install usethishook
 ```
 
-**Peer dependency:** React 18 or later (React 19 is supported).
+**Peer dependencies:** React 18 or later, and **React DOM** 18 or later for confirm, prompt, overlay, and step-flow hooks (React 19 is supported).
 
 ## Why use it
 
@@ -54,9 +58,7 @@ export const SearchBox = () => {
       <button type="button" onClick={toggle}>
         {isOpen ? 'Hide' : 'Show'} search
       </button>
-      {isOpen && (
-        <input value={query} onChange={(event) => setQuery(event.target.value)} />
-      )}
+      {isOpen && <input value={query} onChange={(event) => setQuery(event.target.value)} />}
       <p>Searching for: {debouncedQuery}</p>
     </div>
   );
@@ -95,60 +97,68 @@ Playground paths are hash routes on the local docs app (for example `#/useToggle
 
 ### State
 
-| Hook | Purpose | Preview |
-| --- | --- | --- |
-| `useToggle` | Boolean with `toggle`, `setTrue`, `setFalse` | `#/useToggle` |
-| `useCounter` | Increment, decrement, reset | `#/useCounter` |
-| `useDisclosure` | Open / close / toggle for menus and dialogs | `#/useDisclosure` |
-| `useDebounce` | Debounce a rapidly changing value | `#/useDebounce` |
-| `usePrevious` | Previous render’s value | `#/usePrevious` |
-| `useInterval` | Declarative `setInterval` (`null` pauses) | `#/useInterval` |
-| `useCopyToClipboard` | Clipboard write + last copied text | `#/useCopyToClipboard` |
-| `useLocalStorage` | JSON state persisted in `localStorage` | `#/useLocalStorage` |
-| `useDocumentTitle` | Set `document.title` while mounted | `#/useDocumentTitle` |
+| Hook                 | Purpose                                      | Preview                |
+| -------------------- | -------------------------------------------- | ---------------------- |
+| `useToggle`          | Boolean with `toggle`, `setTrue`, `setFalse` | `#/useToggle`          |
+| `useCounter`         | Increment, decrement, reset                  | `#/useCounter`         |
+| `useDisclosure`      | Open / close / toggle for menus and dialogs  | `#/useDisclosure`      |
+| `useDebounce`        | Debounce a rapidly changing value            | `#/useDebounce`        |
+| `usePrevious`        | Previous render’s value                      | `#/usePrevious`        |
+| `useInterval`        | Declarative `setInterval` (`null` pauses)    | `#/useInterval`        |
+| `useCopyToClipboard` | Clipboard write + last copied text           | `#/useCopyToClipboard` |
+| `useLocalStorage`    | JSON state persisted in `localStorage`       | `#/useLocalStorage`    |
+| `useDocumentTitle`   | Set `document.title` while mounted           | `#/useDocumentTitle`   |
 
 ### Browser
 
-| Hook | Purpose | Preview |
-| --- | --- | --- |
-| `useOnlineStatus` | `navigator.onLine` plus online/offline events | `#/useOnlineStatus` |
-| `useMediaQuery` | Subscribe to a CSS media query | `#/useMediaQuery` |
-| `useWindowSize` | Viewport width and height | `#/useWindowSize` |
-| `useOnClickOutside` | Handler when the user presses outside a ref | `#/useOnClickOutside` |
-| `useOverlay` | Promise-based custom overlay | `#/useOverlay` |
-| `useStepFlow` | Multi-step wizard that resolves when finished | `#/useStepFlow` |
-| `useAsyncSelect` | Native file picker as a Promise | `#/useAsyncSelect` |
+| Hook                | Purpose                                       | Preview               |
+| ------------------- | --------------------------------------------- | --------------------- |
+| `useOnlineStatus`   | `navigator.onLine` plus online/offline events | `#/useOnlineStatus`   |
+| `useMediaQuery`     | Subscribe to a CSS media query                | `#/useMediaQuery`     |
+| `useWindowSize`     | Viewport width and height                     | `#/useWindowSize`     |
+| `useOnClickOutside` | Handler when the user presses outside a ref   | `#/useOnClickOutside` |
+| `useOverlay`        | Promise-based custom overlay                  | `#/useOverlay`        |
+| `useStepFlow`       | Multi-step wizard that resolves when finished | `#/useStepFlow`       |
+| `useAsyncSelect`    | Native file picker as a Promise               | `#/useAsyncSelect`    |
 
 ### App
 
-| Hook | Purpose | Preview |
-| --- | --- | --- |
-| `useStableCallback` | Stable function identity, always-latest body | `#/useStableCallback` |
-| `useOnChange` | Callback when a value changes, not on mount | `#/useOnChange` |
-| `useResetState` | Local state that resets when a source key changes | `#/useResetState` |
-| `useAsyncAction` | Pending / error / data around one async action | `#/useAsyncAction` |
-| `useDebouncedCallback` | Debounce calling a function | `#/useDebouncedCallback` |
-| `useFields` | Small form object, optional Zod-shaped schema | `#/useFields` |
-| `useList` | Insert, update, remove, reorder by `id` | `#/useList` |
-| `useSelection` | Single or multi select ids | `#/useSelection` |
-| `useSearchState` | URL search params as React state | `#/useSearchState` |
-| `useConfirm` | Await a yes/no dialog | `#/useConfirm` |
-| `usePrompt` | Await a string from a dialog | `#/usePrompt` |
-| `useControllableState` | Controlled and uncontrolled in one setter | `#/useControllableState` |
-| `useUnsavedChanges` | Tab-close warning and in-app leave confirm | `#/useUnsavedChanges` |
-| `useElementSize` | Element size via `ResizeObserver` | `#/useElementSize` |
-| `useInView` | Element vs viewport via `IntersectionObserver` | `#/useInView` |
-| `usePagination` | Page, offset, next/prev with clamping | `#/usePagination` |
+| Hook                   | Purpose                                           | Preview                  |
+| ---------------------- | ------------------------------------------------- | ------------------------ |
+| `useStableCallback`    | Stable function identity, always-latest body      | `#/useStableCallback`    |
+| `useOnChange`          | Callback when a value changes, not on mount       | `#/useOnChange`          |
+| `useResetState`        | Local state that resets when a source key changes | `#/useResetState`        |
+| `useAsyncAction`       | Pending / error / data around one async action    | `#/useAsyncAction`       |
+| `useDebouncedCallback` | Debounce calling a function                       | `#/useDebouncedCallback` |
+| `useFields`            | Small form object, optional Zod-shaped schema     | `#/useFields`            |
+| `useList`              | Insert, update, remove, reorder by `id`           | `#/useList`              |
+| `useSelection`         | Single or multi select ids                        | `#/useSelection`         |
+| `useSearchState`       | URL search params as React state                  | `#/useSearchState`       |
+| `useConfirm`           | Await a yes/no dialog                             | `#/useConfirm`           |
+| `usePrompt`            | Await a string from a dialog                      | `#/usePrompt`            |
+| `useControllableState` | Controlled and uncontrolled in one setter         | `#/useControllableState` |
+| `useUnsavedChanges`    | Tab-close warning and in-app leave confirm        | `#/useUnsavedChanges`    |
+| `useElementSize`       | Element size via `ResizeObserver`                 | `#/useElementSize`       |
+| `useInView`            | Element vs viewport via `IntersectionObserver`    | `#/useInView`            |
+| `usePagination`        | Page, offset, next/prev with clamping             | `#/usePagination`        |
+
+## Server rendering
+
+Hooks that read `window`, `document`, `navigator`, or observers are safe to _call_ on the server when they fall back (typical values: `false`, `{ width: 0, height: 0 }`, or an empty query). They subscribe after mount.
+
+- `useMediaQuery`, `useWindowSize`, `useOnlineStatus`, `useLocalStorage`, `useSearchState`, `useDocumentTitle`, `useOnClickOutside`, `useElementSize`, `useInView`, and `useUnsavedChanges` must not assume a browser until after hydration.
+- Confirm, prompt, overlay, and step-flow still need `render()` in the client tree.
 
 ## Scripts
 
-| Command | What it does |
-| --- | --- |
-| `npm test` | Vitest (jsdom) |
-| `npm run typecheck` | `tsc --noEmit` |
-| `npm run build` | ESM + CJS + types via tsup (`dist/`) |
-| `npm run playground` | Docs app |
-| `npm run playground:build` | Static playground |
+| Command                    | What it does                         |
+| -------------------------- | ------------------------------------ |
+| `npm test`                 | Vitest (jsdom)                       |
+| `npm run typecheck`        | Library + playground `tsc --noEmit`  |
+| `npm run lint`             | ESLint + Prettier check              |
+| `npm run build`            | ESM + CJS + types via tsup (`dist/`) |
+| `npm run playground`       | Docs app                             |
+| `npm run playground:build` | Static playground (`base: /`)        |
 
 `prepublishOnly` runs typecheck, tests, and build.
 
@@ -167,9 +177,9 @@ Guidelines for adding a hook: [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 **npm** is the install path for everyone: `npm install usethishook`. Publishing to the public registry is **manual only** — it does not run on push.
 
-1. Bump `version` in `package.json` (and commit / push `main`).
-2. Add a repo secret named `NPM_TOKEN` (npm access token with publish rights).
-3. **Actions → Publish npm → Run workflow**.
+1. Bump `version` in `package.json` and add a [`CHANGELOG.md`](CHANGELOG.md) section in the same commit.
+2. Add a repo secret named `NPM_TOKEN` (npm access token with publish rights). Publish stays **Actions → Publish npm → Run workflow** — never on push.
+3. After publish, link the npm package on the GitHub repo if it is not already connected.
 
 [`.github/workflows/npm-publish.yml`](.github/workflows/npm-publish.yml) runs `npm publish --access public`. `prepublishOnly` still typechecks, tests, and builds.
 

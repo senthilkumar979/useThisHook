@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { BrandMark } from './BrandMark';
 import { HookNav } from './HookNav';
+import { SiteFooter } from './SiteFooter';
 import { ThemeToggle } from './ThemeToggle';
 
 interface LayoutProps {
@@ -38,6 +39,9 @@ export const Layout = ({ activeId, children }: LayoutProps) => (
       </p>
       <HookNav activeId={activeId} />
     </aside>
-    <main className="relative py-8 pl-5 pr-14 lg:py-10 lg:pl-12 lg:pr-16">{children}</main>
+    <main className="relative py-8 pl-5 pr-14 lg:py-10 lg:pl-12 lg:pr-16">
+      {children}
+      <SiteFooter />
+    </main>
   </div>
 );

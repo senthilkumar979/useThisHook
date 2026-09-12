@@ -18,10 +18,18 @@ export const useToggleApi: HookApi = {
     description: 'The current flag plus stable callbacks to change it.',
     fields: [
       { name: 'value', type: 'boolean', description: 'Whether the flag is currently on.' },
-      { name: 'toggle', type: '() => void', description: 'Flips value from true to false or the reverse.' },
+      {
+        name: 'toggle',
+        type: '() => void',
+        description: 'Flips value from true to false or the reverse.',
+      },
       { name: 'setTrue', type: '() => void', description: 'Sets value to true.' },
       { name: 'setFalse', type: '() => void', description: 'Sets value to false.' },
-      { name: 'setValue', type: 'Dispatch<SetStateAction<boolean>>', description: 'Escape hatch for any boolean update, including functional updates.' },
+      {
+        name: 'setValue',
+        type: 'Dispatch<SetStateAction<boolean>>',
+        description: 'Escape hatch for any boolean update, including functional updates.',
+      },
     ],
   },
 };
@@ -54,7 +62,11 @@ export const useCounterApi: HookApi = {
       { name: 'increment', type: '() => void', description: 'Adds step to count.' },
       { name: 'decrement', type: '() => void', description: 'Subtracts step from count.' },
       { name: 'reset', type: '() => void', description: 'Sets count back to initialValue.' },
-      { name: 'setCount', type: 'Dispatch<SetStateAction<number>>', description: 'Set an exact number, bypassing step.' },
+      {
+        name: 'setCount',
+        type: 'Dispatch<SetStateAction<number>>',
+        description: 'Set an exact number, bypassing step.',
+      },
     ],
   },
 };
@@ -89,7 +101,11 @@ export const useDebounceApi: HookApi = {
   explanation:
     'Returns a copy of value that only updates after value has stayed still for delayMs. The first render returns the original value immediately.',
   arguments: [
-    { name: 'value', type: 'T', description: 'The rapidly changing source, such as an input string.' },
+    {
+      name: 'value',
+      type: 'T',
+      description: 'The rapidly changing source, such as an input string.',
+    },
     {
       name: 'delayMs',
       type: 'number',

@@ -5,9 +5,19 @@ export const useControllableStateApi: HookApi = {
   explanation:
     'One setter for both controlled and uncontrolled components. If value is passed, the hook is controlled and only calls onChange. Otherwise it keeps defaultValue internally.',
   arguments: [
-    { name: 'value', type: 'T', optional: true, description: 'Controlled value. Omit this to run uncontrolled.' },
+    {
+      name: 'value',
+      type: 'T',
+      optional: true,
+      description: 'Controlled value. Omit this to run uncontrolled.',
+    },
     { name: 'defaultValue', type: 'T', description: 'Starting value when value is omitted.' },
-    { name: 'onChange', type: '(value: T) => void', optional: true, description: 'Fires with the next value in both modes.' },
+    {
+      name: 'onChange',
+      type: '(value: T) => void',
+      optional: true,
+      description: 'Fires with the next value in both modes.',
+    },
   ],
   returns: {
     type: '[current, setValue]',
@@ -30,7 +40,8 @@ export const useUnsavedChangesApi: HookApi = {
   ],
   returns: {
     type: '{ confirmLeave }',
-    description: 'Call before changing route. Resolves true when clean, or when the user agrees to leave.',
+    description:
+      'Call before changing route. Resolves true when clean, or when the user agrees to leave.',
     fields: [
       {
         name: 'confirmLeave',
@@ -50,7 +61,11 @@ export const useElementSizeApi: HookApi = {
     type: '{ ref, width, height }',
     description: 'Attach ref to the node you want to measure. Starts at 0×0 until it mounts.',
     fields: [
-      { name: 'ref', type: '(element: T | null) => void', description: 'Callback ref for the observed element.' },
+      {
+        name: 'ref',
+        type: '(element: T | null) => void',
+        description: 'Callback ref for the observed element.',
+      },
       { name: 'width', type: 'number', description: 'contentRect.width' },
       { name: 'height', type: 'number', description: 'contentRect.height' },
     ],
@@ -62,14 +77,38 @@ export const useInViewApi: HookApi = {
   explanation:
     'Callback ref plus isInView from IntersectionObserver. Use for lazy media, infinite-scroll sentinels, and enter animations.',
   arguments: [
-    { name: 'root', type: 'Element | null', optional: true, description: 'Scroll root. Default is the viewport.' },
-    { name: 'rootMargin', type: 'string', optional: true, defaultValue: "'0px'", description: 'Same as IntersectionObserver rootMargin.' },
-    { name: 'threshold', type: 'number | number[]', optional: true, defaultValue: '0', description: 'How much of the target must be visible.' },
-    { name: 'once', type: 'boolean', optional: true, defaultValue: 'false', description: 'If true, stays true after the first intersection and disconnects.' },
+    {
+      name: 'root',
+      type: 'Element | null',
+      optional: true,
+      description: 'Scroll root. Default is the viewport.',
+    },
+    {
+      name: 'rootMargin',
+      type: 'string',
+      optional: true,
+      defaultValue: "'0px'",
+      description: 'Same as IntersectionObserver rootMargin.',
+    },
+    {
+      name: 'threshold',
+      type: 'number | number[]',
+      optional: true,
+      defaultValue: '0',
+      description: 'How much of the target must be visible.',
+    },
+    {
+      name: 'once',
+      type: 'boolean',
+      optional: true,
+      defaultValue: 'false',
+      description: 'If true, stays true after the first intersection and disconnects.',
+    },
   ],
   returns: {
     type: '{ ref, isInView }',
-    description: 'Attach ref to the target. isInView updates as it enters and leaves (unless once).',
+    description:
+      'Attach ref to the target. isInView updates as it enters and leaves (unless once).',
   },
 };
 
@@ -79,17 +118,37 @@ export const usePaginationApi: HookApi = {
     '1-based page state with derived pageCount, offset, and next/prev. Clamps page when total shrinks. Changing page size returns to page 1.',
   arguments: [
     { name: 'total', type: 'number', description: 'Total item count.' },
-    { name: 'pageSize', type: 'number', optional: true, defaultValue: '10', description: 'Items per page (initial).' },
-    { name: 'initialPage', type: 'number', optional: true, defaultValue: '1', description: 'Starting page (1-based).' },
+    {
+      name: 'pageSize',
+      type: 'number',
+      optional: true,
+      defaultValue: '10',
+      description: 'Items per page (initial).',
+    },
+    {
+      name: 'initialPage',
+      type: 'number',
+      optional: true,
+      defaultValue: '1',
+      description: 'Starting page (1-based).',
+    },
   ],
   returns: {
     type: '{ page, pageSize, total, pageCount, offset, canNext, canPrev, setPage, setPageSize, next, prev }',
     description: 'Slice with items.slice(offset, offset + pageSize).',
     fields: [
-      { name: 'page', type: 'number', description: 'Current page, always between 1 and pageCount.' },
+      {
+        name: 'page',
+        type: 'number',
+        description: 'Current page, always between 1 and pageCount.',
+      },
       { name: 'offset', type: 'number', description: '(page - 1) * pageSize' },
       { name: 'pageCount', type: 'number', description: 'At least 1, even when total is 0.' },
-      { name: 'setPageSize', type: '(size: number) => void', description: 'Updates page size and resets to page 1.' },
+      {
+        name: 'setPageSize',
+        type: '(size: number) => void',
+        description: 'Updates page size and resets to page 1.',
+      },
     ],
   },
 };

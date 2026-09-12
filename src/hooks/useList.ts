@@ -31,7 +31,12 @@ export const useList = <T extends Identifiable>(initialItems: T[] = []) => {
 
   const move = useCallback((fromIndex: number, toIndex: number) => {
     setItems((previous) => {
-      if (fromIndex < 0 || toIndex < 0 || fromIndex >= previous.length || toIndex >= previous.length) {
+      if (
+        fromIndex < 0 ||
+        toIndex < 0 ||
+        fromIndex >= previous.length ||
+        toIndex >= previous.length
+      ) {
         return previous;
       }
       const next = [...previous];

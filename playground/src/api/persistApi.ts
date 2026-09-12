@@ -8,12 +8,14 @@ export const useIntervalApi: HookApi = {
     {
       name: 'callback',
       type: '() => void',
-      description: 'Work to run each tick. You can change this every render; the interval still keeps its schedule.',
+      description:
+        'Work to run each tick. You can change this every render; the interval still keeps its schedule.',
     },
     {
       name: 'delayMs',
       type: 'number | null',
-      description: 'Milliseconds between ticks. Pass null to pause; passing a number again resumes.',
+      description:
+        'Milliseconds between ticks. Pass null to pause; passing a number again resumes.',
     },
   ],
   returns: {
@@ -40,7 +42,8 @@ export const useCopyToClipboardApi: HookApi = {
       {
         name: 'copy',
         type: '(text: string) => Promise<boolean>',
-        description: 'Writes text. Resolves true on success, false if the API is missing or the write fails.',
+        description:
+          'Writes text. Resolves true on success, false if the API is missing or the write fails.',
       },
       { name: 'reset', type: '() => void', description: 'Clears copiedText back to null.' },
     ],
@@ -53,7 +56,11 @@ export const useLocalStorageApi: HookApi = {
   explanation:
     'Same idea as useState, but the value is JSON-serialized into localStorage under key so it survives refresh.',
   arguments: [
-    { name: 'key', type: 'string', description: 'localStorage key. Changing it re-reads that entry.' },
+    {
+      name: 'key',
+      type: 'string',
+      description: 'localStorage key. Changing it re-reads that entry.',
+    },
     {
       name: 'initialValue',
       type: 'T',
@@ -62,7 +69,8 @@ export const useLocalStorageApi: HookApi = {
   ],
   returns: {
     type: '[value, setValue]',
-    description: 'A state tuple. setValue accepts a value or a function of the previous value, like useState.',
+    description:
+      'A state tuple. setValue accepts a value or a function of the previous value, like useState.',
     fields: [
       { name: 'value', type: 'T', description: 'Current parsed value.' },
       {
@@ -84,7 +92,11 @@ export const useDocumentTitleApi: HookApi = {
   explanation:
     'Sets document.title while this component is mounted, then restores whatever the tab title was before.',
   arguments: [
-    { name: 'title', type: 'string', description: 'Tab title to show for as long as this component stays mounted.' },
+    {
+      name: 'title',
+      type: 'string',
+      description: 'Tab title to show for as long as this component stays mounted.',
+    },
   ],
   returns: {
     type: 'void',

@@ -12,10 +12,14 @@ export const UseStableCallbackDemo = () => {
 
   return (
     <div className="space-y-3">
-      <input className={inputClass} value={label} onChange={(event) => setLabel(event.target.value)} />
+      <input
+        className={inputClass}
+        value={label}
+        onChange={(event) => setLabel(event.target.value)}
+      />
       <p>
-        Interval still uses the latest name <span className="font-medium text-fg">{label}</span> without resetting.
-        Ticks: {ticks}
+        Interval still uses the latest name <span className="font-medium text-fg">{label}</span>{' '}
+        without resetting. Ticks: {ticks}
       </p>
     </div>
   );

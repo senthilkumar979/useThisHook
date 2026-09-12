@@ -1,4 +1,9 @@
-import { useMediaQueryApi, useOnClickOutsideApi, useOnlineStatusApi, useWindowSizeApi } from './api/browserApi';
+import {
+  useMediaQueryApi,
+  useOnClickOutsideApi,
+  useOnlineStatusApi,
+  useWindowSizeApi,
+} from './api/browserApi';
 import { useAsyncSelectApi, useOverlayApi, useStepFlowApi } from './api/flowApi';
 import { UseAsyncSelectDemo, useAsyncSelectExample } from './demos/UseAsyncSelectDemo';
 import { UseMediaQueryDemo, useMediaQueryExample } from './demos/UseMediaQueryDemo';

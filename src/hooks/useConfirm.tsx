@@ -31,7 +31,10 @@ const ConfirmDialog = ({
       <div style={dialogButtonRowStyle}>
         <button
           type="button"
-          style={{ ...primaryButtonStyle, background: danger ? '#e11d48' : primaryButtonStyle.background }}
+          style={{
+            ...primaryButtonStyle,
+            background: danger ? '#e11d48' : primaryButtonStyle.background,
+          }}
           onClick={() => close(true)}
         >
           {confirmLabel}
@@ -47,7 +50,8 @@ const ConfirmDialog = ({
 export const useConfirm = () => {
   const overlay = useOverlay<ConfirmOptions, boolean>(ConfirmDialog);
 
-  const confirm = (options: ConfirmOptions) => overlay.open(options).then((result) => Boolean(result));
+  const confirm = (options: ConfirmOptions) =>
+    overlay.open(options).then((result) => Boolean(result));
 
   return { confirm, render: overlay.render } as const;
 };

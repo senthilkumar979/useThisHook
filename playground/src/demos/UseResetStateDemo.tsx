@@ -26,7 +26,11 @@ export const UseResetStateDemo = () => {
           </button>
         ))}
       </div>
-      <input className={inputClass} value={draft} onChange={(event) => setDraft(event.target.value)} />
+      <input
+        className={inputClass}
+        value={draft}
+        onChange={(event) => setDraft(event.target.value)}
+      />
       <p>Switch users: the draft resets. Stay on the same user: your typing is kept.</p>
     </div>
   );

@@ -19,9 +19,5 @@ export const App = () => {
 
   const hook = route ? getHookById(route) : undefined;
 
-  return (
-    <Layout activeId={hook?.id}>
-      {hook ? <HookPage hook={hook} /> : <HomePage />}
-    </Layout>
-  );
+  return <Layout activeId={hook?.id}>{hook ? <HookPage hook={hook} /> : <HomePage />}</Layout>;
 };

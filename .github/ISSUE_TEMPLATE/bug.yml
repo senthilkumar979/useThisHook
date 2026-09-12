@@ -1,0 +1,38 @@
+name: Bug report
+description: Something in a hook or the playground does not work as documented
+labels: [bug]
+body:
+  - type: input
+    id: hook
+    attributes:
+      label: Hook or page
+      description: Hook name (for example useConfirm) or playground URL hash.
+      placeholder: useToggle
+    validations:
+      required: true
+  - type: input
+    id: react
+    attributes:
+      label: React version
+      placeholder: 18.3.1
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction
+      description: Minimal snippet or steps.
+    validations:
+      required: true

@@ -15,11 +15,31 @@ export const useAsyncActionApi: HookApi = {
     type: '{ run, isPending, error, data, reset }',
     description: 'Call run from a click handler. Disable the button with isPending.',
     fields: [
-      { name: 'run', type: '(...args) => Promise<TResult>', description: 'Starts the action. Re-throws if action throws.' },
-      { name: 'isPending', type: 'boolean', description: 'True while the latest run is in flight.' },
-      { name: 'error', type: 'unknown | null', description: 'Rejection from the latest finished run, or null.' },
-      { name: 'data', type: 'TResult | undefined', description: 'Resolution from the latest successful run.' },
-      { name: 'reset', type: '() => void', description: 'Clears pending, error, and data and invalidates in-flight runs.' },
+      {
+        name: 'run',
+        type: '(...args) => Promise<TResult>',
+        description: 'Starts the action. Re-throws if action throws.',
+      },
+      {
+        name: 'isPending',
+        type: 'boolean',
+        description: 'True while the latest run is in flight.',
+      },
+      {
+        name: 'error',
+        type: 'unknown | null',
+        description: 'Rejection from the latest finished run, or null.',
+      },
+      {
+        name: 'data',
+        type: 'TResult | undefined',
+        description: 'Resolution from the latest successful run.',
+      },
+      {
+        name: 'reset',
+        type: '() => void',
+        description: 'Clears pending, error, and data and invalidates in-flight runs.',
+      },
     ],
   },
 };
@@ -29,15 +49,27 @@ export const useDebouncedCallbackApi: HookApi = {
   explanation:
     'Returns a function that waits delayMs after the last call before running callback. Also returns cancel to drop a pending call.',
   arguments: [
-    { name: 'callback', type: '(...args) => void', description: 'The work to run after idle time. Latest callback is used.' },
+    {
+      name: 'callback',
+      type: '(...args) => void',
+      description: 'The work to run after idle time. Latest callback is used.',
+    },
     { name: 'delayMs', type: 'number', description: 'Idle time in milliseconds.' },
   ],
   returns: {
     type: '[run, cancel]',
     description: 'A tuple: the debounced function and a cancel function.',
     fields: [
-      { name: 'run', type: 'T', description: 'Call this from events. Restarts the timer each time.' },
-      { name: 'cancel', type: '() => void', description: 'Clears the timer so callback will not run.' },
+      {
+        name: 'run',
+        type: 'T',
+        description: 'Call this from events. Restarts the timer each time.',
+      },
+      {
+        name: 'cancel',
+        type: '() => void',
+        description: 'Clears the timer so callback will not run.',
+      },
     ],
   },
 };
@@ -47,7 +79,11 @@ export const useFieldsApi: HookApi = {
   explanation:
     'One object of form values with setField, dirty tracking, and optional schema.safeParse (Zod-compatible). submit(onValid) only runs onValid when parse succeeds.',
   arguments: [
-    { name: 'initialValues', type: 'T extends object', description: 'Starting values. Keep this object stable or isDirty will flicker.' },
+    {
+      name: 'initialValues',
+      type: 'T extends object',
+      description: 'Starting values. Keep this object stable or isDirty will flicker.',
+    },
     {
       name: 'schema',
       type: '{ safeParse(data) => { success, data } | { success: false, error: { issues } } }',
@@ -60,13 +96,37 @@ export const useFieldsApi: HookApi = {
     description: 'Bind inputs to values and setField. Show errors[field] under the input.',
     fields: [
       { name: 'values', type: 'T', description: 'Current field values.' },
-      { name: 'setField', type: '(key, value) => void', description: 'Updates one key and clears that key’s error.' },
-      { name: 'setValues', type: 'Dispatch<SetStateAction<T>>', description: 'Replace or functional-update the whole object.' },
+      {
+        name: 'setField',
+        type: '(key, value) => void',
+        description: 'Updates one key and clears that key’s error.',
+      },
+      {
+        name: 'setValues',
+        type: 'Dispatch<SetStateAction<T>>',
+        description: 'Replace or functional-update the whole object.',
+      },
       { name: 'reset', type: '() => void', description: 'Back to initialValues, no errors.' },
-      { name: 'isDirty', type: 'boolean', description: 'True when any value differs (shallow) from initialValues.' },
-      { name: 'errors', type: 'Partial<Record<keyof T, string>>', description: 'First message per field from the last validate/submit.' },
-      { name: 'validate', type: '() => { ok, values } | { ok, errors }', description: 'Runs schema if present.' },
-      { name: 'submit', type: '(onValid) => result', description: 'Validates, then calls onValid(values) only when ok.' },
+      {
+        name: 'isDirty',
+        type: 'boolean',
+        description: 'True when any value differs (shallow) from initialValues.',
+      },
+      {
+        name: 'errors',
+        type: 'Partial<Record<keyof T, string>>',
+        description: 'First message per field from the last validate/submit.',
+      },
+      {
+        name: 'validate',
+        type: '() => { ok, values } | { ok, errors }',
+        description: 'Runs schema if present.',
+      },
+      {
+        name: 'submit',
+        type: '(onValid) => result',
+        description: 'Validates, then calls onValid(values) only when ok.',
+      },
     ],
   },
 };

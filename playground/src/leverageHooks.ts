@@ -5,7 +5,10 @@ import {
   usePaginationApi,
   useUnsavedChangesApi,
 } from './api/leverageApi';
-import { UseControllableStateDemo, useControllableStateExample } from './demos/UseControllableStateDemo';
+import {
+  UseControllableStateDemo,
+  useControllableStateExample,
+} from './demos/UseControllableStateDemo';
 import { UseElementSizeDemo, useElementSizeExample } from './demos/UseElementSizeDemo';
 import { UseInViewDemo, useInViewExample } from './demos/UseInViewDemo';
 import { UsePaginationDemo, usePaginationExample } from './demos/UsePaginationDemo';

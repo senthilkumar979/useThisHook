@@ -4,10 +4,9 @@ import { usePagination } from './usePagination';
 
 describe('usePagination', () => {
   it('derives offset and pageCount and clamps when total shrinks', () => {
-    const { result, rerender } = renderHook(
-      ({ total }) => usePagination({ total, pageSize: 10 }),
-      { initialProps: { total: 35 } },
-    );
+    const { result, rerender } = renderHook(({ total }) => usePagination({ total, pageSize: 10 }), {
+      initialProps: { total: 35 },
+    });
 
     expect(result.current.pageCount).toBe(4);
     act(() => {
