@@ -1,49 +1,41 @@
 # useThisHook
 
+**The React hooks you actually ship — zero runtime dependencies.**
+
+Named, typed, tree-shakeable hooks for UI, state, forms, lists, overlays, and the browser. You already have React. That is enough.
+
 [![npm](https://img.shields.io/npm/v/usethishook.svg)](https://www.npmjs.com/package/usethishook)
 [![license](https://img.shields.io/npm/l/usethishook.svg)](LICENSE)
 [![CI](https://github.com/senthilkumar979/useThisHook/actions/workflows/ci.yml/badge.svg)](https://github.com/senthilkumar979/useThisHook/actions/workflows/ci.yml)
-
-**useThisHook** is an open-source TypeScript library of named React hooks for everyday UI, forms, lists, overlays, and browser APIs. Import only what you need — the package is tree-shakeable.
-
-The npm package name is lowercase: [`usethishook`](https://www.npmjs.com/package/usethishook).
+[![bundle size](https://img.shields.io/bundlephobia/minzip/usethishook)](https://bundlephobia.com/package/usethishook)
+[![types](https://img.shields.io/npm/types/usethishook.svg)](https://www.npmjs.com/package/usethishook)
 
 ```bash
 npm install usethishook
 ```
 
-**Peer dependencies:** React 18 or later, and **React DOM** 18 or later for confirm, prompt, overlay, and step-flow hooks (React 19 is supported).
+Install **`usethishook`**. The product is **useThisHook**. Peers: **React 18+** and **React DOM 18+** (React 19 supported). Confirm, prompt, overlay, and step-flow need `react-dom`.
 
-## Why use it
+**Try it live:** [usethishook.mentorbridge.in](https://usethishook.mentorbridge.in) · [GitHub Pages](https://senthilkumar979.github.io/useThisHook/)
 
-- Drop the same hooks into Vite, Next.js, CRA, or Module Federation hosts.
-- Named exports and generated `.d.ts` types — no default export.
-- Promise-based overlays, wizards, confirm, and file pick instead of ad-hoc `useEffect` state machines.
-- A playground with a live preview, plain-English description, API reference, and copy-paste example for every hook.
+---
 
-## Documentation playground
+## Why teams pick it
 
-- Hosted: [usethishook.mentorbridge.in](https://usethishook.mentorbridge.in) (Vercel)
-- Mirror: [senthilkumar979.github.io/useThisHook](https://senthilkumar979.github.io/useThisHook/) (GitHub Pages)
+| | |
+| --- | --- |
+| **0 runtime dependencies** | The published package has no `dependencies` block. No lodash, no date lib, no mystery `node_modules` tax on every consumer. |
+| **You already pay for React** | Peers only. Hooks sit on `useState`, `useEffect`, and browser APIs you already trust. |
+| **Tree-shake by import** | Named exports, `sideEffects: false`, ESM + CJS + `.d.ts`. Import `useBoolean` — leave the rest on the floor. |
+| **TypeScript first** | Public types ship with the build. No `@types` package. No default export. |
+| **SSR-aware** | Window, storage, and observers fall back on the server and subscribe after hydration. |
+| **Promised UI, not effect soup** | Confirm, prompt, overlay, file pick, and multi-step flows return values you can `await` in a click handler. |
 
-```bash
-npm install
-npm run playground
-```
+Works in **Vite, Next.js, CRA, and Module Federation** hosts — same import, same types.
 
-Open the URL Vite prints (usually `http://localhost:5173`). Light mode is the default; use the sun/moon icon at the top right to switch theme.
+---
 
-- Home (`#/`): what the library is, install, and the hook index
-- Hook pages (`#/useBoolean`, `#/useConfirm`, …): description, live preview, API, example
-
-See [`playground/README.md`](playground/README.md).
-
-- `npm run playground:build` — static site with `base: /` (Vercel / custom domain)
-- `npm run playground:build:pages` — same site with `base: /useThisHook/` for project GitHub Pages
-
-Output is `playground/dist`. Hash routes (`#/…`) work on Pages without extra rewrite rules. In the GitHub repo, set **Settings → Pages → Source** to **GitHub Actions**.
-
-## Usage
+## Sixty seconds
 
 ```tsx
 import { useBoolean, useDebounce, useLocalStorage } from 'usethishook';
@@ -65,7 +57,7 @@ export const SearchBox = () => {
 };
 ```
 
-Confirm and overlay hooks return a `render()` function. Place it in the tree once:
+Dialogs that behave like functions:
 
 ```tsx
 import { useConfirm } from 'usethishook';
@@ -91,9 +83,15 @@ export const DeleteButton = () => {
 };
 ```
 
-## Hooks
+Place `render()` once in the tree. That is the whole overlay contract.
 
-Playground paths are hash routes on the local docs app (for example `#/useBoolean`).
+---
+
+## What you get
+
+**31 hooks.** State that stays honest. Browser APIs without leftover listeners. App primitives for forms, lists, URLs, and leave-guards.
+
+Each hook has a playground page: why it exists, a live preview, an API table, and a copy-paste example.
 
 ### State
 
@@ -141,12 +139,42 @@ Playground paths are hash routes on the local docs app (for example `#/useBoolea
 | `useInView`            | Element vs viewport via `IntersectionObserver`    | `#/useInView`            |
 | `usePagination`        | Page, offset, next/prev with clamping             | `#/usePagination`        |
 
+Preview paths are hash routes on the docs app (`#/useBoolean`, …).
+
+---
+
+## Playground
+
+- **Hosted:** [usethishook.mentorbridge.in](https://usethishook.mentorbridge.in)
+- **Mirror:** [senthilkumar979.github.io/useThisHook](https://senthilkumar979.github.io/useThisHook/)
+
+```bash
+npm install
+npm run playground
+```
+
+Open the URL Vite prints (usually `http://localhost:5173`). Light mode is the default; use the sun/moon control to switch theme.
+
+- Home (`#/`): product story, install, hook index
+- Hook pages: description, live preview, API, example
+
+See [`playground/README.md`](playground/README.md).
+
+- `npm run playground:build` — static site, `base: /` (Vercel / custom domain)
+- `npm run playground:build:pages` — `base: /useThisHook/` for project GitHub Pages
+
+Output is `playground/dist`. Hash routes work on Pages without extra rewrites. Repo **Settings → Pages → Source → GitHub Actions**.
+
+---
+
 ## Server rendering
 
-Hooks that read `window`, `document`, `navigator`, or observers are safe to _call_ on the server when they fall back (typical values: `false`, `{ width: 0, height: 0 }`, or an empty query). They subscribe after mount.
+Hooks that read `window`, `document`, `navigator`, or observers are safe to _call_ on the server. They fall back (`false`, `{ width: 0, height: 0 }`, empty query) and subscribe after mount.
 
 - `useMediaQuery`, `useWindowSize`, `useOnlineStatus`, `useLocalStorage`, `useSearchState`, `useOnClickOutside`, `useElementSize`, `useInView`, `useUnsavedChanges`, `useEventListener`, `useTimeout`, and `useKeyPress` must not assume a browser until after hydration.
 - Confirm, prompt, overlay, and step-flow still need `render()` in the client tree.
+
+---
 
 ## Scripts
 
@@ -163,8 +191,6 @@ Hooks that read `window`, `document`, `navigator`, or observers are safe to _cal
 
 `prepare` installs Husky. Commits run `verify:commit`; pushes run `verify:push`. `prepublishOnly` is `verify:commit`.
 
-## Local development
-
 ```bash
 npm install
 npm test
@@ -172,24 +198,24 @@ npm run build
 npm run playground
 ```
 
-Guidelines for adding a hook: [`CONTRIBUTING.md`](CONTRIBUTING.md).
+Add a hook: [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
+---
 
 ## Publish
 
-**npm** is the install path for everyone: `npm install usethishook`. Publishing to the public registry is **manual only** — it does not run on push.
+**npm** is the path everyone uses: `npm install usethishook`. Publishing is **manual** — it does not run on push.
 
 1. Bump `version` in `package.json` and add a [`CHANGELOG.md`](CHANGELOG.md) section in the same commit.
-2. Add a repo secret named `NPM_TOKEN`. On [npmjs.com/settings/tokens](https://www.npmjs.com/settings/tokens) create an **Automation** token (not a publish token that requires OTP). Grant it permission to publish `usethishook`. Then GitHub repo **Settings → Secrets and variables → Actions → New repository secret** → name `NPM_TOKEN`. Without this secret, `npm publish` fails with `ENEEDAUTH`.
-   Publish stays **Actions → Publish npm → Run workflow** — never on push.
-3. After publish, link the npm package on the GitHub repo if it is not already connected.
+2. On [npmjs.com/package/usethishook](https://www.npmjs.com/package/usethishook) → **Settings → Trusted Publisher**, add GitHub Actions:
+   - Repository: `senthilkumar979/useThisHook`
+   - Workflow filename: `npm-publish.yml` (exact; no path)
+   - Environment: leave empty
+3. **Actions → Publish npm → Run workflow.** The job uses OIDC (`id-token: write`). Do not set `NODE_AUTH_TOKEN` on that step — a 2FA publish token fails CI with `EOTP`.
 
 [`.github/workflows/npm-publish.yml`](.github/workflows/npm-publish.yml) runs `npm publish --access public`. `prepublishOnly` still typechecks, tests, and builds.
 
-**GitHub Packages** is a second registry and also does not publish on push. It needs a scoped name (`@owner/package`). The committed `package.json` stays `usethishook`. [`.github/workflows/github-packages.yml`](.github/workflows/github-packages.yml) renames it to `@senthilkumar979/usethishook` only for that job.
-
-**Actions → Publish GitHub Package → Run workflow**, or create a GitHub Release.
-
-Install from GitHub Packages (optional; still requires a GitHub token for the registry):
+**GitHub Packages** is optional and also not on push. The committed name stays `usethishook`. [`.github/workflows/github-packages.yml`](.github/workflows/github-packages.yml) publishes `@senthilkumar979/usethishook` for that job only.
 
 ```bash
 npm install @senthilkumar979/usethishook
@@ -199,23 +225,18 @@ npm install @senthilkumar979/usethishook
 @senthilkumar979:registry=https://npm.pkg.github.com
 ```
 
+---
+
 ## License
 
-**useThisHook** is released under the [MIT License](LICENSE).
+**useThisHook** is [MIT](LICENSE). Copyright © 2026 **Senthil Kumar Thangavel**.
 
-Copyright © 2026 **Senthil Kumar Thangavel**.
-
-You may use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the software, provided the copyright notice and permission notice appear in all copies or substantial portions of the software.
-
-The software is provided **“as is”**, without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages, or other liability arising from use of the software.
-
-The full legal text is in [`LICENSE`](LICENSE).
+Use it, ship it, fork it. The software is provided **“as is”**, without warranty. Full text: [`LICENSE`](LICENSE).
 
 ## Author
 
 **Senthil Kumar Thangavel**
 
-- Website: [senthilkumar.mentorbridge.in](https://senthilkumar.mentorbridge.in)
-- LinkedIn: [linkedin.com/in/senthilk979](https://www.linkedin.com/in/senthilk979)
-
-Issues and ideas: [GitHub issues](https://github.com/senthilkumar979/useThisHook/issues).
+- [senthilkumar.mentorbridge.in](https://senthilkumar.mentorbridge.in)
+- [linkedin.com/in/senthilk979](https://www.linkedin.com/in/senthilk979)
+- [GitHub issues](https://github.com/senthilkumar979/useThisHook/issues)
