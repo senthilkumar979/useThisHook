@@ -5,28 +5,18 @@ on:
 
 permissions:
   contents: read
+  id-token: write
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Require NPM_TOKEN secret
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          if [ -z "$NODE_AUTH_TOKEN" ]; then
-            echo 'Add an Actions secret named NPM_TOKEN.'
-            echo 'On npmjs.com create an Automation access token that can publish usethishook,'
-            echo 'then repo Settings → Secrets and variables → Actions → New repository secret.'
-            exit 1
-          fi
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
         with:
-          node-version: 22
+          node-version: 24
           cache: npm
           registry-url: https://registry.npmjs.org
       - run: npm ci --ignore-scripts
       - run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      
