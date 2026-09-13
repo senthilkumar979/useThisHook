@@ -41,24 +41,6 @@ export const useTimeoutApi: HookApi = {
   returns: { type: 'void', description: 'Nothing. Side effect only.' },
 };
 
-export const useHoverApi: HookApi = {
-  signature: 'useHover<T>(): { ref, isHovered }',
-  explanation: 'Tracks pointer enter and leave on an element you attach ref to.',
-  arguments: [],
-  returns: {
-    type: '{ ref, isHovered }',
-    description: 'Attach ref to a DOM node. isHovered is false until pointerenter.',
-    fields: [
-      { name: 'ref', type: 'RefObject<T | null>', description: 'Put this on the hover target.' },
-      {
-        name: 'isHovered',
-        type: 'boolean',
-        description: 'true while the pointer is over the node.',
-      },
-    ],
-  },
-};
-
 export const useKeyPressApi: HookApi = {
   signature: 'useKeyPress(key: string): boolean',
   explanation:
@@ -71,15 +53,4 @@ export const useKeyPressApi: HookApi = {
     },
   ],
   returns: { type: 'boolean', description: 'true between matching keydown and keyup.' },
-};
-
-export const usePreferredColorSchemeApi: HookApi = {
-  signature: "usePreferredColorScheme(): 'light' | 'dark'",
-  explanation:
-    'Reads prefers-color-scheme from matchMedia. This is the OS/browser preference, not the playground theme toggle.',
-  arguments: [],
-  returns: {
-    type: "'light' | 'dark'",
-    description: 'light when the dark media query does not match, including on the server.',
-  },
 };

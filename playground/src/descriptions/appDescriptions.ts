@@ -1,8 +1,6 @@
 export const appDescriptions: Record<string, string> = {
   useStableCallback:
     'You pass a callback into an interval, a subscription, or a child that memoizes on function identity. If you put the function in the dependency array, the subscription resets; if you omit it, you capture stale state. useStableCallback is one function identity that always calls the latest code.',
-  useOnChange:
-    'You want “when this id or filter changes, do something” — refetch, close a panel, log — but not on the first render. That is not what useEffect is for, and the mount run is why people add if (!didMount) guards. useOnChange skips mount and then fires with current and previous.',
   useResetState:
     'You edit a draft for user A, then the route changes to user B. Local state still shows A’s name because you synced with useEffect and missed a dependency. useResetState takes a source key (the user id). When the key changes, state is the new initial value. Same idea as key={userId} on a form, as a hook.',
   useAsyncAction:

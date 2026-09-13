@@ -2,7 +2,6 @@ import { act, renderHook } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { useRef } from 'react';
 import { useStableCallback } from './useStableCallback';
-import { useOnChange } from './useOnChange';
 import { useResetState } from './useResetState';
 
 describe('useStableCallback', () => {
@@ -20,24 +19,6 @@ describe('useStableCallback', () => {
     rerender({ value: 2 });
     expect(result.current.same).toBe(true);
     expect(result.current.callback()).toBe(2);
-  });
-});
-
-describe('useOnChange', () => {
-  it('does not run on mount, then runs when the value changes', () => {
-    const seen: Array<[number, number]> = [];
-    const { rerender } = renderHook(
-      ({ value }) => {
-        useOnChange(value, (current, previous) => {
-          seen.push([current, previous]);
-        });
-      },
-      { initialProps: { value: 1 } },
-    );
-
-    expect(seen).toEqual([]);
-    rerender({ value: 2 });
-    expect(seen).toEqual([[2, 1]]);
   });
 });
 

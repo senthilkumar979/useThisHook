@@ -2,10 +2,10 @@ import { CodeBlock } from '../components/CodeBlock';
 
 const installCommand = `npm install usethishook`;
 
-const usageExample = `import { useToggle } from 'usethishook';
+const usageExample = `import { useBoolean } from 'usethishook';
 
 export const Panel = () => {
-  const { value, toggle } = useToggle();
+  const { value, toggle } = useBoolean(false);
   return <button type="button" onClick={toggle}>{value ? 'Hide' : 'Show'}</button>;
 };`;
 

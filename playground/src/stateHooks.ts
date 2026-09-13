@@ -1,47 +1,23 @@
-import {
-  useCopyToClipboardApi,
-  useDocumentTitleApi,
-  useIntervalApi,
-  useLocalStorageApi,
-} from './api/persistApi';
-import {
-  useCounterApi,
-  useDebounceApi,
-  useDisclosureApi,
-  usePreviousApi,
-  useToggleApi,
-} from './api/coreStateApi';
+import { useCopyToClipboardApi, useIntervalApi, useLocalStorageApi } from './api/persistApi';
+import { useBooleanApi, useDebounceApi, useDisclosureApi } from './api/coreStateApi';
+import { UseBooleanDemo, useBooleanExample } from './demos/UseBooleanDemo';
 import { UseCopyToClipboardDemo, useCopyToClipboardExample } from './demos/UseCopyToClipboardDemo';
-import { UseCounterDemo, useCounterExample } from './demos/UseCounterDemo';
 import { UseDebounceDemo, useDebounceExample } from './demos/UseDebounceDemo';
 import { UseDisclosureDemo, useDisclosureExample } from './demos/UseDisclosureDemo';
-import { UseDocumentTitleDemo, useDocumentTitleExample } from './demos/UseDocumentTitleDemo';
 import { UseIntervalDemo, useIntervalExample } from './demos/UseIntervalDemo';
 import { UseLocalStorageDemo, useLocalStorageExample } from './demos/UseLocalStorageDemo';
-import { UsePreviousDemo, usePreviousExample } from './demos/UsePreviousDemo';
-import { UseToggleDemo, useToggleExample } from './demos/UseToggleDemo';
 import type { HookEntry } from './hookDoc';
 
 export const stateHooks: HookEntry[] = [
   {
-    id: 'useToggle',
-    name: 'useToggle',
+    id: 'useBoolean',
+    name: 'useBoolean',
     summary: 'Boolean state with toggle helpers.',
     whenToUse: 'Use for panels, switches, and any on/off UI.',
     category: 'State',
-    api: useToggleApi,
-    Demo: UseToggleDemo,
-    example: useToggleExample,
-  },
-  {
-    id: 'useCounter',
-    name: 'useCounter',
-    summary: 'Numeric counter with a configurable step.',
-    whenToUse: 'Use for quantity pickers and simple tallies.',
-    category: 'State',
-    api: useCounterApi,
-    Demo: UseCounterDemo,
-    example: useCounterExample,
+    api: useBooleanApi,
+    Demo: UseBooleanDemo,
+    example: useBooleanExample,
   },
   {
     id: 'useDisclosure',
@@ -62,16 +38,6 @@ export const stateHooks: HookEntry[] = [
     api: useDebounceApi,
     Demo: UseDebounceDemo,
     example: useDebounceExample,
-  },
-  {
-    id: 'usePrevious',
-    name: 'usePrevious',
-    summary: 'Keep the value from the previous render.',
-    whenToUse: 'Use to compare current and last state.',
-    category: 'State',
-    api: usePreviousApi,
-    Demo: UsePreviousDemo,
-    example: usePreviousExample,
   },
   {
     id: 'useInterval',
@@ -102,15 +68,5 @@ export const stateHooks: HookEntry[] = [
     api: useLocalStorageApi,
     Demo: UseLocalStorageDemo,
     example: useLocalStorageExample,
-  },
-  {
-    id: 'useDocumentTitle',
-    name: 'useDocumentTitle',
-    summary: 'Set document.title while a component is mounted.',
-    whenToUse: 'Use for page-specific tab titles.',
-    category: 'State',
-    api: useDocumentTitleApi,
-    Demo: UseDocumentTitleDemo,
-    example: useDocumentTitleExample,
   },
 ];

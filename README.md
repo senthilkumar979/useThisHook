@@ -34,7 +34,7 @@ npm run playground
 Open the URL Vite prints (usually `http://localhost:5173`). Light mode is the default; use the sun/moon icon at the top right to switch theme.
 
 - Home (`#/`): what the library is, install, and the hook index
-- Hook pages (`#/useToggle`, `#/useConfirm`, …): description, live preview, API, example
+- Hook pages (`#/useBoolean`, `#/useConfirm`, …): description, live preview, API, example
 
 See [`playground/README.md`](playground/README.md).
 
@@ -46,10 +46,10 @@ Output is `playground/dist`. Hash routes (`#/…`) work on Pages without extra r
 ## Usage
 
 ```tsx
-import { useToggle, useDebounce, useLocalStorage } from 'usethishook';
+import { useBoolean, useDebounce, useLocalStorage } from 'usethishook';
 
 export const SearchBox = () => {
-  const { value: isOpen, toggle } = useToggle();
+  const { value: isOpen, toggle } = useBoolean(false);
   const [query, setQuery] = useLocalStorage('search', '');
   const debouncedQuery = useDebounce(query, 300);
 
@@ -93,24 +93,22 @@ export const DeleteButton = () => {
 
 ## Hooks
 
-Playground paths are hash routes on the local docs app (for example `#/useToggle`).
+Playground paths are hash routes on the local docs app (for example `#/useBoolean`).
 
 ### State
 
 | Hook                 | Purpose                                      | Preview                |
 | -------------------- | -------------------------------------------- | ---------------------- |
-| `useToggle`          | Boolean with `toggle`, `setTrue`, `setFalse` | `#/useToggle`          |
-| `useCounter`         | Increment, decrement, reset                  | `#/useCounter`         |
+| `useBoolean`         | Boolean with required `true` / `false` start | `#/useBoolean`         |
 | `useDisclosure`      | Open / close / toggle for menus and dialogs  | `#/useDisclosure`      |
 | `useDebounce`        | Debounce a rapidly changing value            | `#/useDebounce`        |
-| `usePrevious`        | Previous render’s value                      | `#/usePrevious`        |
 | `useInterval`        | Declarative `setInterval` (`null` pauses)    | `#/useInterval`        |
 | `useCopyToClipboard` | Clipboard write + last copied text           | `#/useCopyToClipboard` |
 | `useLocalStorage`    | JSON state persisted in `localStorage`       | `#/useLocalStorage`    |
-| `useDocumentTitle`   | Set `document.title` while mounted           | `#/useDocumentTitle`   |
 
 ### Browser
 
+<<<<<<< Updated upstream
 | Hook                      | Purpose                                       | Preview                     |
 | ------------------------- | --------------------------------------------- | --------------------------- |
 | `useOnlineStatus`         | `navigator.onLine` plus online/offline events | `#/useOnlineStatus`         |
@@ -125,13 +123,26 @@ Playground paths are hash routes on the local docs app (for example `#/useToggle
 | `useHover`                | Pointer over a ref                            | `#/useHover`                |
 | `useKeyPress`             | Key held down (ignores inputs)                | `#/useKeyPress`             |
 | `usePreferredColorScheme` | OS `prefers-color-scheme`                     | `#/usePreferredColorScheme` |
+=======
+| Hook                | Purpose                                       | Preview               |
+| ------------------- | --------------------------------------------- | --------------------- |
+| `useOnlineStatus`   | `navigator.onLine` plus online/offline events | `#/useOnlineStatus`   |
+| `useMediaQuery`     | Subscribe to a CSS media query                | `#/useMediaQuery`     |
+| `useWindowSize`     | Viewport width and height                     | `#/useWindowSize`     |
+| `useOnClickOutside` | Handler when the user presses outside a ref   | `#/useOnClickOutside` |
+| `useOverlay`        | Promise-based custom overlay                  | `#/useOverlay`        |
+| `useStepFlow`       | Multi-step wizard that resolves when finished | `#/useStepFlow`       |
+| `useAsyncSelect`            | Native file picker as a Promise                  | `#/useAsyncSelect`            |
+| `useEventListener`          | DOM / window listener with a stable handler      | `#/useEventListener`          |
+| `useTimeout`                | One-shot timer (`null` pauses)                   | `#/useTimeout`                |
+| `useKeyPress`               | Key held down (ignores inputs)                   | `#/useKeyPress`               |
+>>>>>>> Stashed changes
 
 ### App
 
 | Hook                   | Purpose                                           | Preview                  |
 | ---------------------- | ------------------------------------------------- | ------------------------ |
 | `useStableCallback`    | Stable function identity, always-latest body      | `#/useStableCallback`    |
-| `useOnChange`          | Callback when a value changes, not on mount       | `#/useOnChange`          |
 | `useResetState`        | Local state that resets when a source key changes | `#/useResetState`        |
 | `useAsyncAction`       | Pending / error / data around one async action    | `#/useAsyncAction`       |
 | `useDebouncedCallback` | Debounce calling a function                       | `#/useDebouncedCallback` |
@@ -151,7 +162,7 @@ Playground paths are hash routes on the local docs app (for example `#/useToggle
 
 Hooks that read `window`, `document`, `navigator`, or observers are safe to _call_ on the server when they fall back (typical values: `false`, `{ width: 0, height: 0 }`, or an empty query). They subscribe after mount.
 
-- `useMediaQuery`, `useWindowSize`, `useOnlineStatus`, `useLocalStorage`, `useSearchState`, `useDocumentTitle`, `useOnClickOutside`, `useElementSize`, `useInView`, `useUnsavedChanges`, `useEventListener`, `useTimeout`, `useHover`, `useKeyPress`, and `usePreferredColorScheme` must not assume a browser until after hydration.
+- `useMediaQuery`, `useWindowSize`, `useOnlineStatus`, `useLocalStorage`, `useSearchState`, `useOnClickOutside`, `useElementSize`, `useInView`, `useUnsavedChanges`, `useEventListener`, `useTimeout`, and `useKeyPress` must not assume a browser until after hydration.
 - Confirm, prompt, overlay, and step-flow still need `render()` in the client tree.
 
 ## Scripts
@@ -183,7 +194,8 @@ Guidelines for adding a hook: [`CONTRIBUTING.md`](CONTRIBUTING.md).
 **npm** is the install path for everyone: `npm install usethishook`. Publishing to the public registry is **manual only** — it does not run on push.
 
 1. Bump `version` in `package.json` and add a [`CHANGELOG.md`](CHANGELOG.md) section in the same commit.
-2. Add a repo secret named `NPM_TOKEN` (npm access token with publish rights). Publish stays **Actions → Publish npm → Run workflow** — never on push.
+2. Add a repo secret named `NPM_TOKEN`. On [npmjs.com/settings/tokens](https://www.npmjs.com/settings/tokens) create an **Automation** token (not a publish token that requires OTP). Grant it permission to publish `usethishook`. Then GitHub repo **Settings → Secrets and variables → Actions → New repository secret** → name `NPM_TOKEN`. Without this secret, `npm publish` fails with `ENEEDAUTH`.
+   Publish stays **Actions → Publish npm → Run workflow** — never on push.
 3. After publish, link the npm package on the GitHub repo if it is not already connected.
 
 [`.github/workflows/npm-publish.yml`](.github/workflows/npm-publish.yml) runs `npm publish --access public`. `prepublishOnly` still typechecks, tests, and builds.

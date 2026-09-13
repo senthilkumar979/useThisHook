@@ -86,20 +86,3 @@ export const useLocalStorageApi: HookApi = {
     'Write failures (quota, private mode) are ignored; state still updates in memory.',
   ],
 };
-
-export const useDocumentTitleApi: HookApi = {
-  signature: 'useDocumentTitle(title: string): void',
-  explanation:
-    'Sets document.title while this component is mounted, then restores whatever the tab title was before.',
-  arguments: [
-    {
-      name: 'title',
-      type: 'string',
-      description: 'Tab title to show for as long as this component stays mounted.',
-    },
-  ],
-  returns: {
-    type: 'void',
-    description: 'Nothing. Look at the browser tab to see the effect.',
-  },
-};

@@ -17,21 +17,6 @@ export const useStableCallbackApi: HookApi = {
   },
 };
 
-export const useOnChangeApi: HookApi = {
-  signature: 'useOnChange<T>(value, callback): void',
-  explanation:
-    'Calls callback after commit when value changes, never on mount. callback receives the new value and the previous one.',
-  arguments: [
-    { name: 'value', type: 'T', description: 'The value to watch. Compared with Object.is.' },
-    {
-      name: 'callback',
-      type: '(current: T, previous: T) => void',
-      description: 'Runs only after a real change. Latest callback is always used.',
-    },
-  ],
-  returns: { type: 'void', description: 'Nothing. Do the side effect inside callback.' },
-};
-
 export const useResetStateApi: HookApi = {
   signature: 'useResetState<T>(source, initialValue)',
   explanation:
