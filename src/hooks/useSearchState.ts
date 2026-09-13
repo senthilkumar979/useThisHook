@@ -21,7 +21,8 @@ function getServerSnapshot() {
 
 function writeSearch(params: URLSearchParams) {
   const query = params.toString();
-  const url = `${window.location.pathname}${query ? `?${query}` : ''}${window.location.hash}`;
+  const search = query ? `?${query}` : '';
+  const url = `${window.location.pathname}${search}${window.location.hash}`;
   window.history.replaceState(window.history.state, '', url);
   window.dispatchEvent(new Event(SEARCH_EVENT));
 }

@@ -50,8 +50,7 @@ const ConfirmDialog = ({
 export const useConfirm = () => {
   const overlay = useOverlay<ConfirmOptions, boolean>(ConfirmDialog);
 
-  const confirm = (options: ConfirmOptions) =>
-    overlay.open(options).then((result) => Boolean(result));
+  const confirm = (options: ConfirmOptions) => overlay.open(options).then(Boolean);
 
   return { confirm, render: overlay.render } as const;
 };

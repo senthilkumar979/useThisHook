@@ -71,9 +71,9 @@ export const useFields = <T extends object>(initialValues: T, schema?: FieldSche
   const submit = useCallback(
     (onValid: (values: T) => void | Promise<void>) => {
       const result = validate();
-      if (!result.ok) return result;
+      if (!result.ok) return false;
       void onValid(result.values);
-      return result;
+      return true;
     },
     [validate],
   );
