@@ -14,6 +14,7 @@ Do not publish from a push or tag.
 ### Added
 
 - `useBoolean(initialValue: boolean)` — required `true` or `false`, plus `toggle`, `setTrue`, `setFalse`, `setValue`
+- Husky **pre-commit** (`verify:commit`) and **pre-push** (`verify:push`) so lint, types, tests, build, playground build, and `npm audit` run before CI or publish
 
 ### Removed
 

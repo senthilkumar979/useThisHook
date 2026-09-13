@@ -18,12 +18,16 @@ By participating you agree to the [Code of Conduct](.github/CODE_OF_CONDUCT.md).
 
 ## Checks
 
+After `npm install`, Husky runs the same gates locally:
+
+- **pre-commit** (`npm run verify:commit`): secret scan, lint, typecheck, tests, library build
+- **pre-push** (`npm run verify:push`): playground production build, `npm audit` (high+)
+
+CI uses `verify:commit` plus `playground:build`. Skip hooks only if you must: `HUSKY=0 git commit` / `HUSKY=0 git push`.
+
 ```bash
-npm test
-npm run typecheck
-npm run lint
-npm run build
-npm run playground:build
+npm run verify:commit
+npm run verify:push
 ```
 
 Node 20 or later (`engines.node`).

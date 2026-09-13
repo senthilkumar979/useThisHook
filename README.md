@@ -108,22 +108,6 @@ Playground paths are hash routes on the local docs app (for example `#/useBoolea
 
 ### Browser
 
-<<<<<<< Updated upstream
-| Hook                      | Purpose                                       | Preview                     |
-| ------------------------- | --------------------------------------------- | --------------------------- |
-| `useOnlineStatus`         | `navigator.onLine` plus online/offline events | `#/useOnlineStatus`         |
-| `useMediaQuery`           | Subscribe to a CSS media query                | `#/useMediaQuery`           |
-| `useWindowSize`           | Viewport width and height                     | `#/useWindowSize`           |
-| `useOnClickOutside`       | Handler when the user presses outside a ref   | `#/useOnClickOutside`       |
-| `useOverlay`              | Promise-based custom overlay                  | `#/useOverlay`              |
-| `useStepFlow`             | Multi-step wizard that resolves when finished | `#/useStepFlow`             |
-| `useAsyncSelect`          | Native file picker as a Promise               | `#/useAsyncSelect`          |
-| `useEventListener`        | DOM / window listener with a stable handler   | `#/useEventListener`        |
-| `useTimeout`              | One-shot timer (`null` pauses)                | `#/useTimeout`              |
-| `useHover`                | Pointer over a ref                            | `#/useHover`                |
-| `useKeyPress`             | Key held down (ignores inputs)                | `#/useKeyPress`             |
-| `usePreferredColorScheme` | OS `prefers-color-scheme`                     | `#/usePreferredColorScheme` |
-=======
 | Hook                | Purpose                                       | Preview               |
 | ------------------- | --------------------------------------------- | --------------------- |
 | `useOnlineStatus`   | `navigator.onLine` plus online/offline events | `#/useOnlineStatus`   |
@@ -132,11 +116,10 @@ Playground paths are hash routes on the local docs app (for example `#/useBoolea
 | `useOnClickOutside` | Handler when the user presses outside a ref   | `#/useOnClickOutside` |
 | `useOverlay`        | Promise-based custom overlay                  | `#/useOverlay`        |
 | `useStepFlow`       | Multi-step wizard that resolves when finished | `#/useStepFlow`       |
-| `useAsyncSelect`            | Native file picker as a Promise                  | `#/useAsyncSelect`            |
-| `useEventListener`          | DOM / window listener with a stable handler      | `#/useEventListener`          |
-| `useTimeout`                | One-shot timer (`null` pauses)                   | `#/useTimeout`                |
-| `useKeyPress`               | Key held down (ignores inputs)                   | `#/useKeyPress`               |
->>>>>>> Stashed changes
+| `useAsyncSelect`    | Native file picker as a Promise               | `#/useAsyncSelect`    |
+| `useEventListener`  | DOM / window listener with a stable handler   | `#/useEventListener`  |
+| `useTimeout`        | One-shot timer (`null` pauses)                | `#/useTimeout`        |
+| `useKeyPress`       | Key held down (ignores inputs)                | `#/useKeyPress`       |
 
 ### App
 
@@ -175,8 +158,10 @@ Hooks that read `window`, `document`, `navigator`, or observers are safe to _cal
 | `npm run build`            | ESM + CJS + types via tsup (`dist/`) |
 | `npm run playground`       | Docs app                             |
 | `npm run playground:build` | Static playground (`base: /`)        |
+| `npm run verify:commit`    | Secrets, lint, types, tests, build   |
+| `npm run verify:push`      | Playground build + `npm audit`       |
 
-`prepublishOnly` runs typecheck, tests, and build.
+`prepare` installs Husky. Commits run `verify:commit`; pushes run `verify:push`. `prepublishOnly` is `verify:commit`.
 
 ## Local development
 
