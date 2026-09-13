@@ -23,20 +23,26 @@ interface DialogFrameProps {
   children: ReactNode;
 }
 
+const dialogStyle: CSSProperties = {
+  ...backdropStyle,
+  border: 'none',
+  margin: 0,
+  padding: 0,
+  maxWidth: 'none',
+  maxHeight: 'none',
+  width: '100vw',
+  height: '100vh',
+};
+
 export const DialogFrame = ({ title, children }: DialogFrameProps) => (
-  <div style={backdropStyle}>
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="usethishook-dialog-title"
-      style={panelStyle}
-    >
+  <dialog open aria-labelledby="usethishook-dialog-title" style={dialogStyle}>
+    <div style={panelStyle}>
       <h2 id="usethishook-dialog-title" style={{ margin: '0 0 0.75rem', fontSize: '1.05rem' }}>
         {title}
       </h2>
       {children}
     </div>
-  </div>
+  </dialog>
 );
 
 const buttonRowStyle: CSSProperties = { display: 'flex', gap: '0.5rem', marginTop: '1rem' };

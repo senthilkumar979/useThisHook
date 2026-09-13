@@ -22,11 +22,11 @@ export const useAsyncAction = <TArgs extends unknown[], TResult>(
         setData(result);
         setIsPending(false);
         return result;
-      } catch (caught) {
-        if (runId !== runIdRef.current) throw caught;
-        setError(caught);
+      } catch (error_) {
+        if (runId !== runIdRef.current) throw error_;
+        setError(error_);
         setIsPending(false);
-        throw caught;
+        throw error_;
       }
     },
     [stableAction],

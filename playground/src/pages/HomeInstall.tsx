@@ -22,7 +22,8 @@ export const HomeInstall = () => (
       >
         usethishook
       </a>
-      . The product name is <span className="text-fg">useThisHook</span>. Requires React 18 or later
+      {'. '}
+      The product name is <span className="text-fg">useThisHook</span>. Requires React 18 or later
       as a peer dependency.
     </p>
     <CodeBlock

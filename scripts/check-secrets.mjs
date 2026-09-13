@@ -1,13 +1,16 @@
 import { execFileSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 
 const SELF = 'scripts/check-secrets.mjs';
+const GIT = ['/opt/homebrew/bin/git', '/usr/bin/git', '/usr/local/bin/git'].find((path) =>
+  existsSync(path),
+);
 
 const patterns = [
   /-----BEGIN [A-Z0-9 ]*PRIVATE KEY-----/,
   /-----BEGIN PGP PRIVATE KEY BLOCK-----/,
   /ghp_[A-Za-z0-9]{20,}/,
-  /github_pat_[A-Za-z0-9_]{20,}/,
+  /github_pat_\w{20,}/,
   /npm_[A-Za-z0-9]{20,}/,
 ];
 
@@ -20,13 +23,17 @@ function fail(message) {
   process.exit(1);
 }
 
+function git(args) {
+  if (!GIT) fail('git binary not found in a fixed directory.');
+  return execFileSync(GIT, args, {
+    encoding: 'utf8',
+    env: { PATH: '/usr/bin:/bin:/opt/homebrew/bin:/usr/local/bin' },
+  });
+}
+
 function addedLinesFromCachedDiff() {
   try {
-    return execFileSync(
-      'git',
-      ['diff', '--cached', '--diff-filter=ACM', '-U0', '--', '.', `:(exclude)${SELF}`],
-      { encoding: 'utf8' },
-    )
+    return git(['diff', '--cached', '--diff-filter=ACM', '-U0', '--', '.', `:(exclude)${SELF}`])
       .split('\n')
       .filter((line) => line.startsWith('+') && !line.startsWith('+++'))
       .map((line) => line.slice(1))
@@ -39,10 +46,7 @@ function addedLinesFromCachedDiff() {
 const stagedHit = linesMatch(addedLinesFromCachedDiff());
 if (stagedHit) fail('Refusing commit: staged diff looks like a secret or private key.');
 
-const tracked = execFileSync('git', ['ls-files'], { encoding: 'utf8' })
-  .trim()
-  .split('\n')
-  .filter(Boolean);
+const tracked = git(['ls-files']).trim().split('\n').filter(Boolean);
 
 for (const file of tracked) {
   if (file === 'package-lock.json' || file.endsWith('.svg') || file === SELF) continue;
