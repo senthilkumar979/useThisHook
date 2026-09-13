@@ -3,3 +3,5 @@ playground/dist
 node_modules
 package-lock.json
 *.svg
+.husky/_
+
