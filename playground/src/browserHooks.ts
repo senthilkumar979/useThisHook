@@ -4,26 +4,15 @@ import {
   useOnlineStatusApi,
   useWindowSizeApi,
 } from './api/browserApi';
-import {
-  useEventListenerApi,
-  useHoverApi,
-  useKeyPressApi,
-  usePreferredColorSchemeApi,
-  useTimeoutApi,
-} from './api/browserEventsApi';
+import { useEventListenerApi, useKeyPressApi, useTimeoutApi } from './api/browserEventsApi';
 import { useAsyncSelectApi, useOverlayApi, useStepFlowApi } from './api/flowApi';
 import { UseAsyncSelectDemo, useAsyncSelectExample } from './demos/UseAsyncSelectDemo';
 import { UseEventListenerDemo, useEventListenerExample } from './demos/UseEventListenerDemo';
-import { UseHoverDemo, useHoverExample } from './demos/UseHoverDemo';
 import { UseKeyPressDemo, useKeyPressExample } from './demos/UseKeyPressDemo';
 import { UseMediaQueryDemo, useMediaQueryExample } from './demos/UseMediaQueryDemo';
 import { UseOnClickOutsideDemo, useOnClickOutsideExample } from './demos/UseOnClickOutsideDemo';
 import { UseOnlineStatusDemo, useOnlineStatusExample } from './demos/UseOnlineStatusDemo';
 import { UseOverlayDemo, useOverlayExample } from './demos/UseOverlayDemo';
-import {
-  UsePreferredColorSchemeDemo,
-  usePreferredColorSchemeExample,
-} from './demos/UsePreferredColorSchemeDemo';
 import { UseStepFlowDemo, useStepFlowExample } from './demos/UseStepFlowDemo';
 import { UseTimeoutDemo, useTimeoutExample } from './demos/UseTimeoutDemo';
 import { UseWindowSizeDemo, useWindowSizeExample } from './demos/UseWindowSizeDemo';
@@ -121,16 +110,6 @@ export const browserHooks: HookEntry[] = [
     example: useTimeoutExample,
   },
   {
-    id: 'useHover',
-    name: 'useHover',
-    summary: 'Whether the pointer is over a ref element.',
-    whenToUse: 'Use for hover styles or tooltips driven by JS.',
-    category: 'Browser',
-    api: useHoverApi,
-    Demo: UseHoverDemo,
-    example: useHoverExample,
-  },
-  {
     id: 'useKeyPress',
     name: 'useKeyPress',
     summary: 'True while a keyboard key is held (ignores text fields).',
@@ -139,15 +118,5 @@ export const browserHooks: HookEntry[] = [
     api: useKeyPressApi,
     Demo: UseKeyPressDemo,
     example: useKeyPressExample,
-  },
-  {
-    id: 'usePreferredColorScheme',
-    name: 'usePreferredColorScheme',
-    summary: 'OS light or dark preference from matchMedia.',
-    whenToUse: 'Use when you need the system scheme, not app theme state.',
-    category: 'Browser',
-    api: usePreferredColorSchemeApi,
-    Demo: UsePreferredColorSchemeDemo,
-    example: usePreferredColorSchemeExample,
   },
 ];

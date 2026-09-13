@@ -12,7 +12,7 @@ npm run playground
 Then open the URL Vite prints (usually `http://localhost:5173`).
 
 - Home (`#/`): what it is, benefits, install, hook index
-- Hook pages (`#/useToggle`, `#/useOverlay`, …): preview + API + example
+- Hook pages (`#/useBoolean`, `#/useOverlay`, …): preview + API + example
 
 Build a static site with `npm run playground:build` (output in `playground/dist`). That build uses `base: /` for Vercel and custom domains.
 

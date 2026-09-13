@@ -9,6 +9,16 @@ Bump `version` in `package.json` in the same change as the notes below, then run
 **Actions → Publish npm** (manual). Create GitHub Release **vX.Y.Z** from the matching section.
 Do not publish from a push or tag.
 
+## [0.3.0] - 2026-09-13
+
+### Added
+
+- `useBoolean(initialValue: boolean)` — required `true` or `false`, plus `toggle`, `setTrue`, `setFalse`, `setValue`
+
+### Removed
+
+- `useToggle`, `useCounter`, `usePrevious`, `useDocumentTitle`, `useHover`, `usePreferredColorScheme`, `useOnChange`
+
 ## [0.2.0] - 2026-09-12
 
 ### Added

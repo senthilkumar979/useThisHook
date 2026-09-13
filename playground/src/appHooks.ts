@@ -1,5 +1,5 @@
 import { useAsyncActionApi, useDebouncedCallbackApi, useFieldsApi } from './api/appFormApi';
-import { useOnChangeApi, useResetStateApi, useStableCallbackApi } from './api/appCoreApi';
+import { useResetStateApi, useStableCallbackApi } from './api/appCoreApi';
 import {
   useConfirmApi,
   useListApi,
@@ -15,7 +15,6 @@ import {
 } from './demos/UseDebouncedCallbackDemo';
 import { UseFieldsDemo, useFieldsExample } from './demos/UseFieldsDemo';
 import { UseListDemo, useListExample } from './demos/UseListDemo';
-import { UseOnChangeDemo, useOnChangeExample } from './demos/UseOnChangeDemo';
 import { UsePromptDemo, usePromptExample } from './demos/UsePromptDemo';
 import { UseResetStateDemo, useResetStateExample } from './demos/UseResetStateDemo';
 import { UseSearchStateDemo, useSearchStateExample } from './demos/UseSearchStateDemo';
@@ -33,16 +32,6 @@ export const appHooks: HookEntry[] = [
     api: useStableCallbackApi,
     Demo: UseStableCallbackDemo,
     example: useStableCallbackExample,
-  },
-  {
-    id: 'useOnChange',
-    name: 'useOnChange',
-    summary: 'Run a callback when a value changes, never on mount.',
-    whenToUse: 'Use instead of useEffect when you mean “on change”.',
-    category: 'App',
-    api: useOnChangeApi,
-    Demo: UseOnChangeDemo,
-    example: useOnChangeExample,
   },
   {
     id: 'useResetState',

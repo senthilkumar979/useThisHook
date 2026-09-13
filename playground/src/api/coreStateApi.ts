@@ -1,16 +1,14 @@
 import type { HookApi } from '../hookDoc';
 
-export const useToggleApi: HookApi = {
-  signature: 'useToggle(initialValue?: boolean)',
+export const useBooleanApi: HookApi = {
+  signature: 'useBoolean(initialValue: boolean)',
   explanation:
     'Keeps a boolean in React state and returns helpers so you can flip, force on, or force off without writing setState yourself.',
   arguments: [
     {
       name: 'initialValue',
       type: 'boolean',
-      optional: true,
-      defaultValue: 'false',
-      description: 'Starting on/off value for the first render.',
+      description: 'Required starting value: true or false.',
     },
   ],
   returns: {
@@ -29,43 +27,6 @@ export const useToggleApi: HookApi = {
         name: 'setValue',
         type: 'Dispatch<SetStateAction<boolean>>',
         description: 'Escape hatch for any boolean update, including functional updates.',
-      },
-    ],
-  },
-};
-
-export const useCounterApi: HookApi = {
-  signature: 'useCounter(initialValue?: number, step?: number)',
-  explanation:
-    'Holds a number and changes it by a fixed step. Useful for quantity pickers, pagination, and simple scores.',
-  arguments: [
-    {
-      name: 'initialValue',
-      type: 'number',
-      optional: true,
-      defaultValue: '0',
-      description: 'Starting count. reset() always returns to this value.',
-    },
-    {
-      name: 'step',
-      type: 'number',
-      optional: true,
-      defaultValue: '1',
-      description: 'How much increment() and decrement() add or subtract.',
-    },
-  ],
-  returns: {
-    type: '{ count, increment, decrement, reset, setCount }',
-    description: 'The current number and ways to move it.',
-    fields: [
-      { name: 'count', type: 'number', description: 'Current value.' },
-      { name: 'increment', type: '() => void', description: 'Adds step to count.' },
-      { name: 'decrement', type: '() => void', description: 'Subtracts step from count.' },
-      { name: 'reset', type: '() => void', description: 'Sets count back to initialValue.' },
-      {
-        name: 'setCount',
-        type: 'Dispatch<SetStateAction<number>>',
-        description: 'Set an exact number, bypassing step.',
       },
     ],
   },
@@ -117,18 +78,5 @@ export const useDebounceApi: HookApi = {
   returns: {
     type: 'T',
     description: 'The lagged value. Use this for search queries, filters, or expensive work.',
-  },
-};
-
-export const usePreviousApi: HookApi = {
-  signature: 'usePrevious<T>(value: T): T | undefined',
-  explanation:
-    'On each render, returns what value was on the previous render. The first render returns undefined because there is no previous value yet.',
-  arguments: [
-    { name: 'value', type: 'T', description: 'Any value you want to compare across renders.' },
-  ],
-  returns: {
-    type: 'T | undefined',
-    description: 'The last distinct value, or undefined until value has changed once.',
   },
 };
