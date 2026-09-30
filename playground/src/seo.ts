@@ -1,6 +1,6 @@
 const SITE_ORIGIN = 'https://usethishook.mentorbridge.in';
 const DEFAULT_DESCRIPTION =
-  'Typed React hooks for everyday UI, forms, overlays, and browser APIs. Zero runtime dependencies.';
+  'Stop rewriting the same React hooks in every project. 32 typed hooks, zero runtime dependencies, live demos for usethishook.';
 
 function setMeta(attr: 'name' | 'property', key: string, content: string) {
   let el = document.head.querySelector(`meta[${attr}="${key}"]`);
@@ -25,7 +25,9 @@ function setCanonical(href: string) {
 export function applyRouteSeo(options: { route: string; hookName?: string; description?: string }) {
   const { route, hookName, description } = options;
   const isHome = !route;
-  const title = isHome ? 'useThisHook — typed React hooks' : `${hookName ?? route} — useThisHook`;
+  const title = isHome
+    ? 'useThisHook — stop rewriting the same React hooks'
+    : `${hookName ?? route} — useThisHook`;
   const desc = description?.trim() || DEFAULT_DESCRIPTION;
   const path = isHome ? '/' : `/${route}`;
   const canonical = `${SITE_ORIGIN}${path}`;

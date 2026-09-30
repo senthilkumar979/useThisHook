@@ -1,9 +1,9 @@
 # useThisHook
 
-**React hooks you can learn in minutes — dialogs you can `await`.**
+**Stop rewriting the same React hooks in every project.**
 
-Tired of wiring the same toggle, debounce, localStorage, or “are you sure?” dialog in every app?
-`usethishook` gives you **32 typed hooks**, zero runtime dependencies, and live demos so you can copy with confidence.
+Install once. Import only what you need — toggles, debounce, storage, forms, browser APIs, and
+dialogs. **32 typed hooks**, zero runtime dependencies, live demos you can paste into production.
 
 ```bash
 npm i usethishook

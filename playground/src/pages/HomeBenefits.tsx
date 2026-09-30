@@ -1,19 +1,19 @@
 const benefits = [
   {
-    title: 'Awaitable UI without a kit',
-    body: 'useConfirm, usePrompt, useOverlay, and useStepFlow resolve in your click handler. Mount render() once — no modal library required.',
+    title: 'Less boilerplate',
+    body: 'Toggles, debounce, timers, forms, lists, and URL state — ready to import so you stop rewriting the same helpers.',
+  },
+  {
+    title: 'Dialogs without a UI kit',
+    body: 'Await confirm(), prompt(), overlays, and wizards in your click handler. Mount render() once. No modal library.',
   },
   {
     title: 'Zero runtime dependencies',
-    body: 'The published package only peers on React 18+. Works with Vite, Next.js, CRA, and Module Federation hosts.',
-  },
-  {
-    title: 'Typed and tree-shakeable',
-    body: 'Strict TypeScript public APIs. Unused hooks stay out of the bundle because every hook is a named export.',
+    body: 'The published package only peers on React 18+. Works with Vite, Next.js, CRA, and Module Federation.',
   },
   {
     title: 'Docs that match the code',
-    body: 'Each page has a live component, an argument/return reference, and an example you can copy into production.',
+    body: 'Every page has a live preview, an argument/return reference, and an example you can paste into your app.',
   },
 ];
 

@@ -15,7 +15,7 @@ export const HomeHookIndex = () => {
     <section>
       <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-muted">Browse hooks</h2>
       <p className="mt-2 max-w-2xl text-sm leading-6 text-muted">
-        Open a hook for a live preview, API reference, and copy-paste example.
+        Pick any hook for a live preview, API reference, and an example you can paste into your app.
       </p>
       <input
         className={`${inputClass} mt-5`}

@@ -2,6 +2,7 @@ import { BrandMark } from '../components/BrandMark';
 import { hookPageHref } from '../hookHref';
 import { trustBadges } from '../trustBadges';
 import { HomeBenefits } from './HomeBenefits';
+import { HomeCommunity } from './HomeCommunity';
 import { HomeHookIndex } from './HomeHookIndex';
 import { HomeInstall } from './HomeInstall';
 
@@ -10,16 +11,14 @@ export const HomePage = () => (
     <header className="space-y-5">
       <BrandMark />
       <p className="text-[0.7rem] font-medium uppercase tracking-[0.18em] text-violet-700 dark:text-violet-300/80">
-        Awaitable UI. Zero runtime deps.
+        32 typed hooks · Zero runtime deps
       </p>
       <h1 className="text-4xl font-semibold tracking-tight text-fg md:text-5xl">
-        useThisHook is await confirm() in your click handler — plus everyday React hooks with no
-        runtime dependencies.
+        Stop rewriting the same React hooks in every project.
       </h1>
       <p className="max-w-2xl text-lg leading-8 text-muted">
-        Promise-based confirm, prompt, overlay, and wizard hooks resolve where you call them. The
-        rest of the kit covers debounce, storage, forms, and browser APIs — tree-shakeable named
-        exports, SSR-safe. This playground is the docs: try a hook, read the API, copy the example.
+        Install once. Import only what you need — toggles, storage, forms, browser APIs, and
+        dialogs. Live demos, clear APIs, copy-paste examples. Built for React 18+.
       </p>
       <div className="flex flex-wrap gap-3">
         <a
@@ -41,6 +40,11 @@ export const HomePage = () => (
           Browse hooks
         </a>
       </div>
+      <p className="max-w-2xl text-sm leading-6 text-muted">
+        New to hooks? A hook is a function that starts with <span className="text-fg">use</span>{' '}
+        (like <span className="font-mono text-fg">useState</span>). Install the package, import one
+        hook, and use it like any other React hook — no UI kit required.
+      </p>
       <div className="space-y-2">
         <div className="flex flex-wrap items-center gap-2">
           {trustBadges.map((badge) => (
@@ -64,6 +68,9 @@ export const HomePage = () => (
     </div>
     <div id="hooks" className="scroll-mt-8">
       <HomeHookIndex />
+    </div>
+    <div id="community" className="scroll-mt-8">
+      <HomeCommunity />
     </div>
   </div>
 );
