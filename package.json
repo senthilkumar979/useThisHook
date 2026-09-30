@@ -51,6 +51,7 @@
     "verify:push": "npm run playground:build && npm audit --audit-level=high",
     "prepublishOnly": "npm run verify:commit",
     "playground:seo": "node scripts/generate-playground-seo.mjs",
+    "social:clip": "node scripts/record-social-clip.mjs",
     "playground": "vite --config playground/vite.config.ts",
     "playground:build": "npm run playground:seo && vite build --config playground/vite.config.ts",
     "playground:build:pages": "npm run playground:seo && GITHUB_PAGES=true vite build --config playground/vite.config.ts"

@@ -32,6 +32,24 @@ export const SiteFooter = () => (
         target="_blank"
       >
         Wiki
+      </a>{' '}
+      ·{' '}
+      <a
+        className={linkClass}
+        href="https://github.com/senthilkumar979/useThisHook/blob/main/CONTRIBUTING.md"
+        rel="noreferrer"
+        target="_blank"
+      >
+        Contribute
+      </a>{' '}
+      ·{' '}
+      <a
+        className={linkClass}
+        href="https://github.com/sponsors/senthilkumar979"
+        rel="noreferrer"
+        target="_blank"
+      >
+        Sponsor
       </a>
     </p>
   </footer>

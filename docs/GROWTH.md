@@ -22,7 +22,7 @@ Optional later: Next.js App Router recipe (see [ROADMAP.md](../ROADMAP.md)).
 ## Distribution loops (recurring)
 
 - [ ] One launch-style post on r/reactjs (problem → demo → why zero-deps; avoid changelog spam)
-- [ ] Cross-post notable releases to X / LinkedIn / Bluesky with a short playground clip
+- [ ] Cross-post notable releases to X / LinkedIn / Bluesky with a short playground clip — assets + captions in [`docs/social/`](./social/README.md)
 - [ ] Submit to awesome-react-style lists and React newsletter tips once demos stay crisp
 - [ ] Ask early users for a star + “used by” one-liner; add social proof to README when you have 2–3 real names
 
