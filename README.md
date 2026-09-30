@@ -1,8 +1,8 @@
 # useThisHook
 
-**React hooks. Zero runtime dependencies.**
+**Awaitable UI hooks. Zero runtime dependencies.**
 
-32 typed, tree-shakeable hooks for state, browser APIs, forms, lists, and promise-based dialogs. Install once; import only what you need.
+Call `await confirm(...)` in a click handler — no UI kit required. Plus 32 typed, tree-shakeable hooks for state, browser APIs, forms, and lists. Install once; import only what you need.
 
 ```bash
 npm i usethishook
@@ -11,6 +11,8 @@ npm i usethishook
 [Docs & live demos](https://usethishook.mentorbridge.in/) · [Wiki](https://github.com/senthilkumar979/useThisHook/wiki) · [npm](https://www.npmjs.com/package/usethishook) · [Changelog](CHANGELOG.md) · [Support](SUPPORT.md) · [Security](SECURITY.md)
 
 [![npm](https://img.shields.io/npm/v/usethishook.svg)](https://www.npmjs.com/package/usethishook)
+[![downloads](https://img.shields.io/npm/dw/usethishook.svg)](https://www.npmjs.com/package/usethishook)
+[![bundle](https://img.shields.io/bundlephobia/minzip/usethishook)](https://bundlephobia.com/package/usethishook)
 [![license](https://img.shields.io/npm/l/usethishook.svg)](LICENSE)
 [![CI](https://github.com/senthilkumar979/useThisHook/actions/workflows/ci.yml/badge.svg)](https://github.com/senthilkumar979/useThisHook/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/senthilkumar979/useThisHook/graph/badge.svg)](https://codecov.io/gh/senthilkumar979/useThisHook)
@@ -31,32 +33,27 @@ Tests are **Vitest** unit tests with coverage (Codecov). There is no Playwright 
 
 ## Why useThisHook
 
+- **Awaitable UI** — confirm, prompt, overlays, and wizards resolve in your click handler
 - **No runtime dependencies** — the published package only peers on React
 - **Tree-shakeable** — named ESM/CJS exports with generated TypeScript types
 - **SSR-safe** — browser hooks fall back on the server and subscribe after hydration
-- **Awaitable UI** — confirm, prompt, overlays, and wizards resolve in your click handler
+
+## Compared to popular libraries
+
+Honest positioning against common React hooks kits. Pick based on what you need — useThisHook is built for **zero runtime deps** plus **promise-based dialogs and wizards**.
+
+|                              | useThisHook                       | react-use           | ahooks               | usehooks-ts            |
+| ---------------------------- | --------------------------------- | ------------------- | -------------------- | ---------------------- |
+| **Runtime dependencies**     | None (React peer only)            | Several             | Several              | None (React peer only) |
+| **Promise confirm / prompt** | Yes (`useConfirm`, `usePrompt`)   | No                  | No                   | No                     |
+| **Promise overlay / wizard** | Yes (`useOverlay`, `useStepFlow`) | No                  | No                   | No                     |
+| **SSR-safe browser hooks**   | Yes                               | Varies              | Varies               | Yes                    |
+| **TypeScript**               | Bundled types                     | Partial / community | Yes                  | Yes                    |
+| **Focus**                    | Everyday kit + awaitable UI       | Broad utility kit   | Ant Design ecosystem | TS everyday hooks      |
+
+Live demos: [`useConfirm`](https://usethishook.mentorbridge.in/useConfirm) · [`useOverlay`](https://usethishook.mentorbridge.in/useOverlay) · [`useStepFlow`](https://usethishook.mentorbridge.in/useStepFlow).
 
 ## Quick start
-
-```tsx
-import { useBoolean, useDebounce, useLocalStorage } from 'usethishook';
-
-export const SearchBox = () => {
-  const { value: isOpen, toggle } = useBoolean(false);
-  const [query, setQuery] = useLocalStorage('search', '');
-  const debouncedQuery = useDebounce(query, 300);
-
-  return (
-    <div>
-      <button type="button" onClick={toggle}>
-        {isOpen ? 'Hide' : 'Show'} search
-      </button>
-      {isOpen && <input value={query} onChange={(event) => setQuery(event.target.value)} />}
-      <p>Searching for: {debouncedQuery}</p>
-    </div>
-  );
-};
-```
 
 Promise-based dialogs — call `confirm()`, then mount `render()` once in the tree:
 
@@ -80,6 +77,28 @@ export const DeleteButton = () => {
       </button>
       {render()}
     </>
+  );
+};
+```
+
+Everyday state hooks work the same way — import only what you need:
+
+```tsx
+import { useBoolean, useDebounce, useLocalStorage } from 'usethishook';
+
+export const SearchBox = () => {
+  const { value: isOpen, toggle } = useBoolean(false);
+  const [query, setQuery] = useLocalStorage('search', '');
+  const debouncedQuery = useDebounce(query, 300);
+
+  return (
+    <div>
+      <button type="button" onClick={toggle}>
+        {isOpen ? 'Hide' : 'Show'} search
+      </button>
+      {isOpen && <input value={query} onChange={(event) => setQuery(event.target.value)} />}
+      <p>Searching for: {debouncedQuery}</p>
+    </div>
   );
 };
 ```
@@ -157,7 +176,7 @@ npm run playground   # local docs, usually http://localhost:5173
 | `npm run pack:check`    | publint + Are the Types Wrong |
 | `npm run verify:commit` | Full pre-commit gate          |
 
-See [CONTRIBUTING.md](CONTRIBUTING.md), [docs/RELEASE.md](docs/RELEASE.md), [docs/MIGRATION.md](docs/MIGRATION.md), [ROADMAP.md](ROADMAP.md), and [SUPPORT.md](SUPPORT.md).
+See [CONTRIBUTING.md](CONTRIBUTING.md), [docs/RELEASE.md](docs/RELEASE.md), [docs/MIGRATION.md](docs/MIGRATION.md), [docs/GROWTH.md](docs/GROWTH.md), [ROADMAP.md](ROADMAP.md), and [SUPPORT.md](SUPPORT.md).
 
 ## License
 

@@ -1,15 +1,15 @@
 const benefits = [
   {
-    title: 'Drop into any React app',
-    body: 'Peer-depends on React 18+. Named exports work with Vite, Next.js, CRA, and Module Federation hosts.',
+    title: 'Awaitable UI without a kit',
+    body: 'useConfirm, usePrompt, useOverlay, and useStepFlow resolve in your click handler. Mount render() once — no modal library required.',
   },
   {
-    title: 'Typed, tree-shakeable',
+    title: 'Zero runtime dependencies',
+    body: 'The published package only peers on React 18+. Works with Vite, Next.js, CRA, and Module Federation hosts.',
+  },
+  {
+    title: 'Typed and tree-shakeable',
     body: 'Strict TypeScript public APIs. Unused hooks stay out of the bundle because every hook is a named export.',
-  },
-  {
-    title: 'Everyday UI, not toy snippets',
-    body: 'Promise-based overlays and wizards, native file pick, storage, debounce, and browser subscriptions you would otherwise rewrite.',
   },
   {
     title: 'Docs that match the code',

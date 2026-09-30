@@ -97,18 +97,29 @@
     "hooks",
     "react-hooks",
     "custom-hooks",
+    "hooks-library",
     "typescript",
     "typescript-hooks",
     "usethishook",
     "tree-shakeable",
+    "zero-dependency",
     "ssr",
+    "ssr-safe",
     "useLocalStorage",
     "useDebounce",
+    "useBoolean",
+    "useDisclosure",
     "useConfirm",
     "usePrompt",
+    "useOverlay",
+    "useStepFlow",
     "useMediaQuery",
     "react-utilities"
   ],
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/senthilkumar979"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/senthilkumar979/useThisHook.git"

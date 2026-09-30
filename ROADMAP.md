@@ -7,6 +7,7 @@ Honest near-term direction for **useThisHook**. Not a commitment calendar.
 - Keep CI trust signals green (Scorecard, CodeQL, Snyk, Sonar, Codecov, publint/attw)
 - Flesh out docs demos where API edges are still thin
 - Raise unit-test coverage on remaining branch gaps
+- Run the owner checklist in [docs/GROWTH.md](docs/GROWTH.md) (Topics, Discussions, content, distribution)
 
 ## Later
 
