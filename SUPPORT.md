@@ -8,7 +8,8 @@
 
 ## Questions and bugs
 
-- Open a [GitHub Issue](https://github.com/senthilkumar979/useThisHook/issues) (bug or feature templates).
+- Questions and ideas: [GitHub Discussions](https://github.com/senthilkumar979/useThisHook/discussions) (enable Discussions in repo settings if the link 404s).
+- Bugs and feature requests: open a [GitHub Issue](https://github.com/senthilkumar979/useThisHook/issues) (bug or feature templates).
 - Pull requests: see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Security

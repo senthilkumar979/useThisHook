@@ -1,4 +1,5 @@
 import { BrandMark } from '../components/BrandMark';
+import { hookPageHref } from '../hookHref';
 import { trustBadges } from '../trustBadges';
 import { HomeBenefits } from './HomeBenefits';
 import { HomeHookIndex } from './HomeHookIndex';
@@ -9,15 +10,16 @@ export const HomePage = () => (
     <header className="space-y-5">
       <BrandMark />
       <p className="text-[0.7rem] font-medium uppercase tracking-[0.18em] text-violet-700 dark:text-violet-300/80">
-        Open source React hooks
+        Awaitable UI. Zero runtime deps.
       </p>
       <h1 className="text-4xl font-semibold tracking-tight text-fg md:text-5xl">
-        useThisHook is a typed library of custom React hooks you can drop into any app.
+        useThisHook is await confirm() in your click handler — plus everyday React hooks with no
+        runtime dependencies.
       </h1>
       <p className="max-w-2xl text-lg leading-8 text-muted">
-        Stop rewriting toggle, debounce, overlay, wizard, and file-picker logic. Import a named
-        hook, wire it to your UI, and ship. This playground is the documentation: try the hook, read
-        what it takes and returns, then copy the example.
+        Promise-based confirm, prompt, overlay, and wizard hooks resolve where you call them. The
+        rest of the kit covers debounce, storage, forms, and browser APIs — tree-shakeable named
+        exports, SSR-safe. This playground is the docs: try a hook, read the API, copy the example.
       </p>
       <div className="flex flex-wrap gap-3">
         <a
@@ -25,6 +27,12 @@ export const HomePage = () => (
           className="rounded-full bg-gradient-to-r from-violet-500 to-sky-500 px-5 py-2.5 text-sm font-medium text-white shadow-lg shadow-violet-500/20"
         >
           Install
+        </a>
+        <a
+          href={hookPageHref('useConfirm')}
+          className="rounded-full border border-line bg-surface px-5 py-2.5 text-sm text-fg hover:bg-code"
+        >
+          Try useConfirm
         </a>
         <a
           href="#hooks"
