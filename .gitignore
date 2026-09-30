@@ -8,3 +8,5 @@ coverage
 .vite
 .turbo
 playground/dist
+docs/social/*.webm
+docs/social/frames/
