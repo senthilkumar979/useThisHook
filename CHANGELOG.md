@@ -9,6 +9,12 @@ Bump `version` in `package.json` in the same change as the notes below, then fol
 [`docs/RELEASE.md`](docs/RELEASE.md): **Actions → Publish npm**, then GitHub Release **vX.Y.Z**.
 Do not publish from a push or tag.
 
+## [1.1.0] - 2026-10-06
+
+### Added
+
+- `useFingerprint(options?)` — client-side visitor id from browser signals (canvas, WebGL, screen, locale, storage). Returns `{ visitorId, components, isPending, error, refresh }`. Zero network calls; not the commercial Fingerprint Identification SaaS.
+
 ## [1.0.0] - 2026-09-28
 
 ### Added

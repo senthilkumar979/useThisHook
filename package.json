@@ -1,6 +1,6 @@
 {
   "name": "usethishook",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Zero-dependency, tree-shakeable React hooks for state, browser APIs, forms, and promise-based dialogs. TypeScript. React 18+.",
   "license": "MIT",
   "author": {
@@ -115,6 +115,8 @@
     "useOverlay",
     "useStepFlow",
     "useMediaQuery",
+    "useFingerprint",
+    "fingerprint",
     "react-utilities"
   ],
   "funding": {
