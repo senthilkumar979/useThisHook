@@ -138,6 +138,11 @@ function main() {
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   // Stable shape (no timestamps) so `mcp:catalog:check` can diff cleanly in CI.
   fs.writeFileSync(outPath, `${JSON.stringify({ hooks: catalog }, null, 2)}\n`);
+  // Match repo Prettier JSON style so CI regenerations don't drift.
+  execFileSync('npx', ['prettier', '--write', outPath], {
+    cwd: root,
+    stdio: ['ignore', 'pipe', 'inherit'],
+  });
   console.error(`Wrote ${catalog.length} hooks to ${path.relative(root, outPath)}`);
 }
 
