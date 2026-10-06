@@ -1,12 +1,13 @@
 import { FingerprintProvider } from '@fingerprint/react';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
+import 'goey-toast/styles.css';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './App';
 import { FingerprintIdentify } from './FingerprintIdentify';
-import { applyTheme, readTheme } from './theme';
-import 'goey-toast/styles.css';
 import './index.css';
-
+import { applyTheme, readTheme } from './theme';
 applyTheme(readTheme());
 
 const fingerprintApiKey = import.meta.env.VITE_FINGERPRINT_API_KEY;
@@ -24,6 +25,8 @@ createRoot(rootElement).render(
     <FingerprintProvider apiKey={fingerprintApiKey} region="eu">
       <FingerprintIdentify />
       <App />
+      <Analytics />
+      <SpeedInsights />
     </FingerprintProvider>
   </StrictMode>,
 );
