@@ -46,7 +46,7 @@ export function createUseThisHookServer(): McpServer {
           .describe('Optional category filter: State | Browser | App'),
       },
     },
-    async ({ category }) => {
+    ({ category }) => {
       const hooks = listHooks(category as HookCategory | undefined);
       return jsonResult({ count: hooks.length, hooks });
     },
@@ -69,7 +69,7 @@ export function createUseThisHookServer(): McpServer {
           .describe('Max results to return (default 8)'),
       },
     },
-    async ({ query, limit }) => {
+    ({ query, limit }) => {
       const hooks = searchHooks(query, limit ?? 8).map(toListItem);
       return jsonResult({ query, count: hooks.length, hooks });
     },
@@ -85,7 +85,7 @@ export function createUseThisHookServer(): McpServer {
         name: z.string().min(1).describe('Hook id or name, e.g. useBoolean or useConfirm'),
       },
     },
-    async ({ name }) => {
+    ({ name }) => {
       const hook = getHook(name);
       if (!hook) {
         const available = listHooks()
@@ -119,7 +119,7 @@ export function createUseThisHookServer(): McpServer {
           .describe('Max recommendations (default 5)'),
       },
     },
-    async ({ task, limit }) => {
+    ({ task, limit }) => {
       const hooks = recommendHooks(task, limit ?? 5);
       if (hooks.length === 0) {
         return textResult(
@@ -151,7 +151,7 @@ export function createUseThisHookServer(): McpServer {
       description: 'Index of every hook in useThisHook with summary and category.',
       mimeType: 'application/json',
     },
-    async (uri) => ({
+    (uri) => ({
       contents: [
         {
           uri: uri.href,
@@ -165,7 +165,7 @@ export function createUseThisHookServer(): McpServer {
   server.registerResource(
     'hook-docs',
     new ResourceTemplate('usethishook://hooks/{id}', {
-      list: async () => ({
+      list: () => ({
         resources: loadCatalog().map((hook) => ({
           uri: `usethishook://hooks/${hook.id}`,
           name: hook.name,
@@ -180,7 +180,7 @@ export function createUseThisHookServer(): McpServer {
       description: 'Markdown docs for a single useThisHook hook.',
       mimeType: 'text/markdown',
     },
-    async (uri, variables) => {
+    (uri, variables) => {
       const id = String(variables.id ?? '');
       const hook = getHook(id);
       if (!hook) {

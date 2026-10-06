@@ -56,22 +56,26 @@ export function formatHookMarkdown(hook: HookDoc): string {
           })
           .join('\n');
 
-  const returnFields =
+  const returnFieldLines =
     hook.api.returns.fields && hook.api.returns.fields.length > 0
-      ? `\n\nReturn fields:\n${hook.api.returns.fields
-          .map((field) => `- \`${field.name}\`: \`${field.type}\` — ${field.description}`)
-          .join('\n')}`
-      : '';
+      ? [
+          '',
+          'Return fields:',
+          ...hook.api.returns.fields.map(
+            (field) => `- \`${field.name}\`: \`${field.type}\` — ${field.description}`,
+          ),
+        ]
+      : [];
 
-  const caveats =
+  const caveatLines =
     hook.api.caveats && hook.api.caveats.length > 0
-      ? `\n\nCaveats:\n${hook.api.caveats.map((item) => `- ${item}`).join('\n')}`
-      : '';
+      ? ['', 'Caveats:', ...hook.api.caveats.map((item) => `- ${item}`)]
+      : [];
 
   return [
     `# ${hook.name}`,
     '',
-    `${hook.summary}`,
+    hook.summary,
     '',
     `**Category:** ${hook.category}`,
     `**When to use:** ${hook.whenToUse}`,
@@ -99,7 +103,9 @@ export function formatHookMarkdown(hook: HookDoc): string {
     '',
     '### Returns',
     '',
-    `\`${hook.api.returns.type}\` — ${hook.api.returns.description}${returnFields}${caveats}`,
+    `\`${hook.api.returns.type}\` — ${hook.api.returns.description}`,
+    ...returnFieldLines,
+    ...caveatLines,
     '',
     '## Example',
     '',

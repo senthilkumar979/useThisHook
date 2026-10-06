@@ -11,24 +11,39 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const playgroundSrc = path.join(root, 'playground', 'src');
 const outPath = path.join(root, 'mcp', 'data', 'catalog.json');
 const playgroundUrl = 'https://usethishook.mentorbridge.in';
+const nodeBin = process.execPath;
+const tsxCli = path.join(root, 'node_modules', 'tsx', 'dist', 'cli.mjs');
+const prettierCli = path.join(root, 'node_modules', 'prettier', 'bin', 'prettier.cjs');
 
 const hookGroupFiles = ['stateHooks.ts', 'browserHooks.ts', 'appHooks.ts', 'leverageHooks.ts'];
 
-const entryPattern =
-  /\{\s*id:\s*'([^']+)',\s*name:\s*'([^']+)',\s*summary:\s*'((?:\\'|[^'])*)',\s*whenToUse:\s*'((?:\\'|[^'])*)',\s*category:\s*'([^']+)',\s*api:\s*(\w+)/g;
-
 const examplePattern = /export const (use\w+Example) = `([\s\S]*?)`;/g;
+
+function readQuotedField(block, field) {
+  const match = block.match(new RegExp(`${field}:\\s*'([^']*)'`));
+  return match?.[1];
+}
 
 function parseHookEntries(source) {
   const entries = [];
-  for (const match of source.matchAll(entryPattern)) {
+  for (const chunk of source.split(/\n\s*\{/)) {
+    const id = readQuotedField(chunk, 'id');
+    if (!id?.startsWith('use')) continue;
+    const name = readQuotedField(chunk, 'name');
+    const summary = readQuotedField(chunk, 'summary');
+    const whenToUse = readQuotedField(chunk, 'whenToUse');
+    const category = readQuotedField(chunk, 'category');
+    const apiMatch = chunk.match(/api:\s*(\w+)/);
+    if (!name || !summary || !whenToUse || !category || !apiMatch?.[1]) {
+      throw new Error(`Incomplete catalog entry near id ${id}`);
+    }
     entries.push({
-      id: match[1],
-      name: match[2],
-      summary: match[3].replaceAll("\\'", "'"),
-      whenToUse: match[4].replaceAll("\\'", "'"),
-      category: match[5],
-      apiExport: match[6],
+      id,
+      name,
+      summary,
+      whenToUse,
+      category,
+      apiExport: apiMatch[1],
     });
   }
   return entries;
@@ -83,7 +98,7 @@ writeFileSync(process.argv[2], JSON.stringify({ descriptions: hookDescriptions, 
   const tmpOut = path.join(root, 'scripts', '.tmp-mcp-catalog-payload.json');
   fs.writeFileSync(tmpLoader, loader);
   try {
-    execFileSync('npx', ['tsx', tmpLoader, tmpOut], {
+    execFileSync(nodeBin, [tsxCli, tmpLoader, tmpOut], {
       cwd: root,
       stdio: ['ignore', 'pipe', 'inherit'],
     });
@@ -100,6 +115,13 @@ writeFileSync(process.argv[2], JSON.stringify({ descriptions: hookDescriptions, 
 }
 
 function main() {
+  if (!fs.existsSync(tsxCli)) {
+    throw new Error(`Missing tsx CLI at ${tsxCli}. Run npm install from the repo root.`);
+  }
+  if (!fs.existsSync(prettierCli)) {
+    throw new Error(`Missing prettier CLI at ${prettierCli}. Run npm install from the repo root.`);
+  }
+
   const { descriptions, apis } = loadApisAndDescriptions();
   const examples = loadExamples();
   const entries = hookGroupFiles.flatMap((file) =>
@@ -139,7 +161,7 @@ function main() {
   // Stable shape (no timestamps) so `mcp:catalog:check` can diff cleanly in CI.
   fs.writeFileSync(outPath, `${JSON.stringify({ hooks: catalog }, null, 2)}\n`);
   // Match repo Prettier JSON style so CI regenerations don't drift.
-  execFileSync('npx', ['prettier', '--write', outPath], {
+  execFileSync(nodeBin, [prettierCli, '--write', outPath], {
     cwd: root,
     stdio: ['ignore', 'pipe', 'inherit'],
   });
