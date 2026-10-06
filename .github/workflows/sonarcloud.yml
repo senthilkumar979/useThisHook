@@ -31,5 +31,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          args: -Dsonar.projectKey=senthilkumar979_useThisHook -Dsonar.organization=senthilkumar979
+          args: >-
+            -Dsonar.projectKey=senthilkumar979_useThisHook
+            -Dsonar.organization=senthilkumar979
+            -Dsonar.cpd.exclusions=**/*.test.ts,**/*.test.tsx,mcp/src/types.ts,playground/src/hookDoc.ts
+            -Dsonar.exclusions=**/node_modules/**,**/dist/**,mcp/data/**,mcp/package-lock.json,coverage/**,playground/dist/**
           projectBaseDir: .

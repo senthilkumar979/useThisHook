@@ -3,58 +3,42 @@ import { getHook, listHooks, setCatalogForTests } from './catalog.js';
 import { recommendHooks, searchHooks } from './search.js';
 import type { HookDoc } from './types.js';
 
+function fixture(partial: Pick<HookDoc, 'id' | 'summary' | 'whenToUse' | 'category'>): HookDoc {
+  return {
+    name: partial.id,
+    description: partial.summary,
+    api: {
+      signature: `${partial.id}()`,
+      explanation: partial.summary,
+      arguments: [],
+      returns: { type: 'unknown', description: 'Hook return value' },
+    },
+    example: `const value = ${partial.id}();`,
+    playgroundUrl: `https://usethishook.mentorbridge.in/${partial.id}`,
+    import: `import { ${partial.id} } from 'usethishook';`,
+    ...partial,
+  };
+}
+
 const sampleHooks: HookDoc[] = [
-  {
+  fixture({
     id: 'useBoolean',
-    name: 'useBoolean',
     summary: 'Boolean state with toggle helpers.',
     whenToUse: 'Use for panels, switches, and any on/off UI.',
     category: 'State',
-    description: 'Named helpers to turn a flag on, off, or flip it.',
-    api: {
-      signature: 'useBoolean(initialValue: boolean)',
-      explanation: 'Boolean state helpers.',
-      arguments: [],
-      returns: { type: 'object', description: 'Flag helpers' },
-    },
-    example: 'const { value, toggle } = useBoolean(false);',
-    playgroundUrl: 'https://usethishook.mentorbridge.in/useBoolean',
-    import: "import { useBoolean } from 'usethishook';",
-  },
-  {
+  }),
+  fixture({
     id: 'useConfirm',
-    name: 'useConfirm',
     summary: 'Await a yes/no dialog.',
     whenToUse: 'Use before destructive actions like delete.',
     category: 'App',
-    description: 'Promise-based confirm dialog for delete flows.',
-    api: {
-      signature: 'useConfirm()',
-      explanation: 'Confirm dialog as a promise.',
-      arguments: [],
-      returns: { type: 'object', description: 'confirm + render' },
-    },
-    example: 'await confirm({ title: "Delete?" })',
-    playgroundUrl: 'https://usethishook.mentorbridge.in/useConfirm',
-    import: "import { useConfirm } from 'usethishook';",
-  },
-  {
+  }),
+  fixture({
     id: 'useDebounce',
-    name: 'useDebounce',
     summary: 'Delay updates until the value stops changing.',
     whenToUse: 'Use for search inputs and expensive derived work.',
     category: 'State',
-    description: 'Debounce a rapidly changing value such as search text.',
-    api: {
-      signature: 'useDebounce<T>(value: T, delayMs?: number): T',
-      explanation: 'Lagged value after idle time.',
-      arguments: [],
-      returns: { type: 'T', description: 'Debounced value' },
-    },
-    example: 'const debounced = useDebounce(query, 300);',
-    playgroundUrl: 'https://usethishook.mentorbridge.in/useDebounce',
-    import: "import { useDebounce } from 'usethishook';",
-  },
+  }),
 ];
 
 afterEach(() => {
