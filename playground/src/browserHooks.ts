@@ -1,4 +1,5 @@
 import {
+  useFingerprintApi,
   useMediaQueryApi,
   useOnClickOutsideApi,
   useOnlineStatusApi,
@@ -8,6 +9,7 @@ import { useEventListenerApi, useKeyPressApi, useTimeoutApi } from './api/browse
 import { useAsyncSelectApi, useOverlayApi, useStepFlowApi } from './api/flowApi';
 import { UseAsyncSelectDemo, useAsyncSelectExample } from './demos/UseAsyncSelectDemo';
 import { UseEventListenerDemo, useEventListenerExample } from './demos/UseEventListenerDemo';
+import { UseFingerprintDemo, useFingerprintExample } from './demos/UseFingerprintDemo';
 import { UseKeyPressDemo, useKeyPressExample } from './demos/UseKeyPressDemo';
 import { UseMediaQueryDemo, useMediaQueryExample } from './demos/UseMediaQueryDemo';
 import { UseOnClickOutsideDemo, useOnClickOutsideExample } from './demos/UseOnClickOutsideDemo';
@@ -28,6 +30,16 @@ export const browserHooks: HookEntry[] = [
     api: useOnlineStatusApi,
     Demo: UseOnlineStatusDemo,
     example: useOnlineStatusExample,
+  },
+  {
+    id: 'useFingerprint',
+    name: 'useFingerprint',
+    summary: 'Client-side visitor id from browser fingerprint signals.',
+    whenToUse: 'Use for anonymous visitor hints without cookies or a backend.',
+    category: 'Browser',
+    api: useFingerprintApi,
+    Demo: UseFingerprintDemo,
+    example: useFingerprintExample,
   },
   {
     id: 'useMediaQuery',

@@ -3,7 +3,7 @@
 **Stop rewriting the same React hooks in every project.**
 
 Install once. Import only what you need — toggles, debounce, storage, forms, browser APIs, and
-dialogs. **32 typed hooks**, zero runtime dependencies, live demos you can paste into production.
+dialogs. **33 typed hooks**, zero runtime dependencies, live demos you can paste into production.
 
 ```bash
 npm i usethishook
@@ -123,18 +123,19 @@ Every hook has a **live preview + API** on the [playground](https://usethishook.
 
 ### Browser
 
-| Hook                                                                         | What it does                              |
-| ---------------------------------------------------------------------------- | ----------------------------------------- |
-| [`useOnlineStatus`](https://usethishook.mentorbridge.in/useOnlineStatus)     | Online / offline                          |
-| [`useMediaQuery`](https://usethishook.mentorbridge.in/useMediaQuery)         | Match a CSS media query                   |
-| [`useWindowSize`](https://usethishook.mentorbridge.in/useWindowSize)         | Viewport width & height                   |
-| [`useOnClickOutside`](https://usethishook.mentorbridge.in/useOnClickOutside) | Detect clicks outside an element          |
-| [`useEventListener`](https://usethishook.mentorbridge.in/useEventListener)   | Stable DOM / window listener              |
-| [`useTimeout`](https://usethishook.mentorbridge.in/useTimeout)               | One-shot timer (`null` pauses)            |
-| [`useKeyPress`](https://usethishook.mentorbridge.in/useKeyPress)             | Key held down (skips text fields)         |
-| [`useOverlay`](https://usethishook.mentorbridge.in/useOverlay)               | Custom overlay as a Promise               |
-| [`useStepFlow`](https://usethishook.mentorbridge.in/useStepFlow)             | Multi-step wizard that resolves when done |
-| [`useAsyncSelect`](https://usethishook.mentorbridge.in/useAsyncSelect)       | Native file picker as a Promise           |
+| Hook                                                                         | What it does                                |
+| ---------------------------------------------------------------------------- | ------------------------------------------- |
+| [`useOnlineStatus`](https://usethishook.mentorbridge.in/useOnlineStatus)     | Online / offline                            |
+| [`useFingerprint`](https://usethishook.mentorbridge.in/useFingerprint)       | Client-side visitor id from browser signals |
+| [`useMediaQuery`](https://usethishook.mentorbridge.in/useMediaQuery)         | Match a CSS media query                     |
+| [`useWindowSize`](https://usethishook.mentorbridge.in/useWindowSize)         | Viewport width & height                     |
+| [`useOnClickOutside`](https://usethishook.mentorbridge.in/useOnClickOutside) | Detect clicks outside an element            |
+| [`useEventListener`](https://usethishook.mentorbridge.in/useEventListener)   | Stable DOM / window listener                |
+| [`useTimeout`](https://usethishook.mentorbridge.in/useTimeout)               | One-shot timer (`null` pauses)              |
+| [`useKeyPress`](https://usethishook.mentorbridge.in/useKeyPress)             | Key held down (skips text fields)           |
+| [`useOverlay`](https://usethishook.mentorbridge.in/useOverlay)               | Custom overlay as a Promise                 |
+| [`useStepFlow`](https://usethishook.mentorbridge.in/useStepFlow)             | Multi-step wizard that resolves when done   |
+| [`useAsyncSelect`](https://usethishook.mentorbridge.in/useAsyncSelect)       | Native file picker as a Promise             |
 
 ### App
 

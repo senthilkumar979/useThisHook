@@ -1,6 +1,8 @@
 export const browserDescriptions: Record<string, string> = {
   useOnlineStatus:
     'You want to warn “you are offline” or disable Save when the laptop loses the network. This hook is the browser’s online flag, updated when the browser fires online and offline. It is not a ping of your API.',
+  useFingerprint:
+    'You need a stable-enough visitor id in the browser without cookies or a backend — for abuse hints, anonymous personalization, or correlating sessions. The hook samples canvas, WebGL, screen, locale, and related signals, hashes them client-side, and exposes refresh(). No API key and no network call (unlike Fingerprint’s commercial Identification product).',
   useMediaQuery:
     'Layout should change at the same breakpoint as CSS, for example a compact toolbar under 768px. Match the query in JS without resize listeners and leftover subscriptions.',
   useWindowSize:

@@ -5,6 +5,12 @@ export { useInterval } from './hooks/useInterval';
 export { useOnlineStatus } from './hooks/useOnlineStatus';
 export { useMediaQuery } from './hooks/useMediaQuery';
 export { useWindowSize } from './hooks/useWindowSize';
+export { useFingerprint } from './hooks/useFingerprint';
+export type {
+  FingerprintComponents,
+  UseFingerprintOptions,
+  UseFingerprintReturn,
+} from './hooks/useFingerprint';
 export { useOnClickOutside } from './hooks/useOnClickOutside';
 export { useEventListener } from './hooks/useEventListener';
 export type { EventListenerTarget } from './hooks/useEventListener';
