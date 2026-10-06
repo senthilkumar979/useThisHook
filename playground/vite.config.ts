@@ -24,6 +24,8 @@ function spaFallback404(): Plugin {
 
 export default defineConfig({
   root: playgroundRoot,
+  // Load VITE_* from repo root (.env.local) so local and Vercel env vars stay aligned.
+  envDir: path.resolve(playgroundRoot, '..'),
   // Absolute base required for History API path routing.
   // Custom domain / local / Vercel: `/`. GitHub project Pages: `/useThisHook/`.
   base: isGitHubPages ? '/useThisHook/' : '/',
