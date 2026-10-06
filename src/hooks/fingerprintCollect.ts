@@ -91,13 +91,13 @@ function touchSignal(): string {
 /** FNV-1a 32-bit → stable hex visitor id (FingerprintJS-style client hash). */
 export function hashComponents(components: FingerprintComponents): string {
   const payload = Object.keys(components)
-    .sort()
+    .sort((left, right) => left.localeCompare(right))
     .map((key) => `${key}:${String(components[key as keyof FingerprintComponents])}`)
     .join('|');
 
   let hash = 0x811c9dc5;
-  for (let index = 0; index < payload.length; index += 1) {
-    hash ^= payload.charCodeAt(index);
+  for (const char of payload) {
+    hash ^= char.codePointAt(0) ?? 0;
     hash = Math.imul(hash, 0x01000193);
   }
 
