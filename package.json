@@ -54,7 +54,14 @@
     "social:clip": "node scripts/record-social-clip.mjs",
     "playground": "vite --config playground/vite.config.ts",
     "playground:build": "npm run playground:seo && vite build --config playground/vite.config.ts",
-    "playground:build:pages": "npm run playground:seo && GITHUB_PAGES=true vite build --config playground/vite.config.ts"
+    "playground:build:pages": "npm run playground:seo && GITHUB_PAGES=true vite build --config playground/vite.config.ts",
+    "mcp:catalog": "node scripts/generate-mcp-catalog.mjs",
+    "mcp:catalog:check": "node scripts/generate-mcp-catalog.mjs && git diff --exit-code -- mcp/data/catalog.json",
+    "mcp:install": "npm --prefix mcp install",
+    "mcp:build": "npm run mcp:catalog && npm --prefix mcp run build",
+    "mcp:test": "npm --prefix mcp test",
+    "mcp:typecheck": "npm --prefix mcp run typecheck",
+    "mcp:verify": "npm run mcp:catalog:check && npm run mcp:typecheck && npm run mcp:test && npm run mcp:build"
   },
   "peerDependencies": {
     "react": ">=18",
@@ -85,6 +92,7 @@
     "react-dom": "^19.1.0",
     "tailwindcss": "^4.3.3",
     "tsup": "^8.5.0",
+    "tsx": "^4.23.15",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.70.0",
     "vite": "^8.3.1",

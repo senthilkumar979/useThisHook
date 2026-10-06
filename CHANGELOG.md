@@ -9,6 +9,12 @@ Bump `version` in `package.json` in the same change as the notes below, then fol
 [`docs/RELEASE.md`](docs/RELEASE.md): **Actions → Publish npm**, then GitHub Release **vX.Y.Z**.
 Do not publish from a push or tag.
 
+## [Unreleased]
+
+### Added
+
+- `usethishook-mcp` — stdio MCP server (`mcp/`) so AI clients can `list_hooks`, `search_hooks`, `get_hook`, and `recommend_hook` against the playground catalog. See [mcp/README.md](mcp/README.md).
+
 ## [1.1.0] - 2026-10-06
 
 ### Added
