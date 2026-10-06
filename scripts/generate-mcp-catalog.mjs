@@ -20,21 +20,34 @@ const hookGroupFiles = ['stateHooks.ts', 'browserHooks.ts', 'appHooks.ts', 'leve
 const examplePattern = /export const (use\w+Example) = `([\s\S]*?)`;/g;
 
 function readQuotedField(block, field) {
-  const match = block.match(new RegExp(`${field}:\\s*'([^']*)'`));
-  return match?.[1];
+  const needle = `${field}:`;
+  const start = block.indexOf(needle);
+  if (start < 0) return undefined;
+  const after = block.slice(start + needle.length).trimStart();
+  if (!after.startsWith("'")) return undefined;
+  const end = after.indexOf("'", 1);
+  if (end < 0) return undefined;
+  return after.slice(1, end);
 }
 
 function parseHookEntries(source) {
   const entries = [];
-  for (const chunk of source.split(/\n\s*\{/)) {
+  for (const chunk of source.split('{')) {
     const id = readQuotedField(chunk, 'id');
     if (!id?.startsWith('use')) continue;
     const name = readQuotedField(chunk, 'name');
     const summary = readQuotedField(chunk, 'summary');
     const whenToUse = readQuotedField(chunk, 'whenToUse');
     const category = readQuotedField(chunk, 'category');
-    const apiMatch = chunk.match(/api:\s*(\w+)/);
-    if (!name || !summary || !whenToUse || !category || !apiMatch?.[1]) {
+    const apiIndex = chunk.indexOf('api:');
+    const apiToken =
+      apiIndex >= 0
+        ? chunk
+            .slice(apiIndex + 4)
+            .trimStart()
+            .match(/^(\w+)/)?.[1]
+        : undefined;
+    if (!name || !summary || !whenToUse || !category || !apiToken) {
       throw new Error(`Incomplete catalog entry near id ${id}`);
     }
     entries.push({
@@ -43,7 +56,7 @@ function parseHookEntries(source) {
       summary,
       whenToUse,
       category,
-      apiExport: apiMatch[1],
+      apiExport: apiToken,
     });
   }
   return entries;
