@@ -41,9 +41,9 @@ export const useFingerprint = (options: UseFingerprintOptions = {}): UseFingerpr
       setComponents(result.components);
       setIsPending(false);
       return result.visitorId;
-    } catch (caught) {
+    } catch (error_) {
       if (runId !== runIdRef.current) return null;
-      const nextError = caught instanceof Error ? caught : new Error(String(caught));
+      const nextError = error_ instanceof Error ? error_ : new Error(String(error_));
       setError(nextError);
       setIsPending(false);
       return null;
