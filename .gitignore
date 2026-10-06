@@ -8,5 +8,8 @@ coverage
 .vite
 .turbo
 playground/dist
+mcp/dist
+mcp/node_modules
 docs/social/*.webm
 docs/social/frames/
+scripts/.tmp-mcp-catalog-*

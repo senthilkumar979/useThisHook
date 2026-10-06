@@ -65,3 +65,19 @@ jobs:
           cache: npm
       - run: npm ci --ignore-scripts
       - run: npm run playground:build
+
+  mcp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm ci --ignore-scripts --prefix mcp
+      - name: Ensure MCP catalog matches playground docs
+        run: npm run mcp:catalog:check
+      - run: npm run mcp:typecheck
+      - run: npm run mcp:test
+      - run: npm --prefix mcp run build

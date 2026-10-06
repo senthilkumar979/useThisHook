@@ -9,7 +9,7 @@ dialogs. **33 typed hooks**, zero runtime dependencies, live demos you can paste
 npm i usethishook
 ```
 
-**[Try the live playground →](https://usethishook.mentorbridge.in/)** · [npm](https://www.npmjs.com/package/usethishook) · [Wiki](https://github.com/senthilkumar979/useThisHook/wiki) · [Changelog](CHANGELOG.md)
+**[Try the live playground →](https://usethishook.mentorbridge.in/)** · [npm](https://www.npmjs.com/package/usethishook) · [MCP](mcp/README.md) · [Wiki](https://github.com/senthilkumar979/useThisHook/wiki) · [Changelog](CHANGELOG.md)
 
 [![npm](https://img.shields.io/npm/v/usethishook.svg)](https://www.npmjs.com/package/usethishook)
 [![downloads](https://img.shields.io/npm/dw/usethishook.svg)](https://www.npmjs.com/package/usethishook)

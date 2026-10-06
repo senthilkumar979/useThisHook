@@ -1,0 +1,1446 @@
+{
+  "hooks": [
+    {
+      "id": "useBoolean",
+      "name": "useBoolean",
+      "summary": "Boolean state with toggle helpers.",
+      "whenToUse": "Use for panels, switches, and any on/off UI.",
+      "category": "State",
+      "description": "You have a panel, switch, or “show more” control. Pass true or false as the starting value. You get named helpers to turn it on, turn it off, or flip it — without a raw boolean plus setState(!value) in three places.",
+      "api": {
+        "signature": "useBoolean(initialValue: boolean)",
+        "explanation": "Keeps a boolean in React state and returns helpers so you can flip, force on, or force off without writing setState yourself.",
+        "arguments": [
+          {
+            "name": "initialValue",
+            "type": "boolean",
+            "description": "Required starting value: true or false."
+          }
+        ],
+        "returns": {
+          "type": "{ value, toggle, setTrue, setFalse, setValue }",
+          "description": "The current flag plus stable callbacks to change it.",
+          "fields": [
+            {
+              "name": "value",
+              "type": "boolean",
+              "description": "Whether the flag is currently on."
+            },
+            {
+              "name": "toggle",
+              "type": "() => void",
+              "description": "Flips value from true to false or the reverse."
+            },
+            {
+              "name": "setTrue",
+              "type": "() => void",
+              "description": "Sets value to true."
+            },
+            {
+              "name": "setFalse",
+              "type": "() => void",
+              "description": "Sets value to false."
+            },
+            {
+              "name": "setValue",
+              "type": "Dispatch<SetStateAction<boolean>>",
+              "description": "Escape hatch for any boolean update, including functional updates."
+            }
+          ]
+        }
+      },
+      "example": "import { useBoolean } from 'usethishook';\n\nexport const Panel = () => {\n  const { value, toggle } = useBoolean(false);\n  return <button type=\"button\" onClick={toggle}>{value ? 'Hide' : 'Show'}</button>;\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useBoolean",
+      "import": "import { useBoolean } from 'usethishook';"
+    },
+    {
+      "id": "useDisclosure",
+      "name": "useDisclosure",
+      "summary": "Open, close, and toggle for menus and dialogs.",
+      "whenToUse": "Use when UI has an explicit open/closed lifecycle.",
+      "category": "State",
+      "description": "A menu, drawer, or dialog is either visible or not. Buttons need Open, Close, and sometimes Toggle. useDisclosure is that lifecycle so you are not mixing a boolean named isOpen with ad-hoc setters.",
+      "api": {
+        "signature": "useDisclosure(initialOpen?: boolean)",
+        "explanation": "Named open/close/toggle helpers for UI that has a visible and hidden state, such as menus, drawers, and dialogs.",
+        "arguments": [
+          {
+            "name": "initialOpen",
+            "type": "boolean",
+            "optional": true,
+            "defaultValue": "false",
+            "description": "Whether the surface starts visible."
+          }
+        ],
+        "returns": {
+          "type": "{ isOpen, open, close, toggle }",
+          "description": "Visibility flag and the three actions you typically wire to buttons.",
+          "fields": [
+            {
+              "name": "isOpen",
+              "type": "boolean",
+              "description": "True while the surface should be shown."
+            },
+            {
+              "name": "open",
+              "type": "() => void",
+              "description": "Shows the surface."
+            },
+            {
+              "name": "close",
+              "type": "() => void",
+              "description": "Hides the surface."
+            },
+            {
+              "name": "toggle",
+              "type": "() => void",
+              "description": "Flips isOpen."
+            }
+          ]
+        }
+      },
+      "example": "import { useDisclosure } from 'usethishook';\n\nexport const Menu = () => {\n  const { isOpen, open, close } = useDisclosure();\n  return (\n    <>\n      <button type=\"button\" onClick={open}>Open</button>\n      {isOpen && (\n        <div>\n          Menu\n          <button type=\"button\" onClick={close}>Close</button>\n        </div>\n      )}\n    </>\n  );\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useDisclosure",
+      "import": "import { useDisclosure } from 'usethishook';"
+    },
+    {
+      "id": "useDebounce",
+      "name": "useDebounce",
+      "summary": "Delay updates until the value stops changing.",
+      "whenToUse": "Use for search inputs and expensive derived work.",
+      "category": "State",
+      "description": "The user is typing into search or a filter. You do not want to hit the server or filter a huge list on every keystroke. Debounce the value, then use the lagged copy for the expensive work. The input itself stays instant.",
+      "api": {
+        "signature": "useDebounce<T>(value: T, delayMs?: number): T",
+        "explanation": "Returns a copy of value that only updates after value has stayed still for delayMs. The first render returns the original value immediately.",
+        "arguments": [
+          {
+            "name": "value",
+            "type": "T",
+            "description": "The rapidly changing source, such as an input string."
+          },
+          {
+            "name": "delayMs",
+            "type": "number",
+            "optional": true,
+            "defaultValue": "300",
+            "description": "Idle time in milliseconds before the returned value catches up."
+          }
+        ],
+        "returns": {
+          "type": "T",
+          "description": "The lagged value. Use this for search queries, filters, or expensive work."
+        }
+      },
+      "example": "import { useState } from 'react';\nimport { useDebounce } from 'usethishook';\n\nexport const Search = () => {\n  const [query, setQuery] = useState('');\n  const debouncedQuery = useDebounce(query, 300);\n  return <input value={query} onChange={(event) => setQuery(event.target.value)} />;\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useDebounce",
+      "import": "import { useDebounce } from 'usethishook';"
+    },
+    {
+      "id": "useInterval",
+      "name": "useInterval",
+      "summary": "Declarative setInterval that always calls the latest callback.",
+      "whenToUse": "Use for polling and timers. Pass null to pause.",
+      "category": "State",
+      "description": "You need a ticking clock, a poll, or a progress bar that advances on a schedule. You are tired of setInterval inside useEffect, stale closures, and forgetting clearInterval. Pass null to pause without tearing the component down.",
+      "api": {
+        "signature": "useInterval(callback: () => void, delayMs: number | null): void",
+        "explanation": "Runs callback on a timer, always calling the latest function without resetting the interval. This is a side-effect hook: it does not return a value.",
+        "arguments": [
+          {
+            "name": "callback",
+            "type": "() => void",
+            "description": "Work to run each tick. You can change this every render; the interval still keeps its schedule."
+          },
+          {
+            "name": "delayMs",
+            "type": "number | null",
+            "description": "Milliseconds between ticks. Pass null to pause; passing a number again resumes."
+          }
+        ],
+        "returns": {
+          "type": "void",
+          "description": "Nothing. Drive UI from your own state that the callback updates."
+        },
+        "caveats": [
+          "Clearing happens automatically when the component unmounts or delayMs changes."
+        ]
+      },
+      "example": "import { useState } from 'react';\nimport { useInterval } from 'usethishook';\n\nexport const Timer = () => {\n  const [count, setCount] = useState(0);\n  useInterval(() => setCount((value) => value + 1), 1000);\n  return <p>{count}</p>;\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useInterval",
+      "import": "import { useInterval } from 'usethishook';"
+    },
+    {
+      "id": "useCopyToClipboard",
+      "name": "useCopyToClipboard",
+      "summary": "Copy text with the Clipboard API.",
+      "whenToUse": "Use for share and copy buttons.",
+      "category": "State",
+      "description": "A “Copy invite link” or “Copy code” button. You need to write to the clipboard and show Copied for a moment. This hook is that interaction, including failure when the browser blocks clipboard access.",
+      "api": {
+        "signature": "useCopyToClipboard()",
+        "explanation": "Wraps navigator.clipboard.writeText and remembers the last string that copied successfully so you can show a “Copied” label.",
+        "arguments": [],
+        "returns": {
+          "type": "{ copiedText, copy, reset }",
+          "description": "Clipboard helpers plus the last successful payload.",
+          "fields": [
+            {
+              "name": "copiedText",
+              "type": "string | null",
+              "description": "Last text that copied, or null if none / last copy failed."
+            },
+            {
+              "name": "copy",
+              "type": "(text: string) => Promise<boolean>",
+              "description": "Writes text. Resolves true on success, false if the API is missing or the write fails."
+            },
+            {
+              "name": "reset",
+              "type": "() => void",
+              "description": "Clears copiedText back to null."
+            }
+          ]
+        },
+        "caveats": ["Requires a secure context (HTTPS or localhost) for the Clipboard API."]
+      },
+      "example": "import { useCopyToClipboard } from 'usethishook';\n\nexport const CopyButton = () => {\n  const { copy, copiedText } = useCopyToClipboard();\n  return <button type=\"button\" onClick={() => void copy('hello')}>{copiedText ? 'Copied' : 'Copy'}</button>;\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useCopyToClipboard",
+      "import": "import { useCopyToClipboard } from 'usethishook';"
+    },
+    {
+      "id": "useLocalStorage",
+      "name": "useLocalStorage",
+      "summary": "Persist JSON-serializable state in localStorage.",
+      "whenToUse": "Use for user preferences that should survive refresh.",
+      "category": "State",
+      "description": "A preference should survive refresh: theme, sidebar width, last used project. You want useState that writes JSON to localStorage. This is that pair of value and setter, with a fallback if storage is empty or corrupt.",
+      "api": {
+        "signature": "useLocalStorage<T>(key: string, initialValue: T)",
+        "explanation": "Same idea as useState, but the value is JSON-serialized into localStorage under key so it survives refresh.",
+        "arguments": [
+          {
+            "name": "key",
+            "type": "string",
+            "description": "localStorage key. Changing it re-reads that entry."
+          },
+          {
+            "name": "initialValue",
+            "type": "T",
+            "description": "Used when the key is missing or stored JSON cannot be parsed."
+          }
+        ],
+        "returns": {
+          "type": "[value, setValue]",
+          "description": "A state tuple. setValue accepts a value or a function of the previous value, like useState.",
+          "fields": [
+            {
+              "name": "value",
+              "type": "T",
+              "description": "Current parsed value."
+            },
+            {
+              "name": "setValue",
+              "type": "(next: T | ((previous: T) => T)) => void",
+              "description": "Writes to React state and localStorage."
+            }
+          ]
+        },
+        "caveats": [
+          "Values must be JSON-serializable.",
+          "Corrupt JSON in storage falls back to initialValue.",
+          "Write failures (quota, private mode) are ignored; state still updates in memory."
+        ]
+      },
+      "example": "import { useLocalStorage } from 'usethishook';\n\nexport const NameField = () => {\n  const [name, setName] = useLocalStorage('name', '');\n  return <input value={name} onChange={(event) => setName(event.target.value)} />;\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useLocalStorage",
+      "import": "import { useLocalStorage } from 'usethishook';"
+    },
+    {
+      "id": "useOnlineStatus",
+      "name": "useOnlineStatus",
+      "summary": "Subscribe to the browser online/offline state.",
+      "whenToUse": "Use to warn users when the network drops.",
+      "category": "Browser",
+      "description": "You want to warn “you are offline” or disable Save when the laptop loses the network. This hook is the browser’s online flag, updated when the browser fires online and offline. It is not a ping of your API.",
+      "api": {
+        "signature": "useOnlineStatus(): boolean",
+        "explanation": "Subscribes to the browser online and offline events and returns whether the machine currently reports a network connection.",
+        "arguments": [],
+        "returns": {
+          "type": "boolean",
+          "description": "true when the browser thinks it is online, false when it fires the offline event."
+        },
+        "caveats": [
+          "This is the browser’s connectivity flag, not a guarantee that your API is reachable."
+        ]
+      },
+      "example": "import { useOnlineStatus } from 'usethishook';\n\nexport const ConnectionBadge = () => {\n  const isOnline = useOnlineStatus();\n  return <span>{isOnline ? 'Online' : 'Offline'}</span>;\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useOnlineStatus",
+      "import": "import { useOnlineStatus } from 'usethishook';"
+    },
+    {
+      "id": "useFingerprint",
+      "name": "useFingerprint",
+      "summary": "Client-side visitor id from browser fingerprint signals.",
+      "whenToUse": "Use for anonymous visitor hints without cookies or a backend.",
+      "category": "Browser",
+      "description": "You need a stable-enough visitor id in the browser without cookies or a backend — for abuse hints, anonymous personalization, or correlating sessions. The hook samples canvas, WebGL, screen, locale, and related signals, hashes them client-side, and exposes refresh(). No API key and no network call (unlike Fingerprint’s commercial Identification product).",
+      "api": {
+        "signature": "useFingerprint(options?: { enabled?: boolean })",
+        "explanation": "Collects browser signals (user agent, canvas, WebGL, screen, locale, storage) and hashes them into a stable client-side visitor id — similar to the open-source FingerprintJS approach. No network calls and no API key.",
+        "arguments": [
+          {
+            "name": "options.enabled",
+            "type": "boolean",
+            "description": "When false, skip automatic identification on mount. Call refresh() yourself. Default true."
+          }
+        ],
+        "returns": {
+          "type": "{ visitorId, components, isPending, error, refresh }",
+          "description": "Visitor id plus the raw signal map used to build it.",
+          "fields": [
+            {
+              "name": "visitorId",
+              "type": "string | null",
+              "description": "Hex hash of the collected signals, or null before the first successful run."
+            },
+            {
+              "name": "components",
+              "type": "FingerprintComponents | null",
+              "description": "Named browser signals that went into the hash."
+            },
+            {
+              "name": "isPending",
+              "type": "boolean",
+              "description": "true while identification is running."
+            },
+            {
+              "name": "error",
+              "type": "Error | null",
+              "description": "Set when collection throws unexpectedly."
+            },
+            {
+              "name": "refresh",
+              "type": "() => Promise<string | null>",
+              "description": "Re-run identification and return the new visitor id."
+            }
+          ]
+        },
+        "caveats": [
+          "This is client-side fingerprinting only. Identical devices can share an id; it is not Fingerprint Identification (the commercial SaaS).",
+          "Privacy-focused browsers may reduce signal entropy. Treat the id as a hint, not a hard identity."
+        ]
+      },
+      "example": "import { useFingerprint } from 'usethishook';\n\nexport const VisitorBadge = () => {\n  const { visitorId, isPending, refresh } = useFingerprint();\n\n  if (isPending) return <span>Identifying…</span>;\n\n  return (\n    <div>\n      <code>{visitorId}</code>\n      <button type=\"button\" onClick={() => void refresh()}>\n        Refresh\n      </button>\n    </div>\n  );\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useFingerprint",
+      "import": "import { useFingerprint } from 'usethishook';"
+    },
+    {
+      "id": "useMediaQuery",
+      "name": "useMediaQuery",
+      "summary": "Subscribe to a CSS media query.",
+      "whenToUse": "Use for layout branches that match CSS breakpoints.",
+      "category": "Browser",
+      "description": "Layout should change at the same breakpoint as CSS, for example a compact toolbar under 768px. Match the query in JS without resize listeners and leftover subscriptions.",
+      "api": {
+        "signature": "useMediaQuery(query: string): boolean",
+        "explanation": "Subscribes to window.matchMedia so your component re-renders when the query starts or stops matching, the same way CSS breakpoints work.",
+        "arguments": [
+          {
+            "name": "query",
+            "type": "string",
+            "description": "A CSS media query, for example \"(min-width: 768px)\" or \"(prefers-color-scheme: dark)\"."
+          }
+        ],
+        "returns": {
+          "type": "boolean",
+          "description": "true while the query matches the current viewport / environment."
+        }
+      },
+      "example": "import { useMediaQuery } from 'usethishook';\n\nexport const ResponsiveNote = () => {\n  const isWide = useMediaQuery('(min-width: 768px)');\n  return <p>{isWide ? 'Desktop layout' : 'Mobile layout'}</p>;\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useMediaQuery",
+      "import": "import { useMediaQuery } from 'usethishook';"
+    },
+    {
+      "id": "useWindowSize",
+      "name": "useWindowSize",
+      "summary": "Current viewport width and height.",
+      "whenToUse": "Use when you need pixel dimensions, not just a breakpoint.",
+      "category": "Browser",
+      "description": "You need the actual pixel width or height: a canvas, a chart, a split pane. A media query is not enough. This hook tracks innerWidth and innerHeight on resize.",
+      "api": {
+        "signature": "useWindowSize(): { width, height }",
+        "explanation": "Tracks window.innerWidth and window.innerHeight and updates on resize. Use this when you need pixel sizes, not just a breakpoint.",
+        "arguments": [],
+        "returns": {
+          "type": "{ width: number, height: number }",
+          "description": "Viewport dimensions in CSS pixels.",
+          "fields": [
+            {
+              "name": "width",
+              "type": "number",
+              "description": "window.innerWidth"
+            },
+            {
+              "name": "height",
+              "type": "number",
+              "description": "window.innerHeight"
+            }
+          ]
+        }
+      },
+      "example": "import { useWindowSize } from 'usethishook';\n\nexport const SizeLabel = () => {\n  const { width, height } = useWindowSize();\n  return <p>{width} × {height}</p>;\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useWindowSize",
+      "import": "import { useWindowSize } from 'usethishook';"
+    },
+    {
+      "id": "useOnClickOutside",
+      "name": "useOnClickOutside",
+      "summary": "Run a handler when the user clicks outside a ref.",
+      "whenToUse": "Use for popovers, dropdowns, and dismissible cards.",
+      "category": "Browser",
+      "description": "A popover or dropdown should close when the user presses outside it. Attach a ref to the surface and pass a close handler. Inside clicks stay ignored.",
+      "api": {
+        "signature": "useOnClickOutside(ref, handler): void",
+        "explanation": "Listens for mousedown and touchstart on the document. If the event target is outside ref.current, it calls handler. Use this to dismiss popovers.",
+        "arguments": [
+          {
+            "name": "ref",
+            "type": "RefObject<T | null>",
+            "description": "Ref attached to the element that should count as “inside”."
+          },
+          {
+            "name": "handler",
+            "type": "(event: MouseEvent | TouchEvent) => void",
+            "description": "Called only for presses that happen outside that element."
+          }
+        ],
+        "returns": {
+          "type": "void",
+          "description": "Nothing. Typically you close local state from handler."
+        }
+      },
+      "example": "import { useRef } from 'react';\nimport { useOnClickOutside } from 'usethishook';\n\nexport const Popover = () => {\n  const ref = useRef<HTMLDivElement>(null);\n  useOnClickOutside(ref, () => console.log('outside'));\n  return <div ref={ref}>Popover</div>;\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useOnClickOutside",
+      "import": "import { useOnClickOutside } from 'usethishook';"
+    },
+    {
+      "id": "useOverlay",
+      "name": "useOverlay",
+      "summary": "Promise-based overlay / modal rendering.",
+      "whenToUse": "Use when a modal should await the user’s choice.",
+      "category": "Browser",
+      "description": "You need a modal that the caller can await, like window.confirm but with your own UI. open(props) returns a promise; close(result) resolves it. Use it for delete confirms, pickers, and any dialog that must return a value before the flow continues.",
+      "api": {
+        "signature": "useOverlay<TProps, TResult>(Overlay)",
+        "explanation": "Turns a modal component into a promise. You call open(props), the overlay renders, and close(result) resolves that promise. Body scroll is locked while it is open.",
+        "arguments": [
+          {
+            "name": "Overlay",
+            "type": "ComponentType<TProps & { isOpen, close }>",
+            "description": "Your UI. It receives the props you pass to open(), plus isOpen and close. Keep showing it when isOpen is false if you need an exit animation."
+          }
+        ],
+        "returns": {
+          "type": "{ open, close, render }",
+          "description": "Control the overlay from the parent and place it in the tree with render().",
+          "fields": [
+            {
+              "name": "open",
+              "type": "(data?: TProps) => Promise<TResult | undefined>",
+              "description": "Shows the overlay and waits until close is called."
+            },
+            {
+              "name": "close",
+              "type": "(result?: TResult) => void",
+              "description": "Hides the overlay, restores overflow, and resolves the pending open() promise."
+            },
+            {
+              "name": "render",
+              "type": "() => ReactNode",
+              "description": "Returns the overlay element, or null before the first open(). Put this in JSX."
+            }
+          ]
+        },
+        "caveats": [
+          "render() is null until open() has been called once.",
+          "close() without a matching open() is a no-op for the promise."
+        ]
+      },
+      "example": "import { useOverlay } from 'usethishook';\n\nconst Modal = ({ title, isOpen, close }) =>\n  isOpen ? <dialog open><p>{title}</p><button type=\"button\" onClick={() => close(true)}>OK</button></dialog> : null;\n\nexport const Example = () => {\n  const overlay = useOverlay(Modal);\n  return (\n    <>\n      <button type=\"button\" onClick={() => void overlay.open({ title: 'Continue?' })}>Open</button>\n      {overlay.render()}\n    </>\n  );\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useOverlay",
+      "import": "import { useOverlay } from 'usethishook';"
+    },
+    {
+      "id": "useStepFlow",
+      "name": "useStepFlow",
+      "summary": "Multi-step wizard that resolves when the flow finishes.",
+      "whenToUse": "Use for onboarding or checkout-style sequences.",
+      "category": "Browser",
+      "description": "Onboarding, checkout, or a three-screen import wizard. Each step is a component. next() starts the flow and resolves with every step’s data when the last step finishes, or null if the user cancels.",
+      "api": {
+        "signature": "useStepFlow<TStepData>(steps)",
+        "explanation": "Runs an ordered list of step components. next() starts the wizard and returns a promise for every step’s data. The last onNext resolves that promise; cancel resolves null.",
+        "arguments": [
+          {
+            "name": "steps",
+            "type": "Array<ComponentType<StepFlowStepProps<TStepData>>>",
+            "description": "Components rendered one at a time. Each receives stepIndex, isLastStep, onNext, and onCancel."
+          }
+        ],
+        "returns": {
+          "type": "{ next, cancel, completeStep, renderCurrentStep, currentStepIndex, isActive }",
+          "description": "Start/stop the flow and render the active step.",
+          "fields": [
+            {
+              "name": "next",
+              "type": "() => Promise<Array<TStepData | undefined> | null>",
+              "description": "Starts from step 0. Resolves with collected step data, or null on cancel."
+            },
+            {
+              "name": "cancel",
+              "type": "() => void",
+              "description": "Aborts, resets the index, resolves next() with null."
+            },
+            {
+              "name": "completeStep",
+              "type": "(stepData?: TStepData) => void",
+              "description": "Records data and advances. Same function passed to each step as onNext."
+            },
+            {
+              "name": "renderCurrentStep",
+              "type": "(extraProps?: object) => ReactNode",
+              "description": "The active step, or null when the flow is inactive. extraProps are spread onto the step."
+            },
+            {
+              "name": "currentStepIndex",
+              "type": "number",
+              "description": "Zero-based index of the visible step."
+            },
+            {
+              "name": "isActive",
+              "type": "boolean",
+              "description": "True between next() and finish/cancel."
+            }
+          ]
+        }
+      },
+      "example": "import { useStepFlow } from 'usethishook';\n\nexport const Wizard = () => {\n  const flow = useStepFlow([StepOne, StepTwo]);\n  return (\n    <>\n      <button type=\"button\" onClick={() => void flow.next()}>Start</button>\n      {flow.renderCurrentStep()}\n    </>\n  );\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useStepFlow",
+      "import": "import { useStepFlow } from 'usethishook';"
+    },
+    {
+      "id": "useAsyncSelect",
+      "name": "useAsyncSelect",
+      "summary": "Open the native file picker and await the result.",
+      "whenToUse": "Use instead of a hidden file input when you want a Promise.",
+      "category": "Browser",
+      "description": "A button should open the native file picker and you want a Promise, not a hidden <input type=\"file\"> in JSX. Call the function from a click, await the File (or File[]), and get null if they cancel.",
+      "api": {
+        "signature": "useAsyncSelect()",
+        "explanation": "Returns a function that opens the native file picker and resolves with the chosen file(s). There is no visible input in your tree; the hook creates a temporary one.",
+        "arguments": [],
+        "returns": {
+          "type": "(options?: AsyncSelectOptions) => Promise<File | File[] | null>",
+          "description": "Call this from a click handler. Await the picker result.",
+          "fields": [
+            {
+              "name": "options.accept",
+              "type": "string",
+              "optional": true,
+              "defaultValue": "'*'",
+              "description": "Same as the input accept attribute, e.g. \"image/*\" or \".pdf\"."
+            },
+            {
+              "name": "options.multiple",
+              "type": "boolean",
+              "optional": true,
+              "defaultValue": "false",
+              "description": "When true, the promise resolves to File[]. When false, it resolves to a single File."
+            }
+          ]
+        },
+        "caveats": [
+          "Resolves null if the user cancels the picker or selects nothing.",
+          "Must be triggered from a user gesture (click) or the browser may block the picker."
+        ]
+      },
+      "example": "import { useAsyncSelect } from 'usethishook';\n\nexport const FileButton = () => {\n  const selectFile = useAsyncSelect();\n  return (\n    <button type=\"button\" onClick={async () => {\n      const file = await selectFile({ accept: 'image/*' });\n      console.log(file);\n    }}>\n      Choose file\n    </button>\n  );\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useAsyncSelect",
+      "import": "import { useAsyncSelect } from 'usethishook';"
+    },
+    {
+      "id": "useEventListener",
+      "name": "useEventListener",
+      "summary": "Subscribe to a DOM or window event with a stable handler.",
+      "whenToUse": "Use instead of addEventListener in an effect you would rewrite often.",
+      "category": "Browser",
+      "description": "You need a resize, keydown, or custom event on window, document, or a node, without re-binding every render. Pass the target, type, and handler. The hook keeps the latest handler and cleans up on unmount.",
+      "api": {
+        "signature": "useEventListener(target, type, handler, options?): void",
+        "explanation": "Adds an event listener on a window, document, node, or ref. The handler ref stays current so the subscription does not reset every render.",
+        "arguments": [
+          {
+            "name": "target",
+            "type": "Window | Document | EventTarget | RefObject<EventTarget | null> | null",
+            "description": "Where to listen. Pass null to skip attaching (SSR-safe)."
+          },
+          {
+            "name": "type",
+            "type": "string",
+            "description": "Event name, for example \"resize\" or \"keydown\"."
+          },
+          {
+            "name": "handler",
+            "type": "(event: Event) => void",
+            "description": "Called for each matching event. Latest function is used."
+          },
+          {
+            "name": "options",
+            "type": "boolean | AddEventListenerOptions",
+            "description": "Passed through to addEventListener.",
+            "optional": true
+          }
+        ],
+        "returns": {
+          "type": "void",
+          "description": "Nothing. Side effect only."
+        }
+      },
+      "example": "import { useEventListener } from 'usethishook';\n\nexport const ResizeNote = () => {\n  useEventListener(window, 'resize', () => {\n    console.log(window.innerWidth);\n  });\n  return null;\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useEventListener",
+      "import": "import { useEventListener } from 'usethishook';"
+    },
+    {
+      "id": "useTimeout",
+      "name": "useTimeout",
+      "summary": "Run a callback once after a delay. null pauses.",
+      "whenToUse": "Use for one-shot delays, not repeating ticks (see useInterval).",
+      "category": "Browser",
+      "description": "Run something once after a delay: a splash screen, a deferred toast. Pass null to cancel. Unlike useInterval, this fires once.",
+      "api": {
+        "signature": "useTimeout(callback, delayMs): void",
+        "explanation": "Runs callback once after delayMs. Pass null to pause or clear. The latest callback is used without restarting the timer.",
+        "arguments": [
+          {
+            "name": "callback",
+            "type": "() => void",
+            "description": "Invoked once when the timer fires."
+          },
+          {
+            "name": "delayMs",
+            "type": "number | null",
+            "description": "Delay in milliseconds. null means do not schedule."
+          }
+        ],
+        "returns": {
+          "type": "void",
+          "description": "Nothing. Side effect only."
+        }
+      },
+      "example": "import { useTimeout } from 'usethishook';\n\nexport const Splash = ({ onDone }: { onDone: () => void }) => {\n  useTimeout(onDone, 1200);\n  return <p>Loading…</p>;\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useTimeout",
+      "import": "import { useTimeout } from 'usethishook';"
+    },
+    {
+      "id": "useKeyPress",
+      "name": "useKeyPress",
+      "summary": "True while a keyboard key is held (ignores text fields).",
+      "whenToUse": "Use for shortcuts such as Escape.",
+      "category": "Browser",
+      "description": "A shortcut such as Escape should flip a boolean while the key is held. Typing in inputs does not count.",
+      "api": {
+        "signature": "useKeyPress(key: string): boolean",
+        "explanation": "True while that event.key is held down on window. Keydowns from inputs, textareas, selects, and contenteditable are ignored.",
+        "arguments": [
+          {
+            "name": "key",
+            "type": "string",
+            "description": "KeyboardEvent.key value, for example \"Escape\" or \"k\"."
+          }
+        ],
+        "returns": {
+          "type": "boolean",
+          "description": "true between matching keydown and keyup."
+        }
+      },
+      "example": "import { useKeyPress } from 'usethishook';\n\nexport const EscHint = () => {\n  const isEscape = useKeyPress('Escape');\n  return isEscape ? <p>Closing…</p> : null;\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useKeyPress",
+      "import": "import { useKeyPress } from 'usethishook';"
+    },
+    {
+      "id": "useStableCallback",
+      "name": "useStableCallback",
+      "summary": "Stable function identity, always-latest implementation.",
+      "whenToUse": "Use in intervals, subscriptions, and memoized children.",
+      "category": "App",
+      "description": "You pass a callback into an interval, a subscription, or a child that memoizes on function identity. If you put the function in the dependency array, the subscription resets; if you omit it, you capture stale state. useStableCallback is one function identity that always calls the latest code.",
+      "api": {
+        "signature": "useStableCallback<T>(fn: T): T",
+        "explanation": "Returns a function with a stable identity that always calls the latest fn you passed. Use it when a subscription or interval should not reset, but should see fresh state.",
+        "arguments": [
+          {
+            "name": "fn",
+            "type": "T extends (...args) => unknown",
+            "description": "The function you would normally recreate every render."
+          }
+        ],
+        "returns": {
+          "type": "T",
+          "description": "A stable callback. Put this in dependency arrays; it will not change."
+        }
+      },
+      "example": "import { useStableCallback } from 'usethishook';\n\nexport const Poller = ({ query }: { query: string }) => {\n  const poll = useStableCallback(() => fetch(\\`/search?q=\\${query}\\`));\n  useInterval(poll, 5000);\n  return null;\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useStableCallback",
+      "import": "import { useStableCallback } from 'usethishook';"
+    },
+    {
+      "id": "useResetState",
+      "name": "useResetState",
+      "summary": "Local state that resets when the source key changes.",
+      "whenToUse": "Use for drafts keyed by user id or record id.",
+      "category": "App",
+      "description": "You edit a draft for user A, then the route changes to user B. Local state still shows A’s name because you synced with useEffect and missed a dependency. useResetState takes a source key (the user id). When the key changes, state is the new initial value. Same idea as key={userId} on a form, as a hook.",
+      "api": {
+        "signature": "useResetState<T>(source, initialValue)",
+        "explanation": "Like useState(initialValue), but when source changes (user id, record id, open flag), state becomes the initialValue from that render.",
+        "arguments": [
+          {
+            "name": "source",
+            "type": "unknown",
+            "description": "Identity of the thing being edited. Changing it resets state."
+          },
+          {
+            "name": "initialValue",
+            "type": "T",
+            "description": "State to use on first render and whenever source changes."
+          }
+        ],
+        "returns": {
+          "type": "[state, setState]",
+          "description": "The same tuple shape as useState.",
+          "fields": [
+            {
+              "name": "state",
+              "type": "T",
+              "description": "Current local value."
+            },
+            {
+              "name": "setState",
+              "type": "Dispatch<SetStateAction<T>>",
+              "description": "Update state until source changes."
+            }
+          ]
+        }
+      },
+      "example": "import { useResetState } from 'usethishook';\n\nexport const Editor = ({ user }: { user: { id: string; name: string } }) => {\n  const [name, setName] = useResetState(user.id, user.name);\n  return <input value={name} onChange={(event) => setName(event.target.value)} />;\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useResetState",
+      "import": "import { useResetState } from 'usethishook';"
+    },
+    {
+      "id": "useAsyncAction",
+      "name": "useAsyncAction",
+      "summary": "Pending, error, and data around one async action.",
+      "whenToUse": "Use on Save/Send buttons, not for list fetching.",
+      "category": "App",
+      "description": "A Save, Send, or “Generate report” button. You need pending, error, and the last result, and you must ignore a response if the user fired the action again. This is not a query cache. It is the mutation UI around one async function.",
+      "api": {
+        "signature": "useAsyncAction(action)",
+        "explanation": "Wraps one async function for button UIs: pending, last data, last error, and run(). A newer run ignores an older result. This is not a shared cache.",
+        "arguments": [
+          {
+            "name": "action",
+            "type": "(...args: TArgs) => Promise<TResult>",
+            "description": "The work to run. The hook always calls the latest version."
+          }
+        ],
+        "returns": {
+          "type": "{ run, isPending, error, data, reset }",
+          "description": "Call run from a click handler. Disable the button with isPending.",
+          "fields": [
+            {
+              "name": "run",
+              "type": "(...args) => Promise<TResult>",
+              "description": "Starts the action. Re-throws if action throws."
+            },
+            {
+              "name": "isPending",
+              "type": "boolean",
+              "description": "True while the latest run is in flight."
+            },
+            {
+              "name": "error",
+              "type": "unknown | null",
+              "description": "Rejection from the latest finished run, or null."
+            },
+            {
+              "name": "data",
+              "type": "TResult | undefined",
+              "description": "Resolution from the latest successful run."
+            },
+            {
+              "name": "reset",
+              "type": "() => void",
+              "description": "Clears pending, error, and data and invalidates in-flight runs."
+            }
+          ]
+        }
+      },
+      "example": "import { useAsyncAction } from 'usethishook';\n\nexport const SaveButton = () => {\n  const { run, isPending } = useAsyncAction(api.save);\n  return <button type=\"button\" disabled={isPending} onClick={() => void run()}>Save</button>;\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useAsyncAction",
+      "import": "import { useAsyncAction } from 'usethishook';"
+    },
+    {
+      "id": "useDebouncedCallback",
+      "name": "useDebouncedCallback",
+      "summary": "Debounce calling a function, with cancel.",
+      "whenToUse": "Use for search fetch and persist-on-type.",
+      "category": "App",
+      "description": "You want to debounce work, not a displayed value: search fetch, persist on type, resize handler. useDebounce lags a value for rendering. useDebouncedCallback lags calling a function and can cancel the pending call.",
+      "api": {
+        "signature": "useDebouncedCallback(callback, delayMs)",
+        "explanation": "Returns a function that waits delayMs after the last call before running callback. Also returns cancel to drop a pending call.",
+        "arguments": [
+          {
+            "name": "callback",
+            "type": "(...args) => void",
+            "description": "The work to run after idle time. Latest callback is used."
+          },
+          {
+            "name": "delayMs",
+            "type": "number",
+            "description": "Idle time in milliseconds."
+          }
+        ],
+        "returns": {
+          "type": "[run, cancel]",
+          "description": "A tuple: the debounced function and a cancel function.",
+          "fields": [
+            {
+              "name": "run",
+              "type": "T",
+              "description": "Call this from events. Restarts the timer each time."
+            },
+            {
+              "name": "cancel",
+              "type": "() => void",
+              "description": "Clears the timer so callback will not run."
+            }
+          ]
+        }
+      },
+      "example": "import { useDebouncedCallback } from 'usethishook';\n\nexport const Search = () => {\n  const [search] = useDebouncedCallback((q: string) => api.search(q), 300);\n  return <input onChange={(event) => search(event.target.value)} />;\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useDebouncedCallback",
+      "import": "import { useDebouncedCallback } from 'usethishook';"
+    },
+    {
+      "id": "useFields",
+      "name": "useFields",
+      "summary": "Small form state with setField, dirty, and optional schema.",
+      "whenToUse": "Use for modals and settings, not huge RHF forms.",
+      "category": "App",
+      "description": "A modal or settings card with five fields. You do not want React Hook Form for that, and you do not want useState per input. One object, setField, dirty flag, optional schema (Zod-shaped safeParse), and submit(onValid).",
+      "api": {
+        "signature": "useFields(initialValues, schema?)",
+        "explanation": "One object of form values with setField, dirty tracking, and optional schema.safeParse (Zod-compatible). submit(onValid) only runs onValid when parse succeeds.",
+        "arguments": [
+          {
+            "name": "initialValues",
+            "type": "T extends object",
+            "description": "Starting values. Keep this object stable or isDirty will flicker."
+          },
+          {
+            "name": "schema",
+            "type": "{ safeParse(data) => { success, data } | { success: false, error: { issues } } }",
+            "optional": true,
+            "description": "Zod schemas work. Issues use path[0] as the field name."
+          }
+        ],
+        "returns": {
+          "type": "{ values, setField, setValues, reset, isDirty, errors, validate, submit }",
+          "description": "Bind inputs to values and setField. Show errors[field] under the input.",
+          "fields": [
+            {
+              "name": "values",
+              "type": "T",
+              "description": "Current field values."
+            },
+            {
+              "name": "setField",
+              "type": "(key, value) => void",
+              "description": "Updates one key and clears that key’s error."
+            },
+            {
+              "name": "setValues",
+              "type": "Dispatch<SetStateAction<T>>",
+              "description": "Replace or functional-update the whole object."
+            },
+            {
+              "name": "reset",
+              "type": "() => void",
+              "description": "Back to initialValues, no errors."
+            },
+            {
+              "name": "isDirty",
+              "type": "boolean",
+              "description": "True when any value differs (shallow) from initialValues."
+            },
+            {
+              "name": "errors",
+              "type": "Partial<Record<keyof T, string>>",
+              "description": "First message per field from the last validate/submit."
+            },
+            {
+              "name": "validate",
+              "type": "() => { ok, values } | { ok, errors }",
+              "description": "Runs schema if present."
+            },
+            {
+              "name": "submit",
+              "type": "(onValid) => result",
+              "description": "Validates, then calls onValid(values) only when ok."
+            }
+          ]
+        }
+      },
+      "example": "import { useFields } from 'usethishook';\n\nexport const Invite = () => {\n  const form = useFields({ email: '' }, schema);\n  return (\n    <input value={form.values.email} onChange={(event) => form.setField('email', event.target.value)} />\n  );\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useFields",
+      "import": "import { useFields } from 'usethishook';"
+    },
+    {
+      "id": "useAmountInput",
+      "name": "useAmountInput",
+      "summary": "Locale amount input with grouping, decimals, and cursor restore.",
+      "whenToUse": "Use for price and invoice fields, not generic text.",
+      "category": "App",
+      "description": "A price, invoice, or quantity field that must look local while you type: French spaces, Dutch dots, English commas, and a cursor that does not jump when grouping appears. The input shows the formatted string; submit still gets a canonical \"12345.67\". Pass language, decimalCount, and the returned ref.",
+      "api": {
+        "signature": "useAmountInput({ language, decimalCount, defaultValue })",
+        "explanation": "Formats a money-like input as the user types: thousand separators, locale decimal, and a stable cursor. Bind displayValue, onChange, onBlur, and ref to the input. value is the canonical string for submit (dot decimal, no grouping).",
+        "arguments": [
+          {
+            "name": "language",
+            "type": "'en' | 'de' | 'nl' | 'fr'",
+            "description": "Picks grouping and decimal characters (en: 1,234.56; fr/de: 1 234,56; nl: 1.234,56)."
+          },
+          {
+            "name": "decimalCount",
+            "type": "number",
+            "description": "Maximum digits after the decimal. Extra fractional digits are dropped."
+          },
+          {
+            "name": "defaultValue",
+            "type": "string | number | null",
+            "optional": true,
+            "defaultValue": "''",
+            "description": "Starting canonical amount. reset() returns here."
+          }
+        ],
+        "returns": {
+          "type": "{ value, displayValue, onChange, onBlur, ref, reset, updateValue }",
+          "description": "Pass displayValue and the handlers to the input. Read value when you persist.",
+          "fields": [
+            {
+              "name": "value",
+              "type": "string",
+              "description": "Unformatted canonical amount, e.g. \"12345.67\". Empty string when blank."
+            },
+            {
+              "name": "displayValue",
+              "type": "string",
+              "description": "Formatted text for the input, e.g. \"12 345,67\"."
+            },
+            {
+              "name": "onChange",
+              "type": "(event) => void",
+              "description": "Normalizes, formats, and restores the cursor after grouping changes."
+            },
+            {
+              "name": "onBlur",
+              "type": "(event) => void",
+              "description": "Re-normalizes the current display on blur."
+            },
+            {
+              "name": "ref",
+              "type": "RefCallback<HTMLInputElement>",
+              "description": "Required so the hook can restore selection after format."
+            },
+            {
+              "name": "reset",
+              "type": "() => void",
+              "description": "Restores defaultValue."
+            },
+            {
+              "name": "updateValue",
+              "type": "(value) => void",
+              "description": "Set from outside (number, string, null). Replaces the field."
+            }
+          ]
+        },
+        "caveats": [
+          "Attach the returned ref. Cursor restoration reads the live input node.",
+          "value is not what you put in the input. Bind displayValue.",
+          "Changing language or decimalCount does not rewrite an in-progress value; remount or call updateValue."
+        ]
+      },
+      "example": "import { useAmountInput } from 'usethishook';\n\nexport const PriceField = () => {\n  const amount = useAmountInput({ language: 'fr', decimalCount: 2, defaultValue: 0 });\n  return (\n    <input\n      ref={amount.ref}\n      value={amount.displayValue}\n      onChange={amount.onChange}\n      onBlur={amount.onBlur}\n    />\n  );\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useAmountInput",
+      "import": "import { useAmountInput } from 'usethishook';"
+    },
+    {
+      "id": "useList",
+      "name": "useList",
+      "summary": "Insert, update, remove, and reorder items with ids.",
+      "whenToUse": "Use for todos, attendees, and pipeline stages.",
+      "category": "App",
+      "description": "A list the user can add to, rename, delete, and reorder: todos, attendees, stages. Instead of spreading arrays in every handler, you get insert, update, remove, and move on items that have an id.",
+      "api": {
+        "signature": "useList<T extends { id: string }>(initialItems?)",
+        "explanation": "Holds an array of items with id and exposes insert, update, remove, move, and replace so list screens do not hand-spread arrays.",
+        "arguments": [
+          {
+            "name": "initialItems",
+            "type": "T[]",
+            "optional": true,
+            "defaultValue": "[]",
+            "description": "Starting list. Each item must have a string id."
+          }
+        ],
+        "returns": {
+          "type": "{ items, insert, update, remove, move, replace, setItems }",
+          "description": "The list and the mutations.",
+          "fields": [
+            {
+              "name": "items",
+              "type": "T[]",
+              "description": "Current array."
+            },
+            {
+              "name": "insert",
+              "type": "(item: T, index?: number) => void",
+              "description": "Appends, or inserts at index."
+            },
+            {
+              "name": "update",
+              "type": "(id, patch | fn) => void",
+              "description": "Merges a partial or maps one item."
+            },
+            {
+              "name": "remove",
+              "type": "(id: string) => void",
+              "description": "Drops the item with that id."
+            },
+            {
+              "name": "move",
+              "type": "(fromIndex, toIndex) => void",
+              "description": "Reorders one item. No-op if indexes are out of range."
+            },
+            {
+              "name": "replace",
+              "type": "(next: T[]) => void",
+              "description": "Swap the whole list (for example after fetch)."
+            }
+          ]
+        }
+      },
+      "example": "import { useList } from 'usethishook';\n\nexport const Attendees = () => {\n  const list = useList([{ id: '1', name: 'Ada' }]);\n  return <button type=\"button\" onClick={() => list.remove('1')}>Remove</button>;\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useList",
+      "import": "import { useList } from 'usethishook';"
+    },
+    {
+      "id": "useSelection",
+      "name": "useSelection",
+      "summary": "Single or multi id selection for lists and tables.",
+      "whenToUse": "Use for checkboxes and “select all on this page”.",
+      "category": "App",
+      "description": "A table or checklist: click to select, cmd-click to multi-select, “select all on this page,” clear. You should not keep a Set in three places. useSelection is the selected ids and those operations, single or multiple.",
+      "api": {
+        "signature": "useSelection({ mode, initial }?)",
+        "explanation": "Selected ids for a list or table. multiple (default) toggles membership; single keeps at most one id.",
+        "arguments": [
+          {
+            "name": "mode",
+            "type": "'single' | 'multiple'",
+            "optional": true,
+            "defaultValue": "'multiple'",
+            "description": "Whether more than one id can be selected."
+          },
+          {
+            "name": "initial",
+            "type": "string[]",
+            "optional": true,
+            "defaultValue": "[]",
+            "description": "Ids selected on first render."
+          }
+        ],
+        "returns": {
+          "type": "{ selected, isSelected, toggle, selectOnly, selectAll, clear, setSelected }",
+          "description": "selected is a string[] in click order.",
+          "fields": [
+            {
+              "name": "selected",
+              "type": "string[]",
+              "description": "Currently selected ids."
+            },
+            {
+              "name": "isSelected",
+              "type": "(id: string) => boolean",
+              "description": "Whether id is in the selection."
+            },
+            {
+              "name": "toggle",
+              "type": "(id: string) => void",
+              "description": "Add/remove in multiple; replace or clear in single."
+            },
+            {
+              "name": "selectOnly",
+              "type": "(id: string) => void",
+              "description": "Selection becomes exactly this id."
+            },
+            {
+              "name": "selectAll",
+              "type": "(ids: string[]) => void",
+              "description": "Select these ids (first only in single mode)."
+            },
+            {
+              "name": "clear",
+              "type": "() => void",
+              "description": "Empty selection."
+            }
+          ]
+        }
+      },
+      "example": "import { useSelection } from 'usethishook';\n\nexport const Table = ({ ids }: { ids: string[] }) => {\n  const selection = useSelection();\n  return <button type=\"button\" onClick={() => selection.selectAll(ids)}>Select page</button>;\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useSelection",
+      "import": "import { useSelection } from 'usethishook';"
+    },
+    {
+      "id": "useSearchState",
+      "name": "useSearchState",
+      "summary": "URL search params as React state.",
+      "whenToUse": "Use for filters, tabs, and page that must be shareable.",
+      "category": "App",
+      "description": "Filters, tabs, and page number should live in the URL so refresh and share work. People sync useState to search params with useEffect and fight loops. This hook is the query string as state: read it, set it, the address bar updates.",
+      "api": {
+        "signature": "useSearchState(defaults)",
+        "explanation": "Treat location.search as state. Keys come from defaults (all strings). Empty strings are omitted from the URL. Updates use history.replaceState so the back button is not flooded.",
+        "arguments": [
+          {
+            "name": "defaults",
+            "type": "T extends Record<string, string>",
+            "description": "Default query values. Keep this object stable (module scope or useMemo)."
+          }
+        ],
+        "returns": {
+          "type": "[values, setValues]",
+          "description": "Like useState. setValues accepts a partial or a functional update.",
+          "fields": [
+            {
+              "name": "values",
+              "type": "T",
+              "description": "Current params merged on top of defaults."
+            },
+            {
+              "name": "setValues",
+              "type": "(partial | fn) => void",
+              "description": "Writes the query string and notifies subscribers."
+            }
+          ]
+        },
+        "caveats": ["Hash routes still work; only location.search is read and written."]
+      },
+      "example": "import { useSearchState } from 'usethishook';\n\nconst defaults = { q: '', page: '1' };\n\nexport const Filters = () => {\n  const [params, setParams] = useSearchState(defaults);\n  return <input value={params.q} onChange={(event) => setParams({ q: event.target.value })} />;\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useSearchState",
+      "import": "import { useSearchState } from 'usethishook';"
+    },
+    {
+      "id": "useConfirm",
+      "name": "useConfirm",
+      "summary": "Await a yes/no dialog from a click handler.",
+      "whenToUse": "Use before delete or other destructive actions.",
+      "category": "App",
+      "description": "You need “Are you sure?” before delete, and you want to await the answer in the click handler. Same idea as useOverlay, with a default dialog. Call confirm({ title, danger }), put render() in the tree, branch on true/false.",
+      "api": {
+        "signature": "useConfirm()",
+        "explanation": "Promise-based confirm dialog with a default UI. confirm(options) resolves true or false. You must render {render()} once in the tree.",
+        "arguments": [],
+        "returns": {
+          "type": "{ confirm, render }",
+          "description": "Same pattern as useOverlay, with a built-in dialog.",
+          "fields": [
+            {
+              "name": "confirm",
+              "type": "(options: ConfirmOptions) => Promise<boolean>",
+              "description": "options: title, message?, confirmLabel?, cancelLabel?, danger?."
+            },
+            {
+              "name": "render",
+              "type": "() => ReactNode",
+              "description": "Place this in JSX. Null until the first confirm()."
+            }
+          ]
+        }
+      },
+      "example": "import { useConfirm } from 'usethishook';\n\nexport const Row = () => {\n  const { confirm, render } = useConfirm();\n  return (\n    <>\n      <button type=\"button\" onClick={async () => { if (await confirm({ title: 'Delete?' })) remove(); }}>Delete</button>\n      {render()}\n    </>\n  );\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useConfirm",
+      "import": "import { useConfirm } from 'usethishook';"
+    },
+    {
+      "id": "usePrompt",
+      "name": "usePrompt",
+      "summary": "Await a single string from a small dialog.",
+      "whenToUse": "Use for rename and “name this view”.",
+      "category": "App",
+      "description": "You need a single string from the user — rename, “name this view” — without standing up a form page. await prompt({ title, label }) returns the string or null if they cancel. Render the dialog with render().",
+      "api": {
+        "signature": "usePrompt()",
+        "explanation": "Promise-based prompt for a single string. prompt(options) resolves the string or null on cancel. Render {render()} in the tree.",
+        "arguments": [],
+        "returns": {
+          "type": "{ prompt, render }",
+          "description": "Built-in labeled input dialog.",
+          "fields": [
+            {
+              "name": "prompt",
+              "type": "(options: PromptOptions) => Promise<string | null>",
+              "description": "options: title, message?, label?, initialValue?, confirmLabel?, cancelLabel?."
+            },
+            {
+              "name": "render",
+              "type": "() => ReactNode",
+              "description": "Place this in JSX."
+            }
+          ]
+        }
+      },
+      "example": "import { usePrompt } from 'usethishook';\n\nexport const Rename = () => {\n  const { prompt, render } = usePrompt();\n  return (\n    <>\n      <button type=\"button\" onClick={() => void prompt({ title: 'Name' })}>Rename</button>\n      {render()}\n    </>\n  );\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/usePrompt",
+      "import": "import { usePrompt } from 'usethishook';"
+    },
+    {
+      "id": "useControllableState",
+      "name": "useControllableState",
+      "summary": "Controlled and uncontrolled state in one setter.",
+      "whenToUse": "Use in reusable inputs, drawers, and tabs.",
+      "category": "App",
+      "description": "You are building a Switch, Tabs, or Drawer that must work in two ways: the parent owns the value, or the component owns it. Teams copy this if (value !== undefined) branch into every primitive. useControllableState is that branch: pass value to control it, omit value to stay uncontrolled, onChange always fires.",
+      "api": {
+        "signature": "useControllableState({ value, defaultValue, onChange })",
+        "explanation": "One setter for both controlled and uncontrolled components. If value is passed, the hook is controlled and only calls onChange. Otherwise it keeps defaultValue internally.",
+        "arguments": [
+          {
+            "name": "value",
+            "type": "T",
+            "optional": true,
+            "description": "Controlled value. Omit this to run uncontrolled."
+          },
+          {
+            "name": "defaultValue",
+            "type": "T",
+            "description": "Starting value when value is omitted."
+          },
+          {
+            "name": "onChange",
+            "type": "(value: T) => void",
+            "optional": true,
+            "description": "Fires with the next value in both modes."
+          }
+        ],
+        "returns": {
+          "type": "[current, setValue]",
+          "description": "Same shape as useState. setValue accepts a value or a functional update."
+        }
+      },
+      "example": "import { useControllableState } from 'usethishook';\n\nexport const Switch = ({ checked, defaultChecked = false, onCheckedChange }) => {\n  const [on, setOn] = useControllableState({\n    value: checked,\n    defaultValue: defaultChecked,\n    onChange: onCheckedChange,\n  });\n  return <button type=\"button\" onClick={() => setOn((value) => !value)}>{on ? 'On' : 'Off'}</button>;\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useControllableState",
+      "import": "import { useControllableState } from 'usethishook';"
+    },
+    {
+      "id": "useUnsavedChanges",
+      "name": "useUnsavedChanges",
+      "summary": "Warn on tab close and confirm in-app leave when dirty.",
+      "whenToUse": "Use on editors and long forms.",
+      "category": "App",
+      "description": "The user edited a form and hits Back, a sidebar link, or closes the tab. You need a beforeunload warning for the tab, and an awaitable confirm for in-app navigation. Wire isDirty from useFields or your form library, inject useConfirm if you want your own dialog, and call confirmLeave() before changing the route.",
+      "api": {
+        "signature": "useUnsavedChanges(isDirty, confirmLeave?)",
+        "explanation": "While isDirty is true, the tab’s beforeunload prompt is armed. confirmLeave() is for in-app navigation: it returns true if leaving is allowed.",
+        "arguments": [
+          {
+            "name": "isDirty",
+            "type": "boolean",
+            "description": "Whether there are unsaved edits."
+          },
+          {
+            "name": "confirmLeave",
+            "type": "(message: string) => boolean | Promise<boolean>",
+            "optional": true,
+            "description": "Injected confirmer (for example useConfirm). Falls back to window.confirm."
+          }
+        ],
+        "returns": {
+          "type": "{ confirmLeave }",
+          "description": "Call before changing route. Resolves true when clean, or when the user agrees to leave.",
+          "fields": [
+            {
+              "name": "confirmLeave",
+              "type": "(message?: string) => Promise<boolean>",
+              "description": "Default message: “Leave without saving?”"
+            }
+          ]
+        }
+      },
+      "example": "import { useUnsavedChanges } from 'usethishook';\n\nexport const Editor = ({ isDirty }: { isDirty: boolean }) => {\n  const { confirmLeave } = useUnsavedChanges(isDirty);\n  return <button type=\"button\" onClick={async () => { if (await confirmLeave()) navigate('/'); }}>Back</button>;\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useUnsavedChanges",
+      "import": "import { useUnsavedChanges } from 'usethishook';"
+    },
+    {
+      "id": "useElementSize",
+      "name": "useElementSize",
+      "summary": "Live width and height of an element via ResizeObserver.",
+      "whenToUse": "Use for charts, split panes, and autosize fields.",
+      "category": "App",
+      "description": "A chart, canvas, or virtual list must match the box it lives in — not the window. useWindowSize re-renders on every viewport resize and still does not know the column width. Attach the callback ref; width and height track that node through ResizeObserver.",
+      "api": {
+        "signature": "useElementSize<T extends HTMLElement>()",
+        "explanation": "Callback ref plus live contentRect width and height from ResizeObserver. Measure the element, not the window.",
+        "arguments": [],
+        "returns": {
+          "type": "{ ref, width, height }",
+          "description": "Attach ref to the node you want to measure. Starts at 0×0 until it mounts.",
+          "fields": [
+            {
+              "name": "ref",
+              "type": "(element: T | null) => void",
+              "description": "Callback ref for the observed element."
+            },
+            {
+              "name": "width",
+              "type": "number",
+              "description": "contentRect.width"
+            },
+            {
+              "name": "height",
+              "type": "number",
+              "description": "contentRect.height"
+            }
+          ]
+        }
+      },
+      "example": "import { useElementSize } from 'usethishook';\n\nexport const ChartHost = () => {\n  const { ref, width, height } = useElementSize<HTMLDivElement>();\n  return <div ref={ref}><Chart width={width} height={height} /></div>;\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useElementSize",
+      "import": "import { useElementSize } from 'usethishook';"
+    },
+    {
+      "id": "useInView",
+      "name": "useInView",
+      "summary": "Whether an element intersects the viewport (or a root).",
+      "whenToUse": "Use for lazy load, infinite scroll, and enter animations.",
+      "category": "App",
+      "description": "You want to load a heavy widget, fetch the next page, or start an animation only when the user can see the element. IntersectionObserver is the right API; the hook is the ref plus isInView. Set once if you only care about the first time it appears.",
+      "api": {
+        "signature": "useInView(options?)",
+        "explanation": "Callback ref plus isInView from IntersectionObserver. Use for lazy media, infinite-scroll sentinels, and enter animations.",
+        "arguments": [
+          {
+            "name": "root",
+            "type": "Element | null",
+            "optional": true,
+            "description": "Scroll root. Default is the viewport."
+          },
+          {
+            "name": "rootMargin",
+            "type": "string",
+            "optional": true,
+            "defaultValue": "'0px'",
+            "description": "Same as IntersectionObserver rootMargin."
+          },
+          {
+            "name": "threshold",
+            "type": "number | number[]",
+            "optional": true,
+            "defaultValue": "0",
+            "description": "How much of the target must be visible."
+          },
+          {
+            "name": "once",
+            "type": "boolean",
+            "optional": true,
+            "defaultValue": "false",
+            "description": "If true, stays true after the first intersection and disconnects."
+          }
+        ],
+        "returns": {
+          "type": "{ ref, isInView }",
+          "description": "Attach ref to the target. isInView updates as it enters and leaves (unless once)."
+        }
+      },
+      "example": "import { useInView } from 'usethishook';\n\nexport const LazyBlock = () => {\n  const { ref, isInView } = useInView({ once: true });\n  return <div ref={ref}>{isInView ? <HeavyChart /> : 'Loading…'}</div>;\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/useInView",
+      "import": "import { useInView } from 'usethishook';"
+    },
+    {
+      "id": "usePagination",
+      "name": "usePagination",
+      "summary": "Page, page size, offset, and next/prev with clamping.",
+      "whenToUse": "Use to slice lists and tables.",
+      "category": "App",
+      "description": "A table or gallery has 200 rows and you show 20 at a time. You need page, how many pages, the slice offset, and disabled next/prev. When a filter shrinks the list, the current page must clamp instead of pointing at empty space. usePagination is that math.",
+      "api": {
+        "signature": "usePagination({ total, pageSize, initialPage })",
+        "explanation": "1-based page state with derived pageCount, offset, and next/prev. Clamps page when total shrinks. Changing page size returns to page 1.",
+        "arguments": [
+          {
+            "name": "total",
+            "type": "number",
+            "description": "Total item count."
+          },
+          {
+            "name": "pageSize",
+            "type": "number",
+            "optional": true,
+            "defaultValue": "10",
+            "description": "Items per page (initial)."
+          },
+          {
+            "name": "initialPage",
+            "type": "number",
+            "optional": true,
+            "defaultValue": "1",
+            "description": "Starting page (1-based)."
+          }
+        ],
+        "returns": {
+          "type": "{ page, pageSize, total, pageCount, offset, canNext, canPrev, setPage, setPageSize, next, prev }",
+          "description": "Slice with items.slice(offset, offset + pageSize).",
+          "fields": [
+            {
+              "name": "page",
+              "type": "number",
+              "description": "Current page, always between 1 and pageCount."
+            },
+            {
+              "name": "offset",
+              "type": "number",
+              "description": "(page - 1) * pageSize"
+            },
+            {
+              "name": "pageCount",
+              "type": "number",
+              "description": "At least 1, even when total is 0."
+            },
+            {
+              "name": "setPageSize",
+              "type": "(size: number) => void",
+              "description": "Updates page size and resets to page 1."
+            }
+          ]
+        }
+      },
+      "example": "import { usePagination } from 'usethishook';\n\nexport const Table = ({ rows }: { rows: string[] }) => {\n  const pager = usePagination({ total: rows.length, pageSize: 20 });\n  const pageRows = rows.slice(pager.offset, pager.offset + pager.pageSize);\n  return <button type=\"button\" onClick={pager.next} disabled={!pager.canNext}>Next</button>;\n};",
+      "playgroundUrl": "https://usethishook.mentorbridge.in/usePagination",
+      "import": "import { usePagination } from 'usethishook';"
+    }
+  ]
+}

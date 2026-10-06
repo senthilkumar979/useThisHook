@@ -15,6 +15,7 @@ By participating you agree to the [Code of Conduct](.github/CODE_OF_CONDUCT.md).
    - Description in `playground/src/descriptions/`.
    - API spec in `playground/src/api/`.
    - Demo component and copy-paste example string in `playground/src/demos/`.
+7. Refresh the MCP catalog used by AI clients: `npm run mcp:catalog` (committed file: `mcp/data/catalog.json`).
 
 Maintainer docs (architecture, release, testing) live in the [GitHub Wiki](https://github.com/senthilkumar979/useThisHook/wiki); sources are in-repo under `wiki/`.
 
@@ -25,11 +26,12 @@ After `npm install`, Husky runs the same gates locally:
 - **pre-commit** (`npm run verify:commit`): secret scan, lint, typecheck, tests, library build
 - **pre-push** (`npm run verify:push`): playground production build, `npm audit` (high+)
 
-CI uses `verify:commit` plus `playground:build`. Skip hooks only if you must: `HUSKY=0 git commit` / `HUSKY=0 git push`.
+CI uses `verify:commit` plus `playground:build` and the `mcp` job (`mcp:catalog:check`, typecheck, tests, build). Skip hooks only if you must: `HUSKY=0 git commit` / `HUSKY=0 git push`.
 
 ```bash
 npm run verify:commit
 npm run verify:push
+npm run mcp:verify   # after npm run mcp:install once
 ```
 
 Node 20 or later (`engines.node`).
