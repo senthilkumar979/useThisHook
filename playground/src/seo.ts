@@ -1,6 +1,4 @@
-const SITE_ORIGIN = 'https://usethishook.mentorbridge.in';
-const DEFAULT_DESCRIPTION =
-  'Promise-based confirm/prompt dialogs and 53 tree-shakeable React hooks. Zero runtime deps, TypeScript, live playground.';
+import type { RouteSeo } from './routeSeo';
 
 function setMeta(attr: 'name' | 'property', key: string, content: string) {
   let el = document.head.querySelector(`meta[${attr}="${key}"]`);
@@ -22,29 +20,16 @@ function setCanonical(href: string) {
   link.setAttribute('href', href);
 }
 
-export function applyRouteSeo(options: {
-  route: string;
-  hookName?: string;
-  description?: string;
-  title?: string;
-}) {
-  const { route, hookName, description, title: titleOverride } = options;
-  const isHome = !route;
-  const title =
-    titleOverride ??
-    (isHome
-      ? 'useThisHook — promise dialogs and zero-dep React hooks'
-      : `${hookName ?? route} React hook — useThisHook`);
-  const desc = description?.trim() || DEFAULT_DESCRIPTION;
-  const path = isHome ? '/' : `/${route}`;
-  const canonical = `${SITE_ORIGIN}${path}`;
+export function applyRouteSeo(seo: RouteSeo) {
+  document.title = seo.title;
+  setMeta('name', 'description', seo.description);
+  setMeta('property', 'og:title', seo.title);
+  setMeta('property', 'og:description', seo.ogDescription);
+  setMeta('property', 'og:url', seo.canonical);
+  setMeta('name', 'twitter:title', seo.title);
+  setMeta('name', 'twitter:description', seo.ogDescription);
+  setCanonical(seo.canonical);
 
-  document.title = title;
-  setMeta('name', 'description', desc);
-  setMeta('property', 'og:title', title);
-  setMeta('property', 'og:description', desc);
-  setMeta('property', 'og:url', canonical);
-  setMeta('name', 'twitter:title', title);
-  setMeta('name', 'twitter:description', desc);
-  setCanonical(canonical);
+  const script = document.getElementById('route-jsonld');
+  if (script) script.textContent = seo.jsonLd;
 }

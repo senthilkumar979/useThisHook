@@ -1,0 +1,78 @@
+# useThisHook
+
+> Promise-based confirm/prompt dialogs and 53 tree-shakeable React hooks. Zero runtime dependencies, TypeScript, SSR-safe.
+
+Install with `npm i usethishook`. React 18+ is the only peer dependency.
+
+- Docs: https://usethishook.mentorbridge.in/
+- npm: https://www.npmjs.com/package/usethishook
+- GitHub: https://github.com/senthilkumar979/useThisHook
+- Full hook reference: https://usethishook.mentorbridge.in/llms-full.txt
+
+## Docs
+
+- [Home](https://usethishook.mentorbridge.in/): Install command, hook index, and what the library is for
+- [Compare](https://usethishook.mentorbridge.in/compare): useThisHook vs usehooks-ts and react-use
+- [MCP](https://usethishook.mentorbridge.in/mcp): usethishook-mcp for Cursor and Claude Desktop
+
+## State
+
+- [useBoolean](https://usethishook.mentorbridge.in/useBoolean): Boolean state with toggle helpers.
+- [useDisclosure](https://usethishook.mentorbridge.in/useDisclosure): Open, close, and toggle for menus and dialogs.
+- [useDebounce](https://usethishook.mentorbridge.in/useDebounce): Delay updates until the value stops changing.
+- [useThrottle](https://usethishook.mentorbridge.in/useThrottle): Limit how often a value updates.
+- [useInterval](https://usethishook.mentorbridge.in/useInterval): Declarative setInterval that always calls the latest callback.
+- [useCopyToClipboard](https://usethishook.mentorbridge.in/useCopyToClipboard): Copy text with the Clipboard API.
+- [useLocalStorage](https://usethishook.mentorbridge.in/useLocalStorage): Persist JSON-serializable state in localStorage.
+- [useSessionStorage](https://usethishook.mentorbridge.in/useSessionStorage): Persist JSON-serializable state in sessionStorage.
+
+## Browser
+
+- [useOnlineStatus](https://usethishook.mentorbridge.in/useOnlineStatus): Subscribe to the browser online/offline state.
+- [useOnlineQueue](https://usethishook.mentorbridge.in/useOnlineQueue): Queue work while offline and flush when online.
+- [useStorageQuota](https://usethishook.mentorbridge.in/useStorageQuota): Origin storage usage and quota from estimate().
+- [useInstallPrompt](https://usethishook.mentorbridge.in/useInstallPrompt): Capture and replay the PWA beforeinstallprompt event.
+- [useCrossTabState](https://usethishook.mentorbridge.in/useCrossTabState): JSON state synced across browser tabs.
+- [useFingerprint](https://usethishook.mentorbridge.in/useFingerprint): Client-side visitor id from browser fingerprint signals.
+- [useMediaQuery](https://usethishook.mentorbridge.in/useMediaQuery): Subscribe to a CSS media query.
+- [useWindowSize](https://usethishook.mentorbridge.in/useWindowSize): Current viewport width and height.
+- [useOnClickOutside](https://usethishook.mentorbridge.in/useOnClickOutside): Run a handler when the user clicks outside a ref.
+- [useOverlay](https://usethishook.mentorbridge.in/useOverlay): Promise-based overlay / modal rendering.
+- [useStepFlow](https://usethishook.mentorbridge.in/useStepFlow): Multi-step wizard that resolves when the flow finishes.
+- [useAsyncSelect](https://usethishook.mentorbridge.in/useAsyncSelect): Open the native file picker and await the result.
+- [useEventListener](https://usethishook.mentorbridge.in/useEventListener): Subscribe to a DOM or window event with a stable handler.
+- [useTimeout](https://usethishook.mentorbridge.in/useTimeout): Run a callback once after a delay. null pauses.
+- [useKeyPress](https://usethishook.mentorbridge.in/useKeyPress): True while a keyboard key is held (ignores text fields).
+- [useScrollLock](https://usethishook.mentorbridge.in/useScrollLock): Lock and unlock document body scroll.
+- [useDocumentVisibility](https://usethishook.mentorbridge.in/useDocumentVisibility): Whether the document tab is visible or hidden.
+- [useIdle](https://usethishook.mentorbridge.in/useIdle): True after a period of no user activity.
+- [useKeyboardShortcut](https://usethishook.mentorbridge.in/useKeyboardShortcut): Register a key combo on window and clean it up.
+- [useLongPress](https://usethishook.mentorbridge.in/useLongPress): Mouse and touch press-and-hold handlers.
+
+## App
+
+- [useStableCallback](https://usethishook.mentorbridge.in/useStableCallback): Stable function identity, always-latest implementation.
+- [useUpdateEffect](https://usethishook.mentorbridge.in/useUpdateEffect): useEffect that skips the first mount.
+- [useResetState](https://usethishook.mentorbridge.in/useResetState): Local state that resets when the source key changes.
+- [useAsyncAction](https://usethishook.mentorbridge.in/useAsyncAction): Pending, error, and data around one async action.
+- [useAsyncState](https://usethishook.mentorbridge.in/useAsyncState): Typed idle, loading, success, and error for async work.
+- [useOptimisticAction](https://usethishook.mentorbridge.in/useOptimisticAction): Apply a local update, confirm or roll back.
+- [useRetry](https://usethishook.mentorbridge.in/useRetry): Retry an async function with backoff and cancel.
+- [useAsyncQueue](https://usethishook.mentorbridge.in/useAsyncQueue): FIFO async tasks with a concurrency cap.
+- [usePolling](https://usethishook.mentorbridge.in/usePolling): Interval polling that pauses when the tab is hidden.
+- [useRenderTracker](https://usethishook.mentorbridge.in/useRenderTracker): Count renders and log commits in development.
+- [useWhyDidYouUpdate](https://usethishook.mentorbridge.in/useWhyDidYouUpdate): Log which values changed between renders.
+- [useDebouncedCallback](https://usethishook.mentorbridge.in/useDebouncedCallback): Debounce calling a function, with cancel.
+- [useThrottledCallback](https://usethishook.mentorbridge.in/useThrottledCallback): Throttle calling a function, with cancel.
+- [useFields](https://usethishook.mentorbridge.in/useFields): Small form state with setField, dirty, and optional schema.
+- [useAmountInput](https://usethishook.mentorbridge.in/useAmountInput): Locale amount input with grouping, decimals, and cursor restore.
+- [useList](https://usethishook.mentorbridge.in/useList): Insert, update, remove, and reorder items with ids.
+- [useSelection](https://usethishook.mentorbridge.in/useSelection): Single or multi id selection for lists and tables.
+- [useSearchState](https://usethishook.mentorbridge.in/useSearchState): URL search params as React state.
+- [useConfirm](https://usethishook.mentorbridge.in/useConfirm): Await a yes/no dialog from a click handler.
+- [usePrompt](https://usethishook.mentorbridge.in/usePrompt): Await a single string from a small dialog.
+- [useControllableState](https://usethishook.mentorbridge.in/useControllableState): Controlled and uncontrolled state in one setter.
+- [useUnsavedChanges](https://usethishook.mentorbridge.in/useUnsavedChanges): Warn on tab close and confirm in-app leave when dirty.
+- [useElementSize](https://usethishook.mentorbridge.in/useElementSize): Live width and height of an element via ResizeObserver.
+- [useInView](https://usethishook.mentorbridge.in/useInView): Whether an element intersects the viewport (or a root).
+- [usePagination](https://usethishook.mentorbridge.in/usePagination): Page, page size, offset, and next/prev with clamping.
