@@ -17,5 +17,5 @@
       "usethishook": ["../src/index.ts"]
     }
   },
-  "include": ["src", "vite.config.ts", "../package.json"]
+  "include": ["src", "vite.config.ts", "prerender.ts", "patchHtml.ts", "../package.json"]
 }

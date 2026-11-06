@@ -1,4 +1,4 @@
-import { pageHref } from '../hookHref';
+import { homeHref, pageHref } from '../hookHref';
 import { version } from '../../../package.json';
 
 const linkClass =
@@ -41,6 +41,10 @@ export const SiteFooter = () => (
       ·{' '}
       <a className={linkClass} href={pageHref('mcp')}>
         MCP
+      </a>{' '}
+      ·{' '}
+      <a className={linkClass} href={`${homeHref()}llms.txt`}>
+        llms.txt
       </a>{' '}
       ·{' '}
       <a
