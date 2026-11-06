@@ -15,12 +15,12 @@ function escapeAttr(value: string) {
 }
 
 function replaceOnce(html: string, pattern: RegExp, replacement: string, label: string) {
-  if (!html.match(pattern)) throw new Error(`Built HTML is missing ${label}`);
+  if (pattern.exec(html) == null) throw new Error(`Built HTML is missing ${label}`);
   return html.replace(pattern, replacement);
 }
 
 function replaceMeta(html: string, attr: 'name' | 'property', key: string, content: string) {
-  const pattern = new RegExp(`<meta\\s[^>]*${attr}="${key}"[^>]*content="[^"]*"[^>]*\\/>`);
+  const pattern = new RegExp(String.raw`<meta\s[^>]*${attr}="${key}"[^>]*content="[^"]*"[^>]*/>`);
   return replaceOnce(
     html,
     pattern,

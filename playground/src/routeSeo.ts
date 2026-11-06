@@ -34,7 +34,7 @@ const author = {
 };
 
 function jsonLd(data: unknown) {
-  return JSON.stringify(data).replace(/</g, '\\u003c');
+  return JSON.stringify(data).replaceAll('<', String.raw`\u003c`);
 }
 
 function homeJsonLd() {
