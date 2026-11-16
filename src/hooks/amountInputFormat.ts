@@ -131,11 +131,21 @@ export function formatAmount(
   return formattedInteger;
 }
 
-export function countMeaningfulCharacters(value: string, decimalSeparator: string): number {
+export function countMeaningfulCharacters(
+  value: string,
+  decimalSeparator: string,
+  thousandSeparator: string = '',
+): number {
   let count = 0;
 
   for (const character of value) {
     if (/\d/.test(character) || character === decimalSeparator) {
+      count++;
+      continue;
+    }
+
+    // `.` is accepted as an alternate decimal marker when it is not the thousand separator
+    if (character === '.' && thousandSeparator !== '.') {
       count++;
     }
   }

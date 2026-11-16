@@ -103,11 +103,12 @@ export function useAmountInput({
       const input = event.target;
       const inputValue = input.value;
       const selectionStart = input.selectionStart ?? inputValue.length;
-      const { decimalSeparator } = locale;
+      const { decimalSeparator, thousandSeparator } = locale;
 
       const meaningfulCharactersBeforeCursor = countMeaningfulCharacters(
         inputValue.slice(0, selectionStart),
         decimalSeparator,
+        thousandSeparator,
       );
 
       const normalized = normalizeInput(inputValue, locale, decimalCount);

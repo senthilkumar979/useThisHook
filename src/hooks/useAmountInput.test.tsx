@@ -61,6 +61,26 @@ describe('useAmountInput', () => {
     expect(input.getAttribute('data-canonical')).toBe('12345.67');
   });
 
+  it('places the cursor after the comma when a typed dot becomes the French decimal', async () => {
+    render(<AmountField />);
+    const input = screen.getByLabelText('amount') as HTMLInputElement;
+
+    fireEvent.change(input, {
+      target: { value: '1234.', selectionStart: 5, selectionEnd: 5 },
+    });
+
+    expect(input.value).toBe('1 234,');
+
+    await act(async () => {
+      await new Promise<void>((resolve) => {
+        requestAnimationFrame(() => resolve());
+      });
+    });
+
+    expect(input.selectionStart).toBe(6);
+    expect(input.selectionEnd).toBe(6);
+  });
+
   it('formats with a custom locale from locales', () => {
     const { result } = renderHook(() =>
       useAmountInput({
