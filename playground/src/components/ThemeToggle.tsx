@@ -1,30 +1,23 @@
 import { gooeyToast } from 'goey-toast';
-import { useState } from 'react';
-import { applyTheme, readTheme, type Theme } from '../theme';
+import { applyTheme, readTheme } from '../theme';
 
 export const ThemeToggle = () => {
-  const [theme, setTheme] = useState<Theme>(() =>
-    typeof document === 'undefined' ? 'light' : readTheme(),
-  );
-
   const toggle = () => {
-    const next = theme === 'light' ? 'dark' : 'light';
+    const next = readTheme() === 'light' ? 'dark' : 'light';
     applyTheme(next);
-    setTheme(next);
     if (next === 'dark') gooeyToast.info('You chose chaos. The moths are already on their way.');
     else gooeyToast.success('Look at you, flipping the sun back on like you own the sky.');
   };
-
-  const isLight = theme === 'light';
 
   return (
     <button
       type="button"
       className="fixed top-4 right-4 z-50 grid h-10 w-10 place-items-center rounded-full border border-line bg-surface text-fg shadow-sm hover:bg-code"
       onClick={toggle}
-      aria-label={isLight ? 'Switch to dark mode' : 'Switch to light mode'}
+      aria-label="Toggle color theme"
     >
-      {isLight ? <MoonIcon /> : <SunIcon />}
+      <MoonIcon />
+      <SunIcon />
     </button>
   );
 };
@@ -32,7 +25,7 @@ export const ThemeToggle = () => {
 const MoonIcon = () => (
   <svg
     viewBox="0 0 24 24"
-    className="h-5 w-5"
+    className="h-5 w-5 dark:hidden"
     fill="none"
     stroke="currentColor"
     strokeWidth="1.8"
@@ -49,7 +42,7 @@ const MoonIcon = () => (
 const SunIcon = () => (
   <svg
     viewBox="0 0 24 24"
-    className="h-5 w-5"
+    className="hidden h-5 w-5 dark:block"
     fill="none"
     stroke="currentColor"
     strokeWidth="1.8"

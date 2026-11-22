@@ -114,7 +114,21 @@ export const SearchBox = () => {
 
 Works with **React 18+**, **Node 20+**, Vite, Next.js, CRA, and Module Federation.
 
-How this differs from **usehooks-ts** and **react-use**: [comparison](https://usethishook.mentorbridge.in/compare) (zero runtime deps, promise dialogs, playground).
+## Why useThisHook
+
+Docs and live demos: [usethishook.mentorbridge.in](https://usethishook.mentorbridge.in/).
+
+Counts below are public `use*` exports. Versions: usehooks-ts 3.1.1, react-use 17.6.1, ahooks 3.11.0.
+
+|                 | useThisHook                                            | usehooks-ts 3.1.1                                                 | react-use 17.6.1                      | ahooks 3.11.0                              |
+| --------------- | ------------------------------------------------------ | ----------------------------------------------------------------- | ------------------------------------- | ------------------------------------------ |
+| Runtime deps    | None (React is a peer)                                 | `lodash.debounce`                                                 | 14 packages                           | 8 packages, including `lodash` and `dayjs` |
+| Tree-shaking    | `sideEffects: false`, ESM + CJS                        | `sideEffects: false`, ESM + CJS                                   | `sideEffects: false`, ESM + CJS       | `sideEffects: false`, ESM + CJS            |
+| SSR             | Browser hooks return safe defaults until mount         | Storage hooks need `initializeWithValue: false` to match SSR HTML | Varies by hook                        | Documented SSR support                     |
+| Promise dialogs | `useConfirm`, `usePrompt`, `useOverlay`, `useStepFlow` | No                                                                | No                                    | No                                         |
+| Hook count      | 53                                                     | 33                                                                | 107 (`create*` factories not counted) | 77                                         |
+
+Side-by-side with usehooks-ts and react-use: [comparison](https://usethishook.mentorbridge.in/compare).
 
 Using Cursor or Claude? Point MCP at [`usethishook-mcp`](mcp/README.md) so the agent can search hook docs instead of guessing APIs.
 

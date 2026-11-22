@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
+# LLM catalogs: https://usethishook.mentorbridge.in/llms.txt and https://usethishook.mentorbridge.in/llms-full.txt
 Sitemap: https://usethishook.mentorbridge.in/sitemap.xml

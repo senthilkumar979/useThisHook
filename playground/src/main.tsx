@@ -1,13 +1,9 @@
-import { FingerprintProvider } from '@fingerprint/react';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/react';
 import 'goey-toast/styles.css';
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { App } from './App';
-import { FingerprintIdentify } from './FingerprintIdentify';
+import { createRoot, hydrateRoot } from 'react-dom/client';
+import { DocumentApp } from './DocumentApp';
 import './index.css';
 import { applyTheme, readTheme } from './theme';
+
 applyTheme(readTheme());
 
 const fingerprintApiKey = import.meta.env.VITE_FINGERPRINT_API_KEY;
@@ -20,13 +16,6 @@ if (!fingerprintApiKey) {
 const rootElement = document.getElementById('root');
 if (!rootElement) throw new Error('Root element not found');
 
-createRoot(rootElement).render(
-  <StrictMode>
-    <FingerprintProvider apiKey={fingerprintApiKey} region="eu">
-      <FingerprintIdentify />
-      <App />
-      <Analytics />
-      <SpeedInsights />
-    </FingerprintProvider>
-  </StrictMode>,
-);
+const app = <DocumentApp />;
+if (rootElement.childElementCount > 0) hydrateRoot(rootElement, app);
+else createRoot(rootElement).render(app);

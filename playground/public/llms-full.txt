@@ -1,0 +1,1419 @@
+# useThisHook
+
+> Promise-based confirm/prompt dialogs and 53 tree-shakeable React hooks. Zero runtime dependencies, TypeScript, SSR-safe. This file is the expanded catalog for language models.
+
+Install: `npm i usethishook`
+
+- Docs: https://usethishook.mentorbridge.in/
+- npm: https://www.npmjs.com/package/usethishook
+- GitHub: https://github.com/senthilkumar979/useThisHook
+- Short catalog: https://usethishook.mentorbridge.in/llms.txt
+
+## useBoolean
+
+Category: State
+
+Boolean state with toggle helpers.
+
+Use for panels, switches, and any on/off UI.
+
+You have a panel, switch, or “show more” control. Pass true or false as the starting value. You get named helpers to turn it on, turn it off, or flip it — without a raw boolean plus setState(!value) in three places.
+
+Signature: `useBoolean(initialValue: boolean)`
+
+```tsx
+import { useBoolean } from 'usethishook';
+
+export const Panel = () => {
+  const { value, toggle } = useBoolean(false);
+  return <button type="button" onClick={toggle}>{value ? 'Hide' : 'Show'}</button>;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useBoolean
+- Import: `import { useBoolean } from 'usethishook';`
+
+## useDisclosure
+
+Category: State
+
+Open, close, and toggle for menus and dialogs.
+
+Use when UI has an explicit open/closed lifecycle.
+
+A menu, drawer, or dialog is either visible or not. Buttons need Open, Close, and sometimes Toggle. useDisclosure is that lifecycle so you are not mixing a boolean named isOpen with ad-hoc setters.
+
+Signature: `useDisclosure(initialOpen?: boolean)`
+
+```tsx
+import { useDisclosure } from 'usethishook';
+
+export const Menu = () => {
+  const { isOpen, open, close } = useDisclosure();
+  return (
+    <>
+      <button type="button" onClick={open}>Open</button>
+      {isOpen && (
+        <div>
+          Menu
+          <button type="button" onClick={close}>Close</button>
+        </div>
+      )}
+    </>
+  );
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useDisclosure
+- Import: `import { useDisclosure } from 'usethishook';`
+
+## useDebounce
+
+Category: State
+
+Delay updates until the value stops changing.
+
+Use for search inputs and expensive derived work.
+
+The user is typing into search or a filter. You do not want to hit the server or filter a huge list on every keystroke. Debounce the value, then use the lagged copy for the expensive work. The input itself stays instant.
+
+Signature: `useDebounce<T>(value: T, delayMs?: number): T`
+
+```tsx
+import { useState } from 'react';
+import { useDebounce } from 'usethishook';
+
+export const Search = () => {
+  const [query, setQuery] = useState('');
+  const debouncedQuery = useDebounce(query, 300);
+  return <input value={query} onChange={(event) => setQuery(event.target.value)} />;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useDebounce
+- Import: `import { useDebounce } from 'usethishook';`
+
+## useThrottle
+
+Category: State
+
+Limit how often a value updates.
+
+Use for scroll, resize, and rapid input where you still want periodic updates.
+
+A value changes often — scroll position, pointer coords, or rapid typing — and you need updates at a steady cadence rather than waiting for silence. Throttle keeps the first update in a window and a trailing latest value.
+
+Signature: `useThrottle<T>(value: T, delayMs?: number): T`
+
+```tsx
+import { useState } from 'react';
+import { useThrottle } from 'usethishook';
+
+export const Search = () => {
+  const [query, setQuery] = useState('');
+  const throttledQuery = useThrottle(query, 300);
+  return <input value={query} onChange={(event) => setQuery(event.target.value)} />;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useThrottle
+- Import: `import { useThrottle } from 'usethishook';`
+
+## useInterval
+
+Category: State
+
+Declarative setInterval that always calls the latest callback.
+
+Use for polling and timers. Pass null to pause.
+
+You need a ticking clock, a poll, or a progress bar that advances on a schedule. You are tired of setInterval inside useEffect, stale closures, and forgetting clearInterval. Pass null to pause without tearing the component down.
+
+Signature: `useInterval(callback: () => void, delayMs: number | null): void`
+
+```tsx
+import { useState } from 'react';
+import { useInterval } from 'usethishook';
+
+export const Timer = () => {
+  const [count, setCount] = useState(0);
+  useInterval(() => setCount((value) => value + 1), 1000);
+  return <p>{count}</p>;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useInterval
+- Import: `import { useInterval } from 'usethishook';`
+
+## useCopyToClipboard
+
+Category: State
+
+Copy text with the Clipboard API.
+
+Use for share and copy buttons.
+
+A “Copy invite link” or “Copy code” button. You need to write to the clipboard and show Copied for a moment. This hook is that interaction, including failure when the browser blocks clipboard access.
+
+Signature: `useCopyToClipboard()`
+
+```tsx
+import { useCopyToClipboard } from 'usethishook';
+
+export const CopyButton = () => {
+  const { copy, copiedText } = useCopyToClipboard();
+  return <button type="button" onClick={() => void copy('hello')}>{copiedText ? 'Copied' : 'Copy'}</button>;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useCopyToClipboard
+- Import: `import { useCopyToClipboard } from 'usethishook';`
+
+## useLocalStorage
+
+Category: State
+
+Persist JSON-serializable state in localStorage.
+
+Use for user preferences that should survive refresh.
+
+A preference should survive refresh: theme, sidebar width, last used project. You want useState that writes JSON to localStorage. This is that pair of value and setter, with a fallback if storage is empty or corrupt.
+
+Signature: `useLocalStorage<T>(key: string, initialValue: T)`
+
+```tsx
+import { useLocalStorage } from 'usethishook';
+
+export const NameField = () => {
+  const [name, setName] = useLocalStorage('name', '');
+  return <input value={name} onChange={(event) => setName(event.target.value)} />;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useLocalStorage
+- Import: `import { useLocalStorage } from 'usethishook';`
+
+## useSessionStorage
+
+Category: State
+
+Persist JSON-serializable state in sessionStorage.
+
+Use for drafts that should survive refresh but clear with the tab.
+
+A draft or wizard step should survive refresh but not outlive the tab. Same shape as useLocalStorage, backed by sessionStorage instead.
+
+Signature: `useSessionStorage<T>(key: string, initialValue: T)`
+
+```tsx
+import { useSessionStorage } from 'usethishook';
+
+export const DraftField = () => {
+  const [draft, setDraft] = useSessionStorage('draft', '');
+  return <input value={draft} onChange={(event) => setDraft(event.target.value)} />;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useSessionStorage
+- Import: `import { useSessionStorage } from 'usethishook';`
+
+## useOnlineStatus
+
+Category: Browser
+
+Subscribe to the browser online/offline state.
+
+Use to warn users when the network drops.
+
+You want to warn “you are offline” or disable Save when the laptop loses the network. This hook is the browser’s online flag, updated when the browser fires online and offline. It is not a ping of your API.
+
+Signature: `useOnlineStatus(): boolean`
+
+```tsx
+import { useOnlineStatus } from 'usethishook';
+
+export const ConnectionBadge = () => {
+  const isOnline = useOnlineStatus();
+  return <span>{isOnline ? 'Online' : 'Offline'}</span>;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useOnlineStatus
+- Import: `import { useOnlineStatus } from 'usethishook';`
+
+## useOnlineQueue
+
+Category: Browser
+
+Queue work while offline and flush when online.
+
+Use for an in-memory outbox, not durable sync.
+
+The user queued a comment on the train. Hold items in memory while navigator.onLine is false, then drain FIFO when the browser fires online. If processItem throws, that item stays at the front.
+
+Signature: `useOnlineQueue(processItem)`
+
+```tsx
+import { useOnlineQueue } from 'usethishook';
+
+export const Outbox = () => {
+  const { enqueue, items } = useOnlineQueue(api.send);
+  return (
+    <button type="button" onClick={() => enqueue({ text: 'hello' })}>
+      Queue ({items.length})
+    </button>
+  );
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useOnlineQueue
+- Import: `import { useOnlineQueue } from 'usethishook';`
+
+## useStorageQuota
+
+Category: Browser
+
+Origin storage usage and quota from estimate().
+
+Use to warn before the origin is out of space.
+
+A PWA or editor writes large files and you need to warn before the origin quota is full. navigator.storage.estimate() after mount, with nulls when the API is missing.
+
+Signature: `useStorageQuota()`
+
+```tsx
+import { useStorageQuota } from 'usethishook';
+
+export const QuotaMeter = () => {
+  const { usageRatio, isSupported } = useStorageQuota();
+  if (!isSupported || usageRatio == null) return null;
+  return <progress value={usageRatio} max={1} />;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useStorageQuota
+- Import: `import { useStorageQuota } from 'usethishook';`
+
+## useInstallPrompt
+
+Category: Browser
+
+Capture and replay the PWA beforeinstallprompt event.
+
+Use for a custom Install button on Chromium.
+
+Chromium fires beforeinstallprompt once. You must preventDefault to show your own Install button later. The hook holds that event, calls prompt(), and tracks standalone / appinstalled.
+
+Signature: `useInstallPrompt()`
+
+```tsx
+import { useInstallPrompt } from 'usethishook';
+
+export const InstallButton = () => {
+  const { isReady, prompt } = useInstallPrompt();
+  if (!isReady) return null;
+  return (
+    <button type="button" onClick={() => void prompt()}>
+      Install
+    </button>
+  );
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useInstallPrompt
+- Import: `import { useInstallPrompt } from 'usethishook';`
+
+## useCrossTabState
+
+Category: Browser
+
+JSON state synced across browser tabs.
+
+Use for theme and flags that must match in every tab.
+
+Theme, a draft flag, or a dismissed banner should match in every tab. Write JSON to localStorage and notify others through BroadcastChannel and the storage event. SSR returns the initial value.
+
+Signature: `useCrossTabState(key, initialValue)`
+
+```tsx
+import { useCrossTabState } from 'usethishook';
+
+export const ThemeSync = () => {
+  const [theme, setTheme] = useCrossTabState<'light' | 'dark'>('theme', 'light');
+  return (
+    <button type="button" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+      {theme}
+    </button>
+  );
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useCrossTabState
+- Import: `import { useCrossTabState } from 'usethishook';`
+
+## useFingerprint
+
+Category: Browser
+
+Client-side visitor id from browser fingerprint signals.
+
+Use for anonymous visitor hints without cookies or a backend.
+
+You need a stable-enough visitor id in the browser without cookies or a backend — for abuse hints, anonymous personalization, or correlating sessions. The hook samples canvas, WebGL, screen, locale, and related signals, hashes them client-side, and exposes refresh(). No API key and no network call (unlike Fingerprint’s commercial Identification product).
+
+Signature: `useFingerprint(options?: { enabled?: boolean })`
+
+```tsx
+import { useFingerprint } from 'usethishook';
+
+export const VisitorBadge = () => {
+  const { visitorId, isPending, refresh } = useFingerprint();
+
+  if (isPending) return <span>Identifying…</span>;
+
+  return (
+    <div>
+      <code>{visitorId}</code>
+      <button type="button" onClick={() => void refresh()}>
+        Refresh
+      </button>
+    </div>
+  );
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useFingerprint
+- Import: `import { useFingerprint } from 'usethishook';`
+
+## useMediaQuery
+
+Category: Browser
+
+Subscribe to a CSS media query.
+
+Use for layout branches that match CSS breakpoints.
+
+Layout should change at the same breakpoint as CSS, for example a compact toolbar under 768px. Match the query in JS without resize listeners and leftover subscriptions.
+
+Signature: `useMediaQuery(query: string): boolean`
+
+```tsx
+import { useMediaQuery } from 'usethishook';
+
+export const ResponsiveNote = () => {
+  const isWide = useMediaQuery('(min-width: 768px)');
+  return <p>{isWide ? 'Desktop layout' : 'Mobile layout'}</p>;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useMediaQuery
+- Import: `import { useMediaQuery } from 'usethishook';`
+
+## useWindowSize
+
+Category: Browser
+
+Current viewport width and height.
+
+Use when you need pixel dimensions, not just a breakpoint.
+
+You need the actual pixel width or height: a canvas, a chart, a split pane. A media query is not enough. This hook tracks innerWidth and innerHeight on resize.
+
+Signature: `useWindowSize(): { width, height }`
+
+```tsx
+import { useWindowSize } from 'usethishook';
+
+export const SizeLabel = () => {
+  const { width, height } = useWindowSize();
+  return <p>{width} × {height}</p>;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useWindowSize
+- Import: `import { useWindowSize } from 'usethishook';`
+
+## useOnClickOutside
+
+Category: Browser
+
+Run a handler when the user clicks outside a ref.
+
+Use for popovers, dropdowns, and dismissible cards.
+
+A popover or dropdown should close when the user presses outside it. Attach a ref to the surface and pass a close handler. Inside clicks stay ignored.
+
+Signature: `useOnClickOutside(ref, handler): void`
+
+```tsx
+import { useRef } from 'react';
+import { useOnClickOutside } from 'usethishook';
+
+export const Popover = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  useOnClickOutside(ref, () => console.log('outside'));
+  return <div ref={ref}>Popover</div>;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useOnClickOutside
+- Import: `import { useOnClickOutside } from 'usethishook';`
+
+## useOverlay
+
+Category: Browser
+
+Promise-based overlay / modal rendering.
+
+Use when a modal should await the user’s choice.
+
+You need a modal that the caller can await, like window.confirm but with your own UI. open(props) returns a promise; close(result) resolves it. Use it for delete confirms, pickers, and any dialog that must return a value before the flow continues.
+
+Signature: `useOverlay<TProps, TResult>(Overlay)`
+
+```tsx
+import { useOverlay } from 'usethishook';
+
+const Modal = ({ title, isOpen, close }) =>
+  isOpen ? <dialog open><p>{title}</p><button type="button" onClick={() => close(true)}>OK</button></dialog> : null;
+
+export const Example = () => {
+  const overlay = useOverlay(Modal);
+  return (
+    <>
+      <button type="button" onClick={() => void overlay.open({ title: 'Continue?' })}>Open</button>
+      {overlay.render()}
+    </>
+  );
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useOverlay
+- Import: `import { useOverlay } from 'usethishook';`
+
+## useStepFlow
+
+Category: Browser
+
+Multi-step wizard that resolves when the flow finishes.
+
+Use for onboarding or checkout-style sequences.
+
+Onboarding, checkout, or a three-screen import wizard. Each step is a component. next() starts the flow and resolves with every step’s data when the last step finishes, or null if the user cancels.
+
+Signature: `useStepFlow<TStepData>(steps)`
+
+```tsx
+import { useStepFlow } from 'usethishook';
+
+export const Wizard = () => {
+  const flow = useStepFlow([StepOne, StepTwo]);
+  return (
+    <>
+      <button type="button" onClick={() => void flow.next()}>Start</button>
+      {flow.renderCurrentStep()}
+    </>
+  );
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useStepFlow
+- Import: `import { useStepFlow } from 'usethishook';`
+
+## useAsyncSelect
+
+Category: Browser
+
+Open the native file picker and await the result.
+
+Use instead of a hidden file input when you want a Promise.
+
+A button should open the native file picker and you want a Promise, not a hidden <input type="file"> in JSX. Call the function from a click, await the File (or File[]), and get null if they cancel.
+
+Signature: `useAsyncSelect()`
+
+```tsx
+import { useAsyncSelect } from 'usethishook';
+
+export const FileButton = () => {
+  const selectFile = useAsyncSelect();
+  return (
+    <button type="button" onClick={async () => {
+      const file = await selectFile({ accept: 'image/*' });
+      console.log(file);
+    }}>
+      Choose file
+    </button>
+  );
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useAsyncSelect
+- Import: `import { useAsyncSelect } from 'usethishook';`
+
+## useEventListener
+
+Category: Browser
+
+Subscribe to a DOM or window event with a stable handler.
+
+Use instead of addEventListener in an effect you would rewrite often.
+
+You need a resize, keydown, or custom event on window, document, or a node, without re-binding every render. Pass the target, type, and handler. The hook keeps the latest handler and cleans up on unmount.
+
+Signature: `useEventListener(target, type, handler, options?): void`
+
+```tsx
+import { useEventListener } from 'usethishook';
+
+export const ResizeNote = () => {
+  useEventListener(window, 'resize', () => {
+    console.log(window.innerWidth);
+  });
+  return null;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useEventListener
+- Import: `import { useEventListener } from 'usethishook';`
+
+## useTimeout
+
+Category: Browser
+
+Run a callback once after a delay. null pauses.
+
+Use for one-shot delays, not repeating ticks (see useInterval).
+
+Run something once after a delay: a splash screen, a deferred toast. Pass null to cancel. Unlike useInterval, this fires once.
+
+Signature: `useTimeout(callback, delayMs): void`
+
+```tsx
+import { useTimeout } from 'usethishook';
+
+export const Splash = ({ onDone }: { onDone: () => void }) => {
+  useTimeout(onDone, 1200);
+  return <p>Loading…</p>;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useTimeout
+- Import: `import { useTimeout } from 'usethishook';`
+
+## useKeyPress
+
+Category: Browser
+
+True while a keyboard key is held (ignores text fields).
+
+Use for shortcuts such as Escape.
+
+A shortcut such as Escape should flip a boolean while the key is held. Typing in inputs does not count.
+
+Signature: `useKeyPress(key: string): boolean`
+
+```tsx
+import { useKeyPress } from 'usethishook';
+
+export const EscHint = () => {
+  const isEscape = useKeyPress('Escape');
+  return isEscape ? <p>Closing…</p> : null;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useKeyPress
+- Import: `import { useKeyPress } from 'usethishook';`
+
+## useScrollLock
+
+Category: Browser
+
+Lock and unlock document body scroll.
+
+Use under modals and drawers so the page behind does not scroll.
+
+A modal or drawer is open and the page behind should not scroll. Lock overflow on document.body, optionally pad for the scrollbar gutter, and unlock when the overlay closes.
+
+Signature: `useScrollLock(options?)`
+
+```tsx
+import { useScrollLock } from 'usethishook';
+
+export const Modal = ({ open }: { open: boolean }) => {
+  useScrollLock({ autoLock: open });
+  if (!open) return null;
+  return <div role="dialog">…</div>;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useScrollLock
+- Import: `import { useScrollLock } from 'usethishook';`
+
+## useDocumentVisibility
+
+Category: Browser
+
+Whether the document tab is visible or hidden.
+
+Use to pause polling or media when the tab is in the background.
+
+The tab is hidden and you should pause polling, video, or expensive work. This is document.visibilityState as a React value — visible or hidden.
+
+Signature: `useDocumentVisibility(): DocumentVisibilityState`
+
+```tsx
+import { useEffect } from 'react';
+import { useDocumentVisibility } from 'usethishook';
+
+export const Poller = () => {
+  const visibility = useDocumentVisibility();
+
+  useEffect(() => {
+    if (visibility === 'hidden') return;
+    const id = window.setInterval(() => api.refresh(), 10_000);
+    return () => window.clearInterval(id);
+  }, [visibility]);
+
+  return null;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useDocumentVisibility
+- Import: `import { useDocumentVisibility } from 'usethishook';`
+
+## useIdle
+
+Category: Browser
+
+True after a period of no user activity.
+
+Use for soft session timeouts and away indicators.
+
+You need a soft “away” or session-timeout signal. After a quiet period with no mouse, keyboard, touch, or scroll, the hook reports idle until the user moves again.
+
+Signature: `useIdle(timeoutMs?: number): boolean`
+
+```tsx
+import { useIdle } from 'usethishook';
+
+export const SessionGuard = () => {
+  const isIdle = useIdle(5 * 60_000);
+  if (!isIdle) return null;
+  return <p>You have been idle. Session may expire soon.</p>;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useIdle
+- Import: `import { useIdle } from 'usethishook';`
+
+## useKeyboardShortcut
+
+Category: Browser
+
+Register a key combo on window and clean it up.
+
+Use for command palette and Escape, not key-held state.
+
+Command/Ctrl+K, Escape, or Shift+? should run a handler and unregister on unmount. Combos are plus-separated. Typing in inputs is ignored unless you turn that off.
+
+Signature: `useKeyboardShortcut(shortcut, handler, options?)`
+
+```tsx
+import { useKeyboardShortcut } from 'usethishook';
+
+export const CommandPalette = ({ open, setOpen }: { open: boolean; setOpen: (open: boolean) => void }) => {
+  useKeyboardShortcut('mod+k', () => setOpen(!open));
+  return open ? <div>Palette</div> : null;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useKeyboardShortcut
+- Import: `import { useKeyboardShortcut } from 'usethishook';`
+
+## useLongPress
+
+Category: Browser
+
+Mouse and touch press-and-hold handlers.
+
+Use for context menus on cards and list rows.
+
+A card or list row should open a menu on press-and-hold, on mouse and touch. Moving past a pixel threshold or releasing early cancels. Spread the returned handlers onto the element.
+
+Signature: `useLongPress(onLongPress, options?)`
+
+```tsx
+import { useLongPress } from 'usethishook';
+
+export const Card = ({ onOpenMenu }: { onOpenMenu: () => void }) => {
+  const bind = useLongPress(onOpenMenu);
+  return <div {...bind}>Hold for menu</div>;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useLongPress
+- Import: `import { useLongPress } from 'usethishook';`
+
+## useStableCallback
+
+Category: App
+
+Stable function identity, always-latest implementation.
+
+Use in intervals, subscriptions, and memoized children.
+
+You pass a callback into an interval, a subscription, or a child that memoizes on function identity. If you put the function in the dependency array, the subscription resets; if you omit it, you capture stale state. useStableCallback is one function identity that always calls the latest code.
+
+Signature: `useStableCallback<T>(fn: T): T`
+
+```tsx
+import { useStableCallback } from 'usethishook';
+
+export const Poller = ({ query }: { query: string }) => {
+  const poll = useStableCallback(() => fetch(\`/search?q=\${query}\`));
+  useInterval(poll, 5000);
+  return null;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useStableCallback
+- Import: `import { useStableCallback } from 'usethishook';`
+
+## useUpdateEffect
+
+Category: App
+
+useEffect that skips the first mount.
+
+Use when a side effect should run only after deps change, not on first paint.
+
+You need a useEffect that should not fire on first paint — only when state, props, or context values change later. Same cleanup rules as useEffect. Put the values that matter in the dependency array.
+
+Signature: `useUpdateEffect(effect, deps?)`
+
+```tsx
+import { useState } from 'react';
+import { useUpdateEffect } from 'usethishook';
+
+export const Tracker = ({ userId }: { userId: string }) => {
+  useUpdateEffect(() => {
+    analytics.track('user-changed', { userId });
+  }, [userId]);
+
+  return <p>{userId}</p>;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useUpdateEffect
+- Import: `import { useUpdateEffect } from 'usethishook';`
+
+## useResetState
+
+Category: App
+
+Local state that resets when the source key changes.
+
+Use for drafts keyed by user id or record id.
+
+You edit a draft for user A, then the route changes to user B. Local state still shows A’s name because you synced with useEffect and missed a dependency. useResetState takes a source key (the user id). When the key changes, state is the new initial value. Same idea as key={userId} on a form, as a hook.
+
+Signature: `useResetState<T>(source, initialValue)`
+
+```tsx
+import { useResetState } from 'usethishook';
+
+export const Editor = ({ user }: { user: { id: string; name: string } }) => {
+  const [name, setName] = useResetState(user.id, user.name);
+  return <input value={name} onChange={(event) => setName(event.target.value)} />;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useResetState
+- Import: `import { useResetState } from 'usethishook';`
+
+## useAsyncAction
+
+Category: App
+
+Pending, error, and data around one async action.
+
+Use on Save/Send buttons, not for list fetching.
+
+A Save, Send, or “Generate report” button. You need pending, error, and the last result, and you must ignore a response if the user fired the action again. This is not a query cache. It is the mutation UI around one async function.
+
+Signature: `useAsyncAction(action)`
+
+```tsx
+import { useAsyncAction } from 'usethishook';
+
+export const SaveButton = () => {
+  const { run, isPending } = useAsyncAction(api.save);
+  return <button type="button" disabled={isPending} onClick={() => void run()}>Save</button>;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useAsyncAction
+- Import: `import { useAsyncAction } from 'usethishook';`
+
+## useAsyncState
+
+Category: App
+
+Typed idle, loading, success, and error for async work.
+
+Use for fetches with abort, not for a shared query cache.
+
+A load that has idle, loading, success, and error — and a second request must not overwrite the first after it finishes late. execute() aborts the previous run. immediate plus source refetch when an id changes. Honor AbortSignal in fetch.
+
+Signature: `useAsyncState(fn, options?)`
+
+```tsx
+import { useAsyncState } from 'usethishook';
+
+export const UserCard = ({ userId }: { userId: string }) => {
+  const { data, isLoading, execute } = useAsyncState(
+    (signal) => fetch(\`/api/users/\${userId}\`, { signal }).then((res) => res.json()),
+    { immediate: true, source: userId },
+  );
+  if (isLoading) return <p>Loading…</p>;
+  return <p>{data?.name}</p>;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useAsyncState
+- Import: `import { useAsyncState } from 'usethishook';`
+
+## useOptimisticAction
+
+Category: App
+
+Apply a local update, confirm or roll back.
+
+Use for likes and steppers that must feel instant.
+
+A like, follow, or stepper should move immediately, then wait for the server. If the request fails, the old value must come back. Duplicate clicks while pending are ignored.
+
+Signature: `useOptimisticAction(initialValue, action, optimistic)`
+
+```tsx
+import { useOptimisticAction } from 'usethishook';
+
+export const LikeButton = ({ initial }: { initial: number }) => {
+  const { value, run, isPending } = useOptimisticAction(
+    initial,
+    (next) => api.setLikes(next),
+    (current) => current + 1,
+  );
+  return (
+    <button type="button" disabled={isPending} onClick={() => void run()}>
+      {value}
+    </button>
+  );
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useOptimisticAction
+- Import: `import { useOptimisticAction } from 'usethishook';`
+
+## useRetry
+
+Category: App
+
+Retry an async function with backoff and cancel.
+
+Use when a single call may fail transiently.
+
+The network blipped. You want N extra attempts, exponential backoff, and a way to cancel waiting between tries. This is the loop around one async function, not a query cache.
+
+Signature: `useRetry(fn, options?)`
+
+```tsx
+import { useRetry } from 'usethishook';
+
+export const SaveDraft = () => {
+  const { run, isPending } = useRetry(api.save, { retries: 3, backoff: 'exponential' });
+  return (
+    <button type="button" disabled={isPending} onClick={() => void run()}>
+      Save
+    </button>
+  );
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useRetry
+- Import: `import { useRetry } from 'usethishook';`
+
+## useAsyncQueue
+
+Category: App
+
+FIFO async tasks with a concurrency cap.
+
+Use for uploads and sequential outbound work.
+
+Uploads, outbound messages, or “process these one or two at a time.” enqueue() returns a promise; concurrency caps how many run; clear() drops work still waiting.
+
+Signature: `useAsyncQueue(options?)`
+
+```tsx
+import { useAsyncQueue } from 'usethishook';
+
+export const Uploader = () => {
+  const { enqueue, pending } = useAsyncQueue({ concurrency: 2 });
+  return (
+    <button type="button" onClick={() => void enqueue(() => api.upload(file))}>
+      Upload ({pending} running)
+    </button>
+  );
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useAsyncQueue
+- Import: `import { useAsyncQueue } from 'usethishook';`
+
+## usePolling
+
+Category: App
+
+Interval polling that pauses when the tab is hidden.
+
+Use for unread badges and live boards.
+
+Refresh unread counts or a live board on an interval. Pause when the tab is hidden, abort the in-flight tick on unmount, and pass null to stop without tearing the component down.
+
+Signature: `usePolling(fn, intervalMs, options?)`
+
+```tsx
+import { useState } from 'react';
+import { usePolling } from 'usethishook';
+
+export const InboxBadge = () => {
+  const [count, setCount] = useState(0);
+  usePolling(async (signal) => {
+    const data = await api.unread({ signal });
+    setCount(data);
+  }, 10_000);
+  return <span>{count}</span>;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/usePolling
+- Import: `import { usePolling } from 'usethishook';`
+
+## useRenderTracker
+
+Category: App
+
+Count renders and log commits in development.
+
+Use to spot unexpected rerenders. Disable in production.
+
+A child re-renders more than you expect. The hook counts function invocations and, in development, logs after commit. Disable in production with the default NODE_ENV check or enabled: false.
+
+Signature: `useRenderTracker(label, options?)`
+
+```tsx
+import { useRenderTracker } from 'usethishook';
+
+export const Panel = (props: { open: boolean }) => {
+  useRenderTracker('Panel');
+  return props.open ? <div>Open</div> : null;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useRenderTracker
+- Import: `import { useRenderTracker } from 'usethishook';`
+
+## useWhyDidYouUpdate
+
+Category: App
+
+Log which values changed between renders.
+
+Use in development when a memoized child still updates.
+
+You know it re-rendered; you need which prop or value changed. Pass a snapshot object. Development logs keys that failed Object.is. No-op logging when disabled.
+
+Signature: `useWhyDidYouUpdate(label, props, options?)`
+
+```tsx
+import { useWhyDidYouUpdate } from 'usethishook';
+
+export const Row = (props: { id: string; selected: boolean }) => {
+  useWhyDidYouUpdate('Row', props);
+  return <div>{props.id}</div>;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useWhyDidYouUpdate
+- Import: `import { useWhyDidYouUpdate } from 'usethishook';`
+
+## useDebouncedCallback
+
+Category: App
+
+Debounce calling a function, with cancel.
+
+Use for search fetch and persist-on-type.
+
+You want to debounce work, not a displayed value: search fetch, persist on type, resize handler. useDebounce lags a value for rendering. useDebouncedCallback lags calling a function and can cancel the pending call.
+
+Signature: `useDebouncedCallback(callback, delayMs)`
+
+```tsx
+import { useDebouncedCallback } from 'usethishook';
+
+export const Search = () => {
+  const [search] = useDebouncedCallback((q: string) => api.search(q), 300);
+  return <input onChange={(event) => search(event.target.value)} />;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useDebouncedCallback
+- Import: `import { useDebouncedCallback } from 'usethishook';`
+
+## useThrottledCallback
+
+Category: App
+
+Throttle calling a function, with cancel.
+
+Use for scroll, resize, and rapid search fetch.
+
+You want to throttle work, not a displayed value: scroll handlers, resize listeners, rapid search. Leading call runs immediately; a trailing call keeps the latest args. cancel drops a pending trailing run.
+
+Signature: `useThrottledCallback(callback, delayMs)`
+
+```tsx
+import { useThrottledCallback } from 'usethishook';
+
+export const Search = () => {
+  const [search] = useThrottledCallback((q: string) => api.search(q), 300);
+  return <input onChange={(event) => search(event.target.value)} />;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useThrottledCallback
+- Import: `import { useThrottledCallback } from 'usethishook';`
+
+## useFields
+
+Category: App
+
+Small form state with setField, dirty, and optional schema.
+
+Use for modals and settings, not huge RHF forms.
+
+A modal or settings card with five fields. You do not want React Hook Form for that, and you do not want useState per input. One object, setField, dirty flag, optional schema (Zod-shaped safeParse), and submit(onValid).
+
+Signature: `useFields(initialValues, schema?)`
+
+```tsx
+import { useFields } from 'usethishook';
+
+export const Invite = () => {
+  const form = useFields({ email: '' }, schema);
+  return (
+    <input value={form.values.email} onChange={(event) => form.setField('email', event.target.value)} />
+  );
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useFields
+- Import: `import { useFields } from 'usethishook';`
+
+## useAmountInput
+
+Category: App
+
+Locale amount input with grouping, decimals, and cursor restore.
+
+Use for price and invoice fields, not generic text.
+
+A price, invoice, or quantity field that must look local while you type: French spaces, Dutch dots, English commas, and a cursor that does not jump when grouping appears. The input shows the formatted string; submit still gets a canonical "12345.67". Pass language, decimalCount, and the returned ref. Add locales to register or override languages beyond en/de/nl/fr.
+
+Signature: `useAmountInput({ language, decimalCount, defaultValue, locales })`
+
+```tsx
+import { useAmountInput } from 'usethishook';
+
+export const PriceField = () => {
+  const amount = useAmountInput({
+    language: 'es',
+    decimalCount: 2,
+    defaultValue: 0,
+    locales: {
+      es: { thousandSeparator: '.', decimalSeparator: ',' },
+    },
+  });
+  return (
+    <input
+      ref={amount.ref}
+      value={amount.displayValue}
+      onChange={amount.onChange}
+      onBlur={amount.onBlur}
+    />
+  );
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useAmountInput
+- Import: `import { useAmountInput } from 'usethishook';`
+
+## useList
+
+Category: App
+
+Insert, update, remove, and reorder items with ids.
+
+Use for todos, attendees, and pipeline stages.
+
+A list the user can add to, rename, delete, and reorder: todos, attendees, stages. Instead of spreading arrays in every handler, you get insert, update, remove, and move on items that have an id.
+
+Signature: `useList<T extends { id: string }>(initialItems?)`
+
+```tsx
+import { useList } from 'usethishook';
+
+export const Attendees = () => {
+  const list = useList([{ id: '1', name: 'Ada' }]);
+  return <button type="button" onClick={() => list.remove('1')}>Remove</button>;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useList
+- Import: `import { useList } from 'usethishook';`
+
+## useSelection
+
+Category: App
+
+Single or multi id selection for lists and tables.
+
+Use for checkboxes and “select all on this page”.
+
+A table or checklist: click to select, cmd-click to multi-select, “select all on this page,” clear. You should not keep a Set in three places. useSelection is the selected ids and those operations, single or multiple.
+
+Signature: `useSelection({ mode, initial }?)`
+
+```tsx
+import { useSelection } from 'usethishook';
+
+export const Table = ({ ids }: { ids: string[] }) => {
+  const selection = useSelection();
+  return <button type="button" onClick={() => selection.selectAll(ids)}>Select page</button>;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useSelection
+- Import: `import { useSelection } from 'usethishook';`
+
+## useSearchState
+
+Category: App
+
+URL search params as React state.
+
+Use for filters, tabs, and page that must be shareable.
+
+Filters, tabs, and page number should live in the URL so refresh and share work. People sync useState to search params with useEffect and fight loops. This hook is the query string as state: read it, set it, the address bar updates.
+
+Signature: `useSearchState(defaults)`
+
+```tsx
+import { useSearchState } from 'usethishook';
+
+const defaults = { q: '', page: '1' };
+
+export const Filters = () => {
+  const [params, setParams] = useSearchState(defaults);
+  return <input value={params.q} onChange={(event) => setParams({ q: event.target.value })} />;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useSearchState
+- Import: `import { useSearchState } from 'usethishook';`
+
+## useConfirm
+
+Category: App
+
+Await a yes/no dialog from a click handler.
+
+Use before delete or other destructive actions.
+
+You need “Are you sure?” before delete, and you want to await the answer in the click handler. Same idea as useOverlay, with a default dialog. Call confirm({ title, danger }), put render() in the tree, branch on true/false.
+
+Signature: `useConfirm()`
+
+```tsx
+import { useConfirm } from 'usethishook';
+
+export const Row = () => {
+  const { confirm, render } = useConfirm();
+  return (
+    <>
+      <button type="button" onClick={async () => { if (await confirm({ title: 'Delete?' })) remove(); }}>Delete</button>
+      {render()}
+    </>
+  );
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useConfirm
+- Import: `import { useConfirm } from 'usethishook';`
+
+## usePrompt
+
+Category: App
+
+Await a single string from a small dialog.
+
+Use for rename and “name this view”.
+
+You need a single string from the user — rename, “name this view” — without standing up a form page. await prompt({ title, label }) returns the string or null if they cancel. Render the dialog with render().
+
+Signature: `usePrompt()`
+
+```tsx
+import { usePrompt } from 'usethishook';
+
+export const Rename = () => {
+  const { prompt, render } = usePrompt();
+  return (
+    <>
+      <button type="button" onClick={() => void prompt({ title: 'Name' })}>Rename</button>
+      {render()}
+    </>
+  );
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/usePrompt
+- Import: `import { usePrompt } from 'usethishook';`
+
+## useControllableState
+
+Category: App
+
+Controlled and uncontrolled state in one setter.
+
+Use in reusable inputs, drawers, and tabs.
+
+You are building a Switch, Tabs, or Drawer that must work in two ways: the parent owns the value, or the component owns it. Teams copy this if (value !== undefined) branch into every primitive. useControllableState is that branch: pass value to control it, omit value to stay uncontrolled, onChange always fires.
+
+Signature: `useControllableState({ value, defaultValue, onChange })`
+
+```tsx
+import { useControllableState } from 'usethishook';
+
+export const Switch = ({ checked, defaultChecked = false, onCheckedChange }) => {
+  const [on, setOn] = useControllableState({
+    value: checked,
+    defaultValue: defaultChecked,
+    onChange: onCheckedChange,
+  });
+  return <button type="button" onClick={() => setOn((value) => !value)}>{on ? 'On' : 'Off'}</button>;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useControllableState
+- Import: `import { useControllableState } from 'usethishook';`
+
+## useUnsavedChanges
+
+Category: App
+
+Warn on tab close and confirm in-app leave when dirty.
+
+Use on editors and long forms.
+
+The user edited a form and hits Back, a sidebar link, or closes the tab. You need a beforeunload warning for the tab, and an awaitable confirm for in-app navigation. Wire isDirty from useFields or your form library, inject useConfirm if you want your own dialog, and call confirmLeave() before changing the route.
+
+Signature: `useUnsavedChanges(isDirty, confirmLeave?)`
+
+```tsx
+import { useUnsavedChanges } from 'usethishook';
+
+export const Editor = ({ isDirty }: { isDirty: boolean }) => {
+  const { confirmLeave } = useUnsavedChanges(isDirty);
+  return <button type="button" onClick={async () => { if (await confirmLeave()) navigate('/'); }}>Back</button>;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useUnsavedChanges
+- Import: `import { useUnsavedChanges } from 'usethishook';`
+
+## useElementSize
+
+Category: App
+
+Live width and height of an element via ResizeObserver.
+
+Use for charts, split panes, and autosize fields.
+
+A chart, canvas, or virtual list must match the box it lives in — not the window. useWindowSize re-renders on every viewport resize and still does not know the column width. Attach the callback ref; width and height track that node through ResizeObserver.
+
+Signature: `useElementSize<T extends HTMLElement>()`
+
+```tsx
+import { useElementSize } from 'usethishook';
+
+export const ChartHost = () => {
+  const { ref, width, height } = useElementSize<HTMLDivElement>();
+  return <div ref={ref}><Chart width={width} height={height} /></div>;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useElementSize
+- Import: `import { useElementSize } from 'usethishook';`
+
+## useInView
+
+Category: App
+
+Whether an element intersects the viewport (or a root).
+
+Use for lazy load, infinite scroll, and enter animations.
+
+You want to load a heavy widget, fetch the next page, or start an animation only when the user can see the element. IntersectionObserver is the right API; the hook is the ref plus isInView. Set once if you only care about the first time it appears.
+
+Signature: `useInView(options?)`
+
+```tsx
+import { useInView } from 'usethishook';
+
+export const LazyBlock = () => {
+  const { ref, isInView } = useInView({ once: true });
+  return <div ref={ref}>{isInView ? <HeavyChart /> : 'Loading…'}</div>;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/useInView
+- Import: `import { useInView } from 'usethishook';`
+
+## usePagination
+
+Category: App
+
+Page, page size, offset, and next/prev with clamping.
+
+Use to slice lists and tables.
+
+A table or gallery has 200 rows and you show 20 at a time. You need page, how many pages, the slice offset, and disabled next/prev. When a filter shrinks the list, the current page must clamp instead of pointing at empty space. usePagination is that math.
+
+Signature: `usePagination({ total, pageSize, initialPage })`
+
+```tsx
+import { usePagination } from 'usethishook';
+
+export const Table = ({ rows }: { rows: string[] }) => {
+  const pager = usePagination({ total: rows.length, pageSize: 20 });
+  const pageRows = rows.slice(pager.offset, pager.offset + pager.pageSize);
+  return <button type="button" onClick={pager.next} disabled={!pager.canNext}>Next</button>;
+};
+```
+
+- Docs: https://usethishook.mentorbridge.in/usePagination
+- Import: `import { usePagination } from 'usethishook';`

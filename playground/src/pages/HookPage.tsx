@@ -1,9 +1,16 @@
 import { ApiReference } from '../components/ApiReference';
+import { ClientOnly } from '../components/ClientOnly';
 import { CodeBlock } from '../components/CodeBlock';
 import { HookTagBadge } from '../components/HookTagBadge';
 import { PreviewCard } from '../components/PreviewCard';
 import { TryOnline } from '../components/TryOnline';
 import type { HookDoc } from '../hooksCatalog';
+
+const previewFallback = (
+  <p className="text-sm leading-6 text-muted">
+    Interactive preview loads in the browser. The example below is the same hook.
+  </p>
+);
 
 interface HookPageProps {
   hook: HookDoc;
@@ -40,7 +47,9 @@ export const HookPage = ({ hook }: HookPageProps) => {
           Live preview
         </h2>
         <PreviewCard>
-          <Demo />
+          <ClientOnly fallback={previewFallback}>
+            <Demo />
+          </ClientOnly>
         </PreviewCard>
       </section>
       <section>
